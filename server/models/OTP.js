@@ -25,7 +25,7 @@ async function sendVerificationMail(email, otp) {
                 <h2 style="color: #333;">Email Verification</h2>
                 <p>Dear User,</p>
                 <p>
-                    Thank you for registering with <strong>MegaProject</strong>.
+                    Thank you for registering with <strong>EduSphere</strong>.
                     Please use the following One-Time Password (OTP) to verify your email address:
                 </p>
 
@@ -52,12 +52,12 @@ async function sendVerificationMail(email, otp) {
 
                 <p>
                     Regards,<br/>
-                    <strong>MegaProject Team</strong>
+                    <strong>EduSphere Team</strong>
                 </p>
             </div>
         `;
 
-        const mailResponse = await mailSender(email, "Email Verification - MegaProject", mailBody);
+        const mailResponse = await mailSender(email, "Email Verification - EduSphere", mailBody);
         console.log("Email sent successfully: ", mailResponse);
 
     } catch (error) {

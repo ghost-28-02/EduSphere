@@ -249,7 +249,7 @@ exports.changePassword = async (req, res) => {
                 <p>Your password has been changed successfully.</p>
                 <p>If this was not you, please contact support immediately.</p>
                 <br/>
-                <p>Regards,<br/>MegaProject Team</p>
+                <p>Regards,<br/>EduSphere Team</p>
             </div>
             `
         );

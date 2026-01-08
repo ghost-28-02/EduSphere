@@ -4,15 +4,20 @@ const subSectionSchema = new mongoose.Schema({
     title: {
         type: String
     },
-    timeDuaration: {
+    timeDuration: {
         type: String
     },
     description: {
         type: String
     },
-    videoUrl: {
-        type: String 
+    video: {
+        url: {
+            type: String,
+        },
+        publicId: {
+            type: String,
+        }
     }
 });
 
-module.exports = mongoose.model("SubSection",subSectionSchema);
+module.exports = mongoose.model("SubSection", subSectionSchema);

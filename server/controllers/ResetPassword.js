@@ -37,7 +37,7 @@ exports.resetPasswordToken = async (req, res) => {
 
                 <p>
                     We received a request to reset your password for your
-                    <strong>MegaProject</strong> account.
+                    <strong>EduSphere</strong> account.
                 </p>
 
                 <p>
@@ -69,14 +69,14 @@ exports.resetPasswordToken = async (req, res) => {
 
                 <p>
                     Regards,<br/>
-                    <strong>MegaProject Team</strong>
+                    <strong>EduSphere Team</strong>
                 </p>
             </div>
         `;
 
         await mailSender(
             email,
-            "Reset Your Password - MegaProject",
+            "Reset Your Password - EduSphere",
             mailBody
         );
 
