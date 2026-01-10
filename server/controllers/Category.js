@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const Category = require("../models/Category")
+=======
+const Category = require("../models/Categorys")
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
 
 
 exports.createCategory = async (req, res) => {
@@ -43,7 +47,11 @@ exports.showAllCategory = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "All Category returned successfully",
+<<<<<<< HEAD
             allCategorys
+=======
+            allCategory
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
         })
     } catch (error) {
         console.log("Error in Category creation: ", error);
@@ -54,6 +62,7 @@ exports.showAllCategory = async (req, res) => {
         });
     }
 }
+<<<<<<< HEAD
 
 exports.categoryPageDetails = async (req, res) => {
     try {
@@ -130,3 +139,5 @@ exports.categoryPageDetails = async (req, res) => {
 }
 
 
+=======
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b

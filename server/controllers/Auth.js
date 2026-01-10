@@ -5,7 +5,10 @@ const otpGenerator = require('otp-generator');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailSender = require("../utils/mailSender");
+<<<<<<< HEAD
 const { passwordUpdatedTemplate } = require("../mail/templates/passwordUpdate");
+=======
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
 require("dotenv").config();
 
 //send OTP
@@ -83,12 +86,20 @@ exports.signup = async (req, res) => {
 
         const recentOtp = await OTP.find({email}).sort({createdAt:-1}).limit(1);
 
+<<<<<<< HEAD
         if(recentOtp.length === 0){
+=======
+        if(recentOtp.length == 0){
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
             return res.status(404).json({
                 success: false,
                 message: "No OTP found for this email"
             })
+<<<<<<< HEAD
         }  else if(otp !== recentOtp[0].otp){
+=======
+        }  else if(otp !== recentOtp.otp){
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
             return res.status(400).json({
                 success: false,
                 message: "Invalid OTP"
@@ -114,8 +125,11 @@ exports.signup = async (req, res) => {
             image: `https://api.dicebear.com/9.x/initials/svg?seed=${firstName} ${lastName}`
         });
 
+<<<<<<< HEAD
         // await OTP.deleteMany({ email });
 
+=======
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
         return res.status(201).json({
             success: true,
             message: "User registered successfully",
@@ -241,13 +255,29 @@ exports.changePassword = async (req, res) => {
         user.password = hashedPassword;
         await user.save();
 
+<<<<<<< HEAD
         const name = `${user.firstName} ${user.lastName}`;
 
+=======
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
         // 7. Send confirmation email
         const mailResponse = await mailSender(
             user.email,
             "Password Changed Successfully",
+<<<<<<< HEAD
             passwordUpdatedTemplate(user.email, name)
+=======
+            `
+            <div style="font-family: Arial, sans-serif;">
+                <h2>Password Updated</h2>
+                <p>Hello ${user.name || "User"},</p>
+                <p>Your password has been changed successfully.</p>
+                <p>If this was not you, please contact support immediately.</p>
+                <br/>
+                <p>Regards,<br/>EduSphere Team</p>
+            </div>
+            `
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
         );
 
         console.log("Email sent successfully: ", mailResponse);

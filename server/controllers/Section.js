@@ -29,7 +29,11 @@ exports.createSection = async (req, res) => {
             populate: {
                 path: "subSections"
             }
+<<<<<<< HEAD
         }).exec();
+=======
+        });
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
 
         return res.status(200).json({
             success: true,
@@ -61,7 +65,13 @@ exports.updateSection = async (req, res) => {
         const section = await Section.findByIdAndUpdate(
             sectionId,
             {
+<<<<<<< HEAD
                 sectionName: sectionName
+=======
+                $push: {
+                    sectionName: sectionName
+                }
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
             },
             {
                 new: true
@@ -86,16 +96,25 @@ exports.updateSection = async (req, res) => {
 exports.deleteSection = async (req, res) =>{
     try {
         
+<<<<<<< HEAD
         const {sectionId, courseId} = req.body;
+=======
+        const {sectionId} = req.params;
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
 
         if(!sectionId){
             return res.status(400).json({
                 success: false,
+<<<<<<< HEAD
                 message: "Section ID is required"
+=======
+                message: "All fields required"
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
             }) 
         }
 
         await Section.findByIdAndDelete(sectionId);
+<<<<<<< HEAD
         await Course.findByIdAndUpdate(
             courseId,
             {
@@ -104,6 +123,9 @@ exports.deleteSection = async (req, res) =>{
                 }
             }
         );
+=======
+        //TODO should we delete the id from course also
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
 
         return res.status(200).json({
             success: true,

@@ -37,7 +37,11 @@ exports.auth = async (req, res, next) => {
 }
 
 //isStudent
+<<<<<<< HEAD
 exports.isStudent = async (req, res, next) => {
+=======
+exports.isStudent = async (req, res) => {
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
     try {
         
         if(req.user.accountType !== "Student"){
@@ -59,7 +63,11 @@ exports.isStudent = async (req, res, next) => {
 
 
 //isInstructor
+<<<<<<< HEAD
 exports.isInstructor = async (req, res, next) => {
+=======
+exports.isInstructor = async (req, res) => {
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
     try {
         
         if(req.user.accountType !== "Instructor"){
@@ -81,7 +89,11 @@ exports.isInstructor = async (req, res, next) => {
 
 
 //isAdmin
+<<<<<<< HEAD
 exports.isAdmin = async (req, res, next) => {
+=======
+exports.isAdmin = async (req, res) => {
+>>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
     try {
         
         if(req.user.accountType !== "Admin"){
