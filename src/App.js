@@ -1,16 +1,79 @@
-import React from "react";
-import Navbar from "./Components/Navbar";
-import Filter from "./Components/Filter";
-import Cards from "./Components/Cards";
-import Spinner from "./Components/Spinner";
-import { apiUrl, filterData } from "./data.js";
-import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { Route, Router, Routes } from "react-router-dom";
+import Home from './pages/Home';
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import './App.css';
+import Navbar from "./components/common/Navbar";
+import VerifyEmail from "./pages/VerifyEmail";
+import ForgotPassword from "./pages/ForgotPassword";
+import OpenRoute from "./components/core/Auth/OpenRoute";
+import UpdatePassword from "./pages/UpdatePassword";
+import Error from './pages/Error';
+import About from "./pages/About";
+
 
 const App = () => {
   return (
     <div>
-      <h1>This is homepage baby</h1>
+      <Navbar />
+      <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          
+          <Route 
+          path="/login" 
+          element={
+            <OpenRoute>
+              <Login/>
+            </OpenRoute>
+          } />
+
+          <Route 
+          path="/signup" 
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          } />
+
+          <Route 
+          path="/verify-email" 
+          element={
+            <OpenRoute>
+              <VerifyEmail/>
+            </OpenRoute>
+          } />
+
+          <Route 
+          path="/forgot-password" 
+          element={
+            <OpenRoute>
+              <ForgotPassword/>
+            </OpenRoute>
+          } />
+
+          <Route 
+          path="/update-password/:id"
+          element={
+            <OpenRoute>
+              <UpdatePassword/>
+            </OpenRoute>
+          } />
+
+          <Route 
+            path="/about"
+            element={
+              <OpenRoute>
+                <About/>
+              </OpenRoute>
+            }
+          />
+
+          <Route path="*" element={<Error/>} />
+        </Routes>
+
+
+      </div>
     </div>
   );
 };

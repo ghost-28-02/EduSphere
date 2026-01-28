@@ -2,10 +2,8 @@ const Profile = require("../models/Profile");
 const User = require("../models/User");
 const Course = require("../models/Course")
 const CourseProgress = require("../models/CourseProgress");
-<<<<<<< HEAD
 const { uploadToCloudinary } = require("../utils/cloudinaryUploader");
-=======
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
+
 
 exports.updateProfile = async (req, res) => {
     try {
@@ -47,11 +45,7 @@ exports.updateProfile = async (req, res) => {
     }
 }
 
-<<<<<<< HEAD
 exports.deleteAccount = async (req, res) => {
-=======
-exports.deleteAccout = async (req, res) => {
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
     try {
 
         const id = req.user.id;
@@ -116,7 +110,6 @@ exports.getAllUserDetails = async (req, res) => {
             error: error.message
         })
     }
-<<<<<<< HEAD
 }
 
 exports.updateProfilePicture = async (req, res) => {
@@ -159,6 +152,4 @@ exports.updateProfilePicture = async (req, res) => {
             error: error
         });
     }
-=======
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
 }

@@ -1,11 +1,8 @@
 const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
-<<<<<<< HEAD
 const bcrypt = require("bcrypt");
 const { passwordResetTemplate } = require("../mail/templates/passwordReset");
-=======
-const bcrypt = require("bcrypt")
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
+
 
 exports.resetPasswordToken = async (req, res) => {
     try {
@@ -27,11 +24,7 @@ exports.resetPasswordToken = async (req, res) => {
             },
             {
                 token: token,
-<<<<<<< HEAD
                 resetPasswordExpires: Date.now() + 5 * 60 * 1000
-=======
-                resetPasswordExpires: Date.now() + 5 * 60
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
             },
             {
                 new: true
@@ -39,63 +32,13 @@ exports.resetPasswordToken = async (req, res) => {
         )
         const url = `http://localhost:3000/update-password/${token}`;
 
-<<<<<<< HEAD
+
         await mailSender(
             email,
             "Reset Your Password - EduSphere",
             passwordResetTemplate(url)
-=======
-        const mailBody = `
-            <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-                <h2>Password Reset Request</h2>
-                <p>Hello,</p>
-
-                <p>
-                    We received a request to reset your password for your
-                    <strong>EduSphere</strong> account.
-                </p>
-
-                <p>
-                    Click the button below to reset your password:
-                </p>
-
-                <a href="${url}" 
-                style="
-                        display: inline-block;
-                        padding: 12px 20px;
-                        background-color: #4CAF50;
-                        color: #ffffff;
-                        text-decoration: none;
-                        border-radius: 5px;
-                        font-weight: bold;
-                ">
-                    Reset Password
-                </a>
-
-                <p style="margin-top: 20px;">
-                    This link will expire in <strong>5 minutes</strong>.
-                </p>
-
-                <p>
-                    If you did not request this, please ignore this email.
-                </p>
-
-                <br/>
-
-                <p>
-                    Regards,<br/>
-                    <strong>EduSphere Team</strong>
-                </p>
-            </div>
-        `;
-
-        await mailSender(
-            email,
-            "Reset Your Password - EduSphere",
-            mailBody
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
         );
-
+        
         return res.status(200).json({
             success: true,
             message: "Email sent successfully, please check email and change password "

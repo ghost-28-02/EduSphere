@@ -22,7 +22,7 @@ exports.auth = async (req, res, next) => {
             return res.status(400).json({
                 success: false,
                 message: "Issue in token verification",
-                error: message.error
+                error: error.message
             });
         }
         next();
@@ -31,17 +31,14 @@ exports.auth = async (req, res, next) => {
         return res.status(400).json({
             success: false,
             message: "Issue in token verification",
-            error: message.error
+            error: error.message
         })
     }
 }
 
 //isStudent
-<<<<<<< HEAD
 exports.isStudent = async (req, res, next) => {
-=======
-exports.isStudent = async (req, res) => {
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
+
     try {
         
         if(req.user.accountType !== "Student"){
@@ -63,11 +60,7 @@ exports.isStudent = async (req, res) => {
 
 
 //isInstructor
-<<<<<<< HEAD
 exports.isInstructor = async (req, res, next) => {
-=======
-exports.isInstructor = async (req, res) => {
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
     try {
         
         if(req.user.accountType !== "Instructor"){
@@ -89,11 +82,7 @@ exports.isInstructor = async (req, res) => {
 
 
 //isAdmin
-<<<<<<< HEAD
 exports.isAdmin = async (req, res, next) => {
-=======
-exports.isAdmin = async (req, res) => {
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
     try {
         
         if(req.user.accountType !== "Admin"){

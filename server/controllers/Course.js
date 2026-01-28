@@ -2,11 +2,6 @@ const Course = require("../models/Course");
 const Category = require("../models/Category");
 const User = require("../models/User");
 const { uploadToCloudinary } = require("../utils/cloudinaryUploader");
-<<<<<<< HEAD
-const { findById } = require("../models/SubSection");
-=======
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
-
 
 exports.createCourse = async (req, res) => {
     try {
@@ -93,11 +88,8 @@ exports.createCourse = async (req, res) => {
     }
 }
 
-<<<<<<< HEAD
+
 exports.getAllCourses = async (req, res) => {
-=======
-exports.showAllCourses = async (req, res) => {
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
     try {
         
         const allCourses = await Course.find({}, {courseName: true, price: true, thumbnail: true, instructor: true, ratingAndReviews: true, studentEnrolled: true}).populate("Instructor").exec();
@@ -117,7 +109,6 @@ exports.showAllCourses = async (req, res) => {
             error: error.message
         });
     }
-<<<<<<< HEAD
 }
 
 exports.getCourseDetails = async (req, res) => {
@@ -164,6 +155,4 @@ exports.getCourseDetails = async (req, res) => {
         });
     }
 }
-=======
-}
->>>>>>> 04c45250e25853284f0d36bcfd7ff6937054727b
+

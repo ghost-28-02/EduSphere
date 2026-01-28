@@ -51,7 +51,7 @@ router.post("/getCourseDetails",getCourseDetails);
 
 
 router.post("/createCategory",auth, isAdmin, createCategory);
-router.get("/showAllCategory",showAllCategory);
+router.get("/showAllCategories",showAllCategory);
 router.post("/getCategoryPageDetails",categoryPageDetails);
 
 router.post("/createRating",auth, isStudent, createRating);

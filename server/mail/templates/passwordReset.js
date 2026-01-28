@@ -46,8 +46,8 @@ exports.passwordResetTemplate = (resetUrl) => {
             .cta {
                 display: inline-block;
                 padding: 12px 20px;
-                background-color: #4f46e5;
-                color: #ffffff;
+                background-color: #FFE83D;
+                color: #DBDDEA;
                 text-decoration: none;
                 border-radius: 5px;
                 font-weight: bold;
@@ -65,7 +65,7 @@ exports.passwordResetTemplate = (resetUrl) => {
     <body>
         <div class="container">
             <a href="https://studynotion-edtech-project.vercel.app">
-                <img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png" alt="EduSphere Logo">
+                <img class="logo" src="https://res.cloudinary.com/dfryej1yt/image/upload/v1769185735/EduSphere/fesztk4wmwascixusg0c.png" alt="EduSphere Logo">
             </a>
 
             <div class="message">Password Reset Request</div>
