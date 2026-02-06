@@ -7,6 +7,8 @@ import Quote from '../components/core/AboutPage/Quote';
 import FoundingStory from '../assets/Images/FoundingStory.png';
 import Stats from '../components/core/AboutPage/Stats';
 import Footer from "../components/common/Footer";
+import LearningGrid from '../components/core/AboutPage/LearningGrid';
+import ContactFormSection from '../components/core/AboutPage/ContactFormSection';
 
 function About() {
     return (
@@ -108,8 +110,21 @@ function About() {
             </section>
 
             {/* Section 5 */}
-            <section>
+            <section className="mx-auto mt-20 flex w-10/12 max-w-maxContent flex-col justify-between gap-10 text-white mb-20">
+                <LearningGrid />
+                <ContactFormSection/>
+            </section>
 
+            {/* Section 6 */}
+            <section>
+                <div className='mb-20'>
+                    <p className='text-white text-4xl text-center'>
+                        Reviews from other learners
+                    </p>
+                    <div>
+
+                    </div>
+                </div>
             </section>
 
             {/* Footer */}

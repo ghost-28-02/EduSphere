@@ -4,6 +4,7 @@ const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const courseEnrollmentTemplate = require("../mail/templates/courseEnrollment");
 const mongoose = require("mongoose");
+const { paymentSuccessEmailTemplate } = require("../mail/templates/paymentSuccessEmail");
 
 
 
@@ -159,3 +160,46 @@ exports.verifySignature = async (req, res) => {
         });
     }
 }
+
+
+exports.sendPaymentSuccessEmail = async (req, res) => {
+  try {
+    const { courseName, amount, currency, orderId, paymentId } = req.body;
+    const userId = req.user.id;
+
+    if (!courseName || !amount) {
+      return res.status(400).json({
+        success: false,
+        message: "courseName and amount are required",
+      });
+    }
+
+    const user = await User.findById(userId);
+    const name = `${user.firstName} ${user.lastName}`;
+
+    await mailSender(
+      user.email,
+      "Payment Successful",
+      paymentSuccessEmailTemplate({
+        name,
+        courseName,
+        amount,
+        currency,
+        orderId,
+        paymentId,
+      })
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Payment success email sent",
+    });
+  } catch (error) {
+    console.log("sendPaymentSuccessEmail error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Could not send payment success email",
+      error: error.message,
+    });
+  }
+};

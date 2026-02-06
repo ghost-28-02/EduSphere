@@ -3,7 +3,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Banner from "../../../assets/Images/banner.mp4"
 import CodeBlocks from './CodeBlocks';
-import CTAButton from "./Button";
+import CTAButton from "../../common/Button";
 import HighlightText from './HighlightText';
 
 function HeroSection() {

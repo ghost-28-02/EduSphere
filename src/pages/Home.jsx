@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaArrowRight } from 'react-icons/fa';
 import HighlightText from '../components/core/HomePage/HighlightText';
-import CTAButton from '../components/core/HomePage/Button';
+import CTAButton from '../components/common/Button';
 import HeroSection from '../components/core/HomePage/HeroSection';
 import TimelineSection from '../components/core/HomePage/TimelineSection';
 import LearningLanguageSection from '../components/core/HomePage/LearningLanguageSection';

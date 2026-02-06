@@ -41,7 +41,7 @@ function Navbar() {
     
 
     return (
-        <div className={`sticky top-0 z-50 flex h-14 items-center justify-center border-b border-richblack-700 ${ location.pathname !== "/" ? "bg-richblack-800" : "bg-richblack-900"} transition-all duration-200`}>
+        <div className={`sticky top-0 z-50 flex h-14 items-center justify-center border-b border-richblack-700 ${ location.pathname === "/" ? "bg-richblack-900" : "bg-richblack-800"} transition-all duration-200`}>
             <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
                 <Link to={"/"}>
                     <img src={Logo}
