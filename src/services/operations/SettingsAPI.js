@@ -61,7 +61,7 @@ export function updateProfile(token, formData) {
                 }
             )
 
-            console.log("UPDATE_PROFILE_API API RESPONSE............", response)
+            console.log("UPDATE_PROFILE_API API RESPONSE............", response.data.data)
 
             if (!response.data.success) {
                 const msg = response.data.message;
@@ -70,13 +70,12 @@ export function updateProfile(token, formData) {
                 toast.dismiss(toastId);
                 return;
             }
-            console.log(response);
-            const userImage = response?.data?.userDetails?.image
-                ? response?.data?.userDetails?.image
-                : `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.userDetails?.firstName} ${response?.data?.userDetails?.lastName}`
-            dispatch(
-                setUser({ ...response.data.updatedUserDetails, image: userImage })
-            )
+
+            const userImage = response?.data?.data?.image
+                ? response?.data?.data?.image
+                : `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.data?.firstName} ${response?.data?.data?.lastName}`
+            
+            dispatch(setUser({ ...response.data.data, image: userImage }))
             toast.success("Profile Updated Successfully")
 
         } catch (error) {

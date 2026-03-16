@@ -8,14 +8,15 @@ import LearningLanguageSection from '../components/core/HomePage/LearningLanguag
 import InstructorSection from '../components/core/HomePage/InstructorSection';
 import Footer from '../components/common/Footer';
 import ExploreMore from '../components/core/HomePage/ExploreMore'
+import ReviewSlider from "../components/common/ReviewSlider";
 
 const Home = () => {
   return (
     <div>
       {/* Section 1 */}
-      <HeroSection/>
+      <HeroSection />
 
-      <ExploreMore/>
+      <ExploreMore />
 
       {/* Section 2 */}
 
@@ -27,7 +28,7 @@ const Home = () => {
               <CTAButton active={true} linkto={"/signup"}>
                 <div className='flex flex-row gap-2 items-center'>
                   Explore Full Catalog
-                  <FaArrowRight/>
+                  <FaArrowRight />
                 </div>
               </CTAButton>
               <CTAButton active={false} linkto={"/signup"}>
@@ -44,7 +45,7 @@ const Home = () => {
           <div className='flex lg:flex-row flex-col flex-wrap lg:gap-20 gap-5 justify-center mb-10 mt-[95px]'>
             <div className='text-4xl font-semibold lg:w-[45%]'>
               Get the skills you need for a
-              <HighlightText text={"job that is in demand."}/>
+              <HighlightText text={"job that is in demand."} />
             </div>
 
             <div className='flex flex-col gap-7 lg:w-[40%] items-start'>
@@ -59,21 +60,27 @@ const Home = () => {
             </div>
           </div>
 
-          <TimelineSection/>
-          <LearningLanguageSection/>
+          <TimelineSection />
+          <LearningLanguageSection />
 
         </div>
       </div>
 
 
       {/* Section 3 */}
+      <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-center gap-8 bg-richblack-900 py-20 px-4 text-white">
+        <InstructorSection />
+        <h1 className="text-center text-4xl font-semibold">
+          Reviews from other learners
+        </h1>
+        <ReviewSlider />
+      </div>
 
-      <InstructorSection/>
 
 
       {/* Footer */}
 
-      <Footer/>
+      <Footer />
 
     </div>
   )

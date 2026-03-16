@@ -21,7 +21,7 @@ exports.updateProfile = async (req, res) => {
             })
         }
 
-        const userDetails = await User.findById(id);
+        let userDetails = await User.findById(id);
         const profileId = userDetails.additionalDetails;
         const profileDetails = await Profile.findById(profileId);
 
@@ -31,10 +31,12 @@ exports.updateProfile = async (req, res) => {
         profileDetails.gender = gender;
         await profileDetails.save();
 
+        const data = await User.findById(id).populate("additionalDetails").exec();
+
         return res.status(200).json({
             success: true,
             message: "Profile details updated successfully",
-            userDetails,
+            data: data
         })
 
 
@@ -229,7 +231,7 @@ exports.instructorDashboard = async (req, res) => {
         const courseDetails = await Course.find({ instructor: req.user.id })
 
         const courseData = courseDetails.map((course) => {
-            const totalStudentsEnrolled = course.studentsEnroled.length
+            const totalStudentsEnrolled = course.studentEnrolled.length
             const totalAmountGenerated = totalStudentsEnrolled * course.price
 
             // Create a new object with the additional fields
@@ -245,9 +247,9 @@ exports.instructorDashboard = async (req, res) => {
             return courseDataWithStats
         })
 
-        res.status(200).json({ courses: courseData })
+        res.status(200).json({success: true,  courses: courseData })
     } catch (error) {
         console.error(error)
-        res.status(500).json({ message: "Server Error" })
+        res.status(500).json({success: false, message: "Server Error" })
     }
 }

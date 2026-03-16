@@ -52,7 +52,6 @@ export async function getUserEnrolledCourses(token) {
     const toastId = toast.loading("Loading...");
     let result = [];
     try {
-        console.log("BEFORE Calling BACKEND API FOR ENROLLED COURSES");
         const response = await apiConnector(
             "GET",
             GET_USER_ENROLLED_COURSES_API,
@@ -62,7 +61,6 @@ export async function getUserEnrolledCourses(token) {
             }
         )
 
-        console.log("AFTER Calling BACKEND API FOR ENROLLED COURSES");
         if (!response.data.success) {
             const msg = response.data.message;
             toast.error(msg);
@@ -71,7 +69,6 @@ export async function getUserEnrolledCourses(token) {
         }
 
         result = response?.data?.data;
-
     } catch (error) {
         console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
         const errorMessage = error.response?.data?.message || error.message || "Could Not Get Enrolled Courses";
@@ -104,7 +101,7 @@ export async function getInstructorDetails(token) {
             return;
         }
 
-        result = response?.data?.data;
+        result = response?.data?.courses;
 
     } catch (error) {
         console.log("GET_INSTRUCTOR_API ERROR", error);

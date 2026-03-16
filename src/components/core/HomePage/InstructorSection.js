@@ -29,9 +29,6 @@ function InstructorSection() {
             </div>
           </div>
         </div>
-        <p className='text-center text-4xl font-semibold mt-10 '>
-          Reviews from other learners
-        </p>
       </div>
     </div>
   )

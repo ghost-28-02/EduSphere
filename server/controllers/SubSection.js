@@ -41,20 +41,23 @@ exports.createSubSection = async (req, res) => {
                 new: true
             }
         )
-            .populate();
+            .populate({
+                path: "subSections"
+            });
 
         return res.status(200).json({
             success: true,
-            message: "Subsection created successfully"
+            message: "Subsection created successfully",
+            data: updatedSection
         })
 
 
     } catch (error) {
-        console.log("Error in creating subsection: ",error)
+        console.log("Error in creating subsection: ", error)
         return res.status(500).json({
             success: false,
             message: "Error in creating subsection",
-            error:error
+            error: error
         })
     }
 }

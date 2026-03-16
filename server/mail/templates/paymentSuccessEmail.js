@@ -1,7 +1,6 @@
 exports.paymentSuccessEmailTemplate = ({
   name,
-  courseName,
-  amount,
+  Amount,
   currency = "INR",
   orderId,
   paymentId,
@@ -94,12 +93,12 @@ exports.paymentSuccessEmailTemplate = ({
 
       <div class="body">
         <p>Hi ${name || "Learner"},</p>
-        <p>Your payment for <span class="highlight">${courseName || "your course"}</span> was successful.</p>
-        <p>Amount Paid: <span class="highlight">${currency} ${amount}</span></p>
+        <p>Your payment is successful.</p>
+        <p>Amount Paid: <span class="highlight">${currency} ${Amount}</span></p>
 
         <div class="details">
-          <div class="row"><span>Order ID</span><span>${orderId || "-"}</span></div>
-          <div class="row"><span>Payment ID</span><span>${paymentId || "-"}</span></div>
+          <div class="row"><span>Order ID is: </span><span> ${orderId || "-"}</span></div>
+          <div class="row"><span>Payment ID is: </span><span> ${paymentId || "-"}</span></div>
         </div>
 
         <a class="cta" href="https://studynotion-edtech-project.vercel.app/dashboard">

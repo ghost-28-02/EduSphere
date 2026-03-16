@@ -16,12 +16,12 @@ function Navbar() {
     const { user } = useSelector((state) => state.profile);
     const { totalItems } = useSelector((state) => state.cart);
 
-    const [subLinks, setSunLinks] = useState([]);
+    const [subLinks, setSubLinks] = useState([]);
 
     const fetchSublinks = async () => {
         try {
             const result = await apiConnector("GET", categories.CATEGORIES_API);
-            setSunLinks(result?.data?.allCategorys);
+            setSubLinks(result?.data?.allCategorys);
         } catch (error) {
             console.log("Could not fetch the category list");
             console.log(error);
@@ -35,10 +35,7 @@ function Navbar() {
     const location = useLocation();
     const matchRoute = (route) => {
         return matchPath({ path: route }, location.pathname)
-    }
-
-    console.log(user);
-    
+    }    
 
     return (
         <div className={`sticky top-0 z-50 flex h-14 items-center justify-center border-b border-richblack-700 ${ location.pathname === "/" ? "bg-richblack-900" : "bg-richblack-800"} transition-all duration-200`}>
@@ -101,13 +98,15 @@ function Navbar() {
                 </nav>
                 <div className='flex gap-x-4 items-center '>
 
-                    {
+                    { 
                         user && user?.accountType !== "Instructor" && (
                             <Link to={'/dashboard/cart'} className='relative'>
                                 <FaShoppingCart className="text-white text-xl" />
                                 {
                                     totalItems > 0 && (
-                                        <span className='absolute -top-3 -right-3'>{totalItems}</span>
+                                        <div className='absolute h-[17px] w-[17px] -top-2 -right-2 bg-richblack-600 rounded-full flex items-center justify-center'>
+                                            <span className='text-yellow-50 text-sm '>{totalItems}</span>
+                                        </div>
                                     )
                                 }
                             </Link>
