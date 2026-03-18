@@ -202,68 +202,133 @@ npm run server
 ---
 
 ## 📁 Project Structure
-
 ```
 EduSphere/
-├── public/                       # Static HTML & assets
-├── src/                          # React frontend
-│   ├── assets/                   # Images & logos
-│   ├── components/
-│   │   ├── common/               # Navbar, Footer, Button, Spinner, etc.
-│   │   └── core/
-│   │       ├── Auth/             # Login, Signup, OTP components
-│   │       ├── HomePage/         # Hero, Timeline, ExploreMore, etc.
-│   │       ├── Dashboard/        # Student & Instructor dashboards
-│   │       ├── Course/           # Course details & accordion
-│   │       ├── Catalog/          # Browse courses by category
-│   │       ├── ViewCourse/       # Video player & sidebar
-│   │       ├── AboutPage/        # About page sections
-│   │       └── ContactPage/      # Contact form sections
-│   ├── pages/                    # Route-level page components
-│   ├── services/
-│   │   ├── apis.js               # All API endpoint constants
-│   │   ├── apiConnector.js       # Axios instance & interceptors
-│   │   └── operations/           # Business logic API calls
-│   ├── slices/                   # Redux state slices
-│   ├── hooks/                    # Custom React hooks
-│   ├── utils/                    # Helper functions & constants
-│   ├── data/                     # Static data (home page content, etc.)
-│   ├── App.js                    # Root component & route definitions
-│   └── index.js                  # React entry point
-├── server/                       # Express backend
-│   ├── config/
-│   │   ├── database.js           # MongoDB connection
-│   │   ├── cloudinary.js         # Cloudinary SDK setup
-│   │   └── razorpay.js           # Razorpay SDK setup
-│   ├── controllers/              # Route handler logic
-│   ├── middlewares/
-│   │   └── auth.js               # JWT auth & role guards
-│   ├── models/                   # Mongoose schemas
-│   │   ├── User.js
-│   │   ├── Course.js
-│   │   ├── Section.js
-│   │   ├── SubSection.js
-│   │   ├── Category.js
-│   │   ├── RatingAndReview.js
-│   │   ├── CourseProgress.js
-│   │   ├── OTP.js
-│   │   ├── Profile.js
-│   │   └── Contact.js
-│   ├── routes/                   # Express routers
-│   │   ├── User.js               # /api/v1/auth
-│   │   ├── Course.js             # /api/v1/course
-│   │   ├── Profile.js            # /api/v1/profile
-│   │   ├── Payments.js           # /api/v1/payment
-│   │   └── Contact.js            # /api/v1/reach
-│   ├── utils/                    # Server utilities
-│   │   ├── mailSender.js
-│   │   ├── cloudinaryUploader.js
-│   │   └── secToDuration.js
-│   ├── mail/templates/           # HTML email templates
-│   └── index.js                  # Server entry point
-├── package.json                  # Root (frontend) package manifest
-├── tailwind.config.js            # Tailwind CSS config
-└── .gitignore
+├── README.md                         # Project overview, setup instructions
+├── backend/                          # Node.js + Express backend
+│   ├── .gitignore                    # Backend-specific gitignore rules
+│   ├── index.js                      # Backend entry point (Express app bootstrap)
+│   ├── package.json                  # Backend dependencies & scripts
+│   ├── package-lock.json             # Locked dependency tree
+│   ├── config/                       # External service + DB configuration
+│   │   ├── cloudinary.js             # Cloudinary config (uploads/media)
+│   │   ├── database.js               # Database connection config (likely MongoDB)
+│   │   └── razorpay.js               # Razorpay payment gateway config
+│   ├── controllers/                  # Request handlers (business logic)
+│   │   ├── Auth.js                   # Auth flows: signup/login/logout, tokens, etc.
+│   │   ├── Category.js               # Course category CRUD/logic
+│   │   ├── ContactUs.js              # Contact-us form handling
+│   │   ├── Course.js                 # Course creation, updates, fetching, publish, etc.
+│   │   ├── Payments.js               # Payment capture/verification + enrollment logic
+│   │   ├── Profile.js                # Profile read/update logic
+│   │   ├── RatingAndReview.js        # Ratings & reviews CRUD/aggregation
+│   │   ├── ResetPassword.js          # Forgot/reset password flows
+│   │   ├── Section.js                # Course section CRUD/ordering
+│   │   ├── SubSection.js             # Subsection/lectures CRUD/ordering
+│   │   └── courseProgress.js         # Track/compute course progress
+│   ├── middlewares/                  # Express middlewares
+│   │   └── auth.js                   # Auth middleware (JWT verification, roles, etc.)
+│   ├── models/                       # Database models (schemas)
+│   │   ├── Category.js               # Category schema
+│   │   ├── Contact.js                # Contact form submissions schema
+│   │   ├── Course.js                 # Course schema
+│   │   ├── CourseProgress.js         # Progress tracking schema
+│   │   ├── OTP.js                    # OTP schema (email/phone verification)
+│   │   ├── Profile.js                # Profile schema
+│   │   ├── RatingAndReview.js        # Ratings & reviews schema
+│   │   ├── Section.js                # Section schema
+│   │   ├── SubSection.js             # Subsection/lecture schema
+│   │   └── User.js                   # User schema (roles: student/instructor/admin)
+│   ├── routes/                       # Express routes (API endpoints)
+│   │   ├── Contact.js                # Routes for contact-us
+│   │   ├── Course.js                 # Routes for courses/sections/subsections
+│   │   ├── Payments.js               # Routes for payments + enrollment
+│   │   ├── Profile.js                # Routes for profile actions
+│   │   └── User.js                   # Routes for auth/user actions
+│   ├── utils/                        # Shared backend utilities/helpers
+│   │   ├── cloudinaryUploader.js     # Media upload helper wrapper (Cloudinary)
+│   │   ├── mailSender.js             # Email sending utility (nodemailer or similar)
+│   │   └── secToDuration.js          # Convert seconds -> duration string (hh:mm:ss etc.)
+│   └── mail/                         # Email templates and mail-related code
+│       └── templates/                # Email HTML/text templates
+│           ├── contactUsAdmin.js      # Email template to admin on new contact message
+│           ├── contactUsUser.js       # Confirmation email template to user
+│           ├── courseEnrollment.js    # Enrollment confirmation email template
+│           ├── emailVerification.js   # Verify email (OTP/link) template
+│           ├── passwordReset.js       # Password reset email template
+│           ├── passwordUpdate.js      # Password updated notification template
+│           └── paymentSuccessEmail.js # Payment success receipt/confirmation template
+└── frontend/                         # React frontend (client)
+    ├── .gitignore                    # Frontend-specific gitignore rules
+    ├── package.json                  # Frontend dependencies & scripts
+    ├── package-lock.json             # Locked dependency tree
+    ├── tailwind.config.js            # Tailwind CSS configuration
+    ├── public/                       # Static HTML & public assets
+    │   ├── index.html                # Root HTML template
+    │   ├── favicon.ico               # Browser tab icon
+    │   ├── manifest.json             # PWA manifest (if used)
+    │   ├── robots.txt                # SEO crawler directives
+    │   ├── logo192.png               # PWA/icon asset
+    │   └── logo512.png               # PWA/icon asset
+    └── src/                          # React application source
+        ├── index.js                  # React entry point (renders <App />)
+        ├── index.css                 # Global styles (Tailwind base + custom)
+        ├── App.js                    # App root component (routes/layout)
+        ├── App.css                   # App-level CSS (if not purely Tailwind)
+        ├── assets/                   # Images, logos, icons
+        │   ├── Images/               # General UI images
+        │   ├── Logo/                 # Branding logos
+        │   └── TimeLineLogo/         # Timeline/feature icons
+        ├── components/               # Reusable UI components
+        │   ├── common/               # Navbar, Footer, Button, Spinner, Modals, etc.
+        │   └── core/                 # Feature/domain components
+        │       ├── Auth/             # Login, Signup, OTP/verification UI (if present)
+        │       ├── HomePage/         # Hero, Timeline, ExploreMore, etc. (if present)
+        │       ├── Dashboard/        # Student & Instructor dashboards (if present)
+        │       ├── Course/           # Course details UI, accordion, curriculum (if present)
+        │       ├── Catalog/          # Category browsing UI (if present)
+        │       ├── ViewCourse/       # Video player, sidebar, progress UI (if present)
+        │       ├── AboutPage/        # About page sections (if present)
+        │       └── ContactPage/      # Contact form sections (if present)
+        ├── pages/                    # Route-level page components
+        │   ├── Home.jsx              # Landing/home page
+        │   ├── About.jsx             # About page
+        │   ├── Contact.jsx           # Contact page
+        │   ├── Catalog.jsx           # Catalog page (browse courses)
+        │   ├── CourseDetails.jsx     # Course details page (overview + buy/enroll)
+        │   ├── ViewCourse.jsx        # Course consumption page (lectures)
+        │   ├── Dashboard.jsx         # Dashboard wrapper page
+        │   ├── Login.js              # Login page
+        │   ├── Signup.js             # Signup page
+        │   ├── ForgotPassword.jsx    # Forgot password page
+        │   ├── UpdatePassword.jsx    # Update/reset password page
+        │   ├── VerifyEmail.jsx       # Email verification page
+        │   └── Error.jsx             # 404/route error page
+        ├── data/                     # Static data/constants for UI
+        │   ├── countrycode.json      # Country codes dataset
+        │   ├── dashboard-links.js    # Sidebar/dashboard navigation config
+        │   ├── footer-links.js       # Footer links config
+        │   ├── homepage-explore.js   # Home page “explore” sections config
+        │   └── navbar-links.js       # Navbar links config
+        ├── hooks/                    # Custom React hooks
+        │   └── useOnClickOutside.js  # Detect outside clicks (dropdowns/modals)
+        ├── reducer/                  # Redux root reducer (or reducer composition)
+        │   └── index.js              # Combine reducers / configure root reducer
+        ├── slices/                   # Redux slices (state modules)
+        │   ├── authSlice.js          # Auth state (token, user, loading)
+        │   ├── cartSlice.js          # Cart state (items, totals)
+        │   ├── courseSlice.js        # Course creation/editing state (instructor)
+        │   ├── profileSlice.js       # Profile state (user profile data)
+        │   └── viewCourseSlice.js    # Course viewing/progress state
+        ├── services/                 # API + integration layer
+        │   ├── apis.js               # All API endpoint constants
+        │   ├── apiConnector.js       # Axios/fetch wrapper + interceptors
+        │   ├── formatDate.js         # Date formatting helper for UI
+        │   └── operations/           # High-level API calls (auth/course/payment actions)
+        └── utils/                    # Frontend helper utilities
+            ├── avgRating.js          # Compute average ratings from reviews
+            ├── constants.js          # Shared constants (roles, enums, etc.)
+            └── dateFormatter.js      # Additional date formatting helpers
 ```
 
 ---
