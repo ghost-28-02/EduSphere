@@ -131,17 +131,19 @@ cd EduSphere
 
 ```bash
 # Frontend dependencies
+cd frontend
 npm install
+cd ..
 
 # Backend dependencies
-cd server
+cd backend
 npm install
 cd ..
 ```
 
 ### 3. Configure Environment Variables
 
-Create a `.env` file inside the **`server/`** directory and populate it with your credentials:
+Create a `.env` file inside the **`backend/`** directory and populate it with your credentials:
 
 ```env
 # ── Server ────────────────────────────────────────────────
@@ -177,6 +179,7 @@ MAIL_PASS=your_email_app_password
 From the **project root**, run:
 
 ```bash
+cd frontend
 npm run dev
 ```
 
@@ -188,9 +191,11 @@ This starts both servers simultaneously:
 
 ```bash
 # Frontend only
+cd frontend
 npm start
 
 # Backend only
+cd backend
 npm run server
 ```
 
