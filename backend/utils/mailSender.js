@@ -1,51 +1,30 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config()
+const { Resend } = require("resend");
+require("dotenv").config();
 
-const createTransporter = () => {
-    return nodemailer.createTransport({
-        host: process.env.MAIL_HOST,
-        port: Number(process.env.MAIL_PORT) || 587,
-        secure: (process.env.MAIL_SECURE === 'true') || (process.env.MAIL_PORT === '465'),
-        auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS
-        },
-        tls: { rejectUnauthorized: false },
-        connectionTimeout: 10000,
-        greetingTimeout: 10000,
-        socketTimeout: 10000,
-        logger: true,
-        debug: true
-    })
-}
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const mailSender = async (email, title, body) => {
     try {
-        const transporter = createTransporter();
 
-        // verify connection configuration (fails fast with useful logs)
-        try {
-            await transporter.verify();
-            console.log('SMTP connection verified');
-        } catch (verifyErr) {
-            console.error('SMTP verify failed:', verifyErr);
-            throw verifyErr;
-        }
-
-        const info = await transporter.sendMail({
-            from: process.env.MAIL_FROM || '"EduSphere | Web Dev - Sachin" <noreply@EduSphere.com>',
+        const response = await resend.emails.send({
+            from: process.env.MAIL_USER,
             to: email,
             subject: title,
-            html: body
-        })
+            html: body,
+        });
 
-        console.log('Message sent: %s', info.messageId)
-        return info
+        console.log("Email sent successfully");
+        console.log(response);
+
+        return response;
 
     } catch (error) {
-        console.error('Issue in mailSender:', error)
-        throw error
+
+        console.log("Issue in mailSender");
+        console.log(error);
+
+        throw error;
     }
-}
+};
 
 module.exports = mailSender;
