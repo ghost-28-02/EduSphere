@@ -53,6 +53,12 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
             name:"EduSphere",
             description: "Thank You for Purchasing the Course",
             image:rzpLogo,
+            method: {
+                card: true,
+                upi: true,
+                netbanking: true,
+                wallet: true,
+            },
             prefill: {
                 name:`${userDetails.firstName} ${userDetails.lastName}`,
                 email:userDetails.email
