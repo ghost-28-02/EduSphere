@@ -10,17 +10,13 @@ import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
 const Resources = [
-  "Articles",
   "Blog",
-  "Chart Sheet",
-  "Code challenges",
-  "Docs",
-  "Projects",
-  "Videos",
-  "Workspaces",
+  "Documentation",
+  "Help Center",
+  "FAQ",
 ];
-const Plans = ["Paid memberships", "For students", "Business solutions"];
-const Community = ["Forums", "Chapters", "Events"];
+const Plans = ["For Students", "For Instructors", "For Enterprise"];
+const Community = ["Discussion Forums", "Community Events", "Partner With Us"];
 
 const Footer = () => {
   return (
@@ -30,7 +26,7 @@ const Footer = () => {
           {/* Section 1 */}
           <div className="flex flex-wrap flex-row justify-between gap-3 pl-3 lg:w-[50%] lg:border-r lg:border-gray-700 lg:pr-5">
             <div className="mb-7 flex w-[30%] flex-col gap-3 lg:pl-0">
-              <img src={Logo} alt="" className="object-contain" />
+              <img src={Logo} alt="EduSphere Logo" className="h-10 w-auto object-contain" />
               <h1 className="text-[16px] font-semibold text-white">
                 Company
               </h1>
@@ -39,18 +35,18 @@ const Footer = () => {
                   return (
                     <div
                       key={i}
-                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-white"
+                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-secondary-500"
                     >
                       <Link to={ele.toLowerCase()}>{ele}</Link>
                     </div>
                   );
                 })}
               </div>
-              <div className="flex gap-3 text-lg">
-                <FaFacebook />
-                <FaGoogle />
-                <FaTwitter />
-                <FaYoutube />
+              <div className="flex gap-3 text-2xl text-gray-300">
+                <FaFacebook className="cursor-pointer transition-all duration-200 hover:text-secondary-500" />
+                <FaGoogle className="cursor-pointer transition-all duration-200 hover:text-secondary-500" />
+                <FaTwitter className="cursor-pointer transition-all duration-200 hover:text-secondary-500" />
+                <FaYoutube className="cursor-pointer transition-all duration-200 hover:text-secondary-500" />
               </div>
               <div></div>
             </div>
@@ -65,7 +61,7 @@ const Footer = () => {
                   return (
                     <div
                       key={index}
-                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-white"
+                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-secondary-500"
                     >
                       <Link to={ele.split(" ").join("-").toLowerCase()}>
                         {ele}
@@ -78,7 +74,7 @@ const Footer = () => {
               <h1 className="mt-7 text-[16px] font-semibold text-white">
                 Support
               </h1>
-              <div className="mt-2 cursor-pointer text-[14px] transition-all duration-200 hover:text-white">
+              <div className="mt-2 cursor-pointer text-[14px] transition-all duration-200 hover:text-secondary-500">
                 <Link to={"/help-center"}>Help Center</Link>
               </div>
             </div>
@@ -93,7 +89,7 @@ const Footer = () => {
                   return (
                     <div
                       key={index}
-                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-white"
+                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-secondary-500"
                     >
                       <Link to={ele.split(" ").join("-").toLowerCase()}>
                         {ele}
@@ -111,7 +107,7 @@ const Footer = () => {
                   return (
                     <div
                       key={index}
-                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-white"
+                      className="cursor-pointer text-[14px] transition-all duration-200 hover:text-secondary-500"
                     >
                       <Link to={ele.split(" ").join("-").toLowerCase()}>
                         {ele}
@@ -136,7 +132,7 @@ const Footer = () => {
                       return (
                         <div
                           key={index}
-                          className="cursor-pointer text-[14px] transition-all duration-200 hover:text-white"
+                          className="cursor-pointer text-[14px] transition-all duration-200 hover:text-secondary-500"
                         >
                           <Link to={link.link}>{link.title}</Link>
                         </div>
@@ -159,9 +155,9 @@ const Footer = () => {
                 <div
                   key={i}
                   className={` ${
-                    BottomFooter.length - 1 === i
+                    BottomFooter.length  === i
                       ? ""
-                      : "border-r border-gray-700 cursor-pointer hover:text-white transition-all duration-200"
+                      : "border-r border-gray-700 cursor-pointer hover:text-secondary-500 transition-all duration-200"
                   } px-3 `}
                 >
                   <Link to={ele.split(" ").join("-").toLocaleLowerCase()}>

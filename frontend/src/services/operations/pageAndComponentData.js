@@ -3,7 +3,6 @@ import { apiConnector } from "../apiConnector"
 import {catalogData} from "../apis"
 
 export const getCatalogaPageData = async (categoryId) => {
-    const toastId = toast.loading("Loading...")
     let result = []
 
     try {
@@ -15,7 +14,6 @@ export const getCatalogaPageData = async (categoryId) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -27,6 +25,5 @@ export const getCatalogaPageData = async (categoryId) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }

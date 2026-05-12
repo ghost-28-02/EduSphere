@@ -18,7 +18,6 @@ const {
 
 export function sendOtp(email, navigate){
     return async(dispatch) => {
-        const toastId = toast.loading('Loading...');
         dispatch(setLoading(true));
         try {
             const response = await apiConnector("POST", SENDOTP_API, {
@@ -32,7 +31,6 @@ export function sendOtp(email, navigate){
                 const msg = response.data.message;
                 toast.error(msg);
                 dispatch(setLoading(false));
-                toast.dismiss(toastId);
                 return;
             }
 
@@ -44,7 +42,6 @@ export function sendOtp(email, navigate){
             toast.error(errorMessage);
         }
         dispatch(setLoading(false));
-        toast.dismiss(toastId);
     }
 }
 
@@ -59,7 +56,6 @@ export function signUp(
     navigate
 ) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST", SIGNUP_API, {
@@ -78,7 +74,6 @@ export function signUp(
                 const msg = response.data.message;
                 toast.error(msg);
                 dispatch(setLoading(false));
-                toast.dismiss(toastId);
                 return;
             }
             toast.success("Signup Successful")
@@ -91,13 +86,11 @@ export function signUp(
             navigate("/signup")
         }
         dispatch(setLoading(false));
-        toast.dismiss(toastId);
     }
 }
 
 export function login(email, password, navigate) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true));
 
         try {
@@ -112,7 +105,6 @@ export function login(email, password, navigate) {
                 const msg = response.data.message;
                 toast.error(msg);
                 dispatch(setLoading(false));
-                toast.dismiss(toastId);
                 return;
             }
 
@@ -132,7 +124,6 @@ export function login(email, password, navigate) {
         }
 
         dispatch(setLoading(false))
-        toast.dismiss(toastId)
     }
 }
 

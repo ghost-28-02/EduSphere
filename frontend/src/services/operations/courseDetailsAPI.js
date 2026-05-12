@@ -22,7 +22,6 @@ const {
 } = courseEndpoints;
 
 export const getAllCourses = async () => {
-    const toastId = toast.loading("Loading...")
     let result = [];
     try {
         const response = await apiConnector("GET", GET_ALL_COURSE_API)
@@ -30,7 +29,6 @@ export const getAllCourses = async () => {
         if (!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -43,12 +41,10 @@ export const getAllCourses = async () => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const fetchCourseDetails = async (courseId) => {
-    const toastId = toast.loading("Loading...")
     let result = [];
     try {
         const response = await apiConnector("POST", COURSE_DETAILS_API, {
@@ -58,7 +54,6 @@ export const fetchCourseDetails = async (courseId) => {
         if (!response?.data?.success) {
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
         console.log("COURSE_DETAILS_API API RESPONSE............", response)
@@ -71,12 +66,10 @@ export const fetchCourseDetails = async (courseId) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const fetchCourseCategories = async () => {
-    const toastId = toast.loading("Loading...")
     let result = []
     try {
         const response = await apiConnector("GET", COURSE_CATEGORIES_API)
@@ -84,7 +77,6 @@ export const fetchCourseCategories = async () => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -98,12 +90,10 @@ export const fetchCourseCategories = async () => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const addCourseDetails = async(data, token) => {
-    const toastId = toast.loading("Loading....")
     let result = null;
     try {
         const response = await apiConnector("POST", CREATE_COURSE_API, data, {
@@ -114,7 +104,6 @@ export const addCourseDetails = async(data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -127,12 +116,10 @@ export const addCourseDetails = async(data, token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const editCourseDetails = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null;
 
     try {
@@ -145,7 +132,6 @@ export const editCourseDetails = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -158,12 +144,10 @@ export const editCourseDetails = async (data, token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const addSectionDetails = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null;
 
     try {
@@ -174,7 +158,6 @@ export const addSectionDetails = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -186,12 +169,10 @@ export const addSectionDetails = async (data, token) => {
         const errorMessage = error?.response?.data?.message || error?.message || "Failed to create section"
         toast.error(errorMessage)
     }
-    toast.dismiss(toastId)
     return result
 }
 
 export const addSubsection = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null;
 
     try {
@@ -203,7 +184,6 @@ export const addSubsection = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -216,12 +196,10 @@ export const addSubsection = async (data, token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const updateSection = async (data, token) => {
-    const toastId = toast.loading("Loading....")
     let result = null
 
     try {
@@ -233,7 +211,6 @@ export const updateSection = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -245,12 +222,10 @@ export const updateSection = async (data, token) => {
         const errorMessage = error?.response?.data?.message || error?.message || "Failed to update section"
         toast.error(errorMessage)
     }
-    toast.dismiss(toastId)
     return result
 }
 
 export const updateSubsection = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null
 
     try {
@@ -262,7 +237,6 @@ export const updateSubsection = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -274,12 +248,10 @@ export const updateSubsection = async (data, token) => {
         const errorMessage = error?.response?.data?.message || error?.message || "Failed to update subsection"
         toast.error(errorMessage)
     }
-    toast.dismiss(toastId)
     return result
 }
 
 export const deleteSection = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null
 
     try {
@@ -291,7 +263,6 @@ export const deleteSection = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -303,12 +274,10 @@ export const deleteSection = async (data, token) => {
         const errorMessage = error?.response?.data?.message || error?.message || "Failed to delete Section"
         toast.error(errorMessage)
     }
-    toast.dismiss(toastId)
     return result
 }
 
 export const deleteSubsection = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null
 
     try {
@@ -320,7 +289,6 @@ export const deleteSubsection = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -333,12 +301,10 @@ export const deleteSubsection = async (data, token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const deleteCourse = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null
 
     try {
@@ -350,7 +316,6 @@ export const deleteCourse = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -362,12 +327,11 @@ export const deleteCourse = async (data, token) => {
         const errorMessage = error?.response?.data?.message || error?.message || "Failed to delete course"
         toast.error(errorMessage)
     }
-    toast.dismiss(toastId)
+
     return result
 }
 
 export const fetchInstructorCourses = async (token) => {
-    const toastId = toast.loading("Loading...")
     let result = []
 
     try {
@@ -379,7 +343,6 @@ export const fetchInstructorCourses = async (token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -391,12 +354,10 @@ export const fetchInstructorCourses = async (token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const getFullDetailsOfCourse = async (courseId, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null
 
     try {
@@ -408,7 +369,6 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
         if(!response?.data?.success){
              const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -420,12 +380,10 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const markLectureAsComplete = async (data, token) => {
-    const toastId = toast.loading("Loading...")
     let result = null
 
     try {
@@ -437,7 +395,6 @@ export const markLectureAsComplete = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -451,12 +408,10 @@ export const markLectureAsComplete = async (data, token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return result
 }
 
 export const createRating = async (data, token) => {
-    const toastId = toast.loading("loading...")
     let success = false
 
     try {
@@ -468,7 +423,6 @@ export const createRating = async (data, token) => {
         if(!response?.data?.success){
             const msg = response?.data?.message
             toast.error(msg)
-            toast.dismiss(toastId)
             return
         }
 
@@ -483,6 +437,5 @@ export const createRating = async (data, token) => {
         toast.error(errorMessage)
     }
 
-    toast.dismiss(toastId)
     return success
 }

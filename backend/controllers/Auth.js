@@ -86,7 +86,7 @@ exports.signup = async (req, res) => {
         if(recentOtp.length === 0){
             return res.status(404).json({
                 success: false,
-                message: "No OTP found for this email"
+                message: `No OTP found for this email`
             })
         }  else if(otp !== recentOtp[0].otp){
             return res.status(400).json({

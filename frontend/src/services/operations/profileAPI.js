@@ -13,7 +13,6 @@ const {
 
 export function getUserDetails(token, navigate) {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector(
@@ -28,7 +27,6 @@ export function getUserDetails(token, navigate) {
             if (!response.data.success) {
                 const msg = response.data.message;
                 toast.error(msg);
-                toast.dismiss(toastId);
                 setLoading(false);
                 return;
             }
@@ -43,13 +41,11 @@ export function getUserDetails(token, navigate) {
             const errorMessage = error.response?.data?.message || error.message || "Could Not Get User Details";
             toast.error(errorMessage);
         }
-        toast.dismiss(toastId)
         dispatch(setLoading(false))
     }
 }
 
 export async function getUserEnrolledCourses(token) {
-    const toastId = toast.loading("Loading...");
     let result = [];
     try {
         const response = await apiConnector(
@@ -64,7 +60,6 @@ export async function getUserEnrolledCourses(token) {
         if (!response.data.success) {
             const msg = response.data.message;
             toast.error(msg);
-            toast.dismiss(toastId);
             return;
         }
 
@@ -75,12 +70,10 @@ export async function getUserEnrolledCourses(token) {
         toast.error(errorMessage);
     }
 
-    toast.dismiss(toastId);
     return result;
 }
 
 export async function getInstructorDetails(token) {
-    const toastId = toast.loading("Loading...")
     let result = [];
 
     try {
@@ -97,7 +90,6 @@ export async function getInstructorDetails(token) {
         if (!response.data.success) {
             const msg = response.data.message;
             toast.error(msg);
-            toast.dismiss(toastId);
             return;
         }
 
@@ -109,6 +101,5 @@ export async function getInstructorDetails(token) {
         toast.error(errorMessage);
     }
 
-    toast.dismiss(toastId);
     return result;
 }
