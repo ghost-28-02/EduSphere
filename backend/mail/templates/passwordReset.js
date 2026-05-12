@@ -9,7 +9,7 @@ exports.passwordResetTemplate = (resetUrl) => {
         body: `
             <div style="background:#19313b;border:1px solid #29434d;border-radius:18px;padding:20px;">
                 <p style="margin:0;color:#cbd5e1;line-height:24px;">For your security, this reset link is temporary and can only be used once.</p>
-                <p style="margin:14px 0 0;color:#f8fafc;line-height:24px;"><strong style="color:#e9c46a;">Link expires in 5 minutes.</strong></p>
+                <p style="margin:14px 0 0;color:#f8fafc;line-height:24px;"><strong style="color:#e9c46a;">Link expires in 10 minutes.</strong></p>
             </div>
         `,
         cta: ctaButton("Reset Password", resetUrl),
