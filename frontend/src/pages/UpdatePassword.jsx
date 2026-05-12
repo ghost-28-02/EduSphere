@@ -38,20 +38,20 @@ function UpdatePassword() {
 
 
     return (
-        <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center">
+        <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center bg-primary-800 p-4">
             {
                 loading ? (
                     <Spinner />
                 ) : (
-                    <div className="w-full max-w-[500px] p-6 lg:p-8 bg-richblack-900 rounded-xl shadow-lg">
+                    <div className="w-full max-w-md p-6 lg:p-8 bg-primary-700 rounded-xl border border-gray-700 shadow-md">
 
                         {/* Heading */}
-                        <p className="text-3xl font-semibold text-richblack-5">
+                        <p className="text-2xl font-semibold text-white">
                             Choose New Password
                         </p>
 
                         {/* Subheading */}
-                        <p className="mt-3 text-lg text-richblack-100 leading-relaxed">
+                        <p className="mt-3 text-base text-gray-300 leading-relaxed">
                             Almost done. Enter your new password and you are all set.
                         </p>
 
@@ -65,8 +65,8 @@ function UpdatePassword() {
                             <div className="flex flex-col gap-4">
                                 {/* New Password */}
                                 <label className="relative">
-                                    <p className="mb-1 text-sm text-richblack-200">
-                                        New Password <sup className="text-pink-200">*</sup>
+                                    <p className="mb-1 text-sm text-gray-300">
+                                        New Password <sup className="text-coral-500">*</sup>
                                     </p>
 
                                     <input
@@ -76,32 +76,25 @@ function UpdatePassword() {
                                         value={password}
                                         onChange={handleOnChange}
                                         placeholder="Enter password"
-                                        style={{
-                                            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                                        }}
-                                        className="
-                                            w-full rounded-lg bg-richblack-800 p-3 pr-12
-                                            text-richblack-5 placeholder-richblack-400
-                                            focus:outline-none focus:ring-2 focus:ring-yellow-50
-                                        "
+                                        className="w-full rounded-md bg-primary-800 p-3 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary-500 border border-gray-700"
                                     />
 
                                     <span
                                         onClick={() => setShowPassword(prev => !prev)}
-                                        className="absolute right-3 top-[38px] cursor-pointer"
+                                        className="absolute right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-300 hover:text-white transition"
                                     >
                                         {showPassword ? (
-                                            <AiOutlineEyeInvisible size={24} className="text-richblack-300" />
+                                            <AiOutlineEyeInvisible size={24} />
                                         ) : (
-                                            <AiOutlineEye size={24} className="text-richblack-300" />
+                                            <AiOutlineEye size={24} />
                                         )}
                                     </span>
                                 </label>
 
                                 {/* Confirm Password */}
                                 <label className="relative">
-                                    <p className="mb-1 text-sm text-richblack-200">
-                                        Confirm New Password <sup className="text-pink-200">*</sup>
+                                    <p className="mb-1 text-sm text-gray-300">
+                                        Confirm New Password <sup className="text-coral-500">*</sup>
                                     </p>
 
                                     <input
@@ -111,24 +104,17 @@ function UpdatePassword() {
                                         value={confirmPassword}
                                         onChange={handleOnChange}
                                         placeholder="Confirm password"
-                                        style={{
-                                            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                                        }}
-                                        className="
-                                            w-full rounded-lg bg-richblack-800 p-3 pr-12
-                                            text-richblack-5 placeholder-richblack-400
-                                            focus:outline-none focus:ring-2 focus:ring-yellow-50
-                                        "
+                                        className="w-full rounded-md bg-primary-800 p-3 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary-500 border border-gray-700"
                                     />
 
                                     <span
                                         onClick={() => setShowConfirmPassword(prev => !prev)}
-                                        className="absolute right-3 top-[38px] cursor-pointer"
+                                        className="absolute right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-300 hover:text-white transition"
                                     >
                                         {showConfirmPassword ? (
-                                            <AiOutlineEyeInvisible size={24} className="text-richblack-300" />
+                                            <AiOutlineEyeInvisible size={24} />
                                         ) : (
-                                            <AiOutlineEye size={24} className="text-richblack-300" />
+                                            <AiOutlineEye size={24} />
                                         )}
                                     </span>
                                 </label>
@@ -137,11 +123,7 @@ function UpdatePassword() {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="
-                                    mt-4 w-full rounded-lg bg-yellow-50 py-3
-                                    font-medium text-richblack-900
-                                    hover:bg-yellow-100 transition-all
-                                "
+                                className="mt-4 w-full rounded-md bg-secondary-500 py-3 font-medium text-white hover:bg-secondary-600 transition-all"
                             >
                                 Reset Password
                             </button>
@@ -150,7 +132,7 @@ function UpdatePassword() {
                             <div className="mt-6 text-center">
                                 <Link
                                     to="/login"
-                                    className="inline-flex items-center gap-2 text-sm text-richblack-200 hover:text-yellow-50 transition"
+                                    className="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-secondary-500 transition"
                                 >
                                     <BiArrowBack />
                                     Back to login

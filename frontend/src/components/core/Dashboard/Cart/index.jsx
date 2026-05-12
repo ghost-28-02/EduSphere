@@ -10,8 +10,8 @@ export default function Cart(){
 
     return (
         <div>
-            <h1 className="mb-14 text-3xl font-medium text-richblack-5">Your Cart</h1>
-            <p className="border-b border-b-richblack-400 pb-2 font-semibold text-richblack-400">
+            <h1 className="mb-14 text-3xl font-semibold text-white">Your Cart</h1>
+            <p className="border-b border-b-gray-700 pb-2 font-semibold text-gray-400">
                 {totalItems} Courses in Cart
             </p>
 
@@ -24,7 +24,7 @@ export default function Cart(){
                     </div>
                 ) 
                 : (
-                    <div className="mt-14 text-center text-3xl text-richblack-100">
+                    <div className="mt-14 text-center text-3xl text-gray-300">
                         <p>Your Cart is Empty</p>
                     </div>
                 )

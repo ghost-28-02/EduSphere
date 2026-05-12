@@ -174,76 +174,76 @@ const VideoDetails = () => {
 
   return (
     <div className="flex flex-col gap-5 text-white">
-      {!videoData ? (
-        <img
-          src={previewSource}
-          alt="Preview"
-          className="h-full w-full rounded-md object-cover"
-        />
-      ) : (
-        <Player
-          ref={playerRef}
-          aspectRatio="16:9"
-          playsInline
-          onEnded={() => setVideoEnded(true)}
-          src={videoData?.video?.url}
-        >
-          <BigPlayButton position="center" />
-
-          {videoEnded && (
-            <div
-              style={{
-                backgroundImage:
-                  "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
-              }}
-              className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
+      <div className="w-full">
+        {!videoData ? (
+          <img
+            src={previewSource}
+            alt="Preview"
+            className="h-auto w-full rounded-md object-cover"
+          />
+        ) : (
+          <div className="relative w-full overflow-hidden rounded-md bg-primary-700">
+            <Player
+              ref={playerRef}
+              aspectRatio="16:9"
+              playsInline
+              onEnded={() => setVideoEnded(true)}
+              src={videoData?.video?.url}
             >
-              {!completedLectures.includes(subSectionId) && (
-                <IconBtn
-                  disabled={loading}
-                  onclick={() => handleLectureCompletion()}
-                  text={!loading ? "Mark As Completed" : "Loading..."}
-                  customClasses="text-xl max-w-max px-4 mx-auto"
-                />
-              )}
-              <IconBtn
-                disabled={loading}
-                onclick={() => {
-                  if (playerRef?.current) {
-                    playerRef?.current?.seek(0)
-                    setVideoEnded(false)
-                  }
-                }}
-                text="Rewatch"
-                customClasses="text-xl max-w-max px-4 mx-auto mt-2"
-              />
-              <div className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
-                {!isFirstVideo() && (
-                  <button
-                    disabled={loading}
-                    onClick={goToPrevVideo}
-                    className="blackButton"
-                  >
-                    Prev
-                  </button>
-                )}
-                {!isLastVideo() && (
-                  <button
-                    disabled={loading}
-                    onClick={goToNextVideo}
-                    className="blackButton"
-                  >
-                    Next
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-        </Player>
-      )}
+              <BigPlayButton position="center" />
+            </Player>
 
-      <h1 className="mt-4 text-3xl font-semibold">{videoData?.title}</h1>
-      <p className="pt-2 pb-6">{videoData?.description}</p>
+            {videoEnded && (
+              <div className="absolute inset-0 z-[100] grid h-full place-content-center bg-gradient-to-t from-black/95 via-black/70 to-transparent px-4">
+                <div className="mx-auto w-full max-w-xl text-center">
+                  {!completedLectures.includes(subSectionId) && (
+                    <IconBtn
+                      disabled={loading}
+                      onclick={() => handleLectureCompletion()}
+                      text={!loading ? "Mark As Completed" : "Loading..."}
+                      customClasses="text-lg w-full max-w-max px-4 mx-auto"
+                    />
+                  )}
+                  <IconBtn
+                    disabled={loading}
+                    onclick={() => {
+                      if (playerRef?.current) {
+                        playerRef?.current?.seek(0)
+                        setVideoEnded(false)
+                      }
+                    }}
+                    text="Rewatch"
+                    customClasses="mt-3 text-lg w-full max-w-max px-4 mx-auto"
+                  />
+                  <div className="mt-8 flex w-full items-center justify-center gap-4 text-lg">
+                    {!isFirstVideo() && (
+                      <button
+                        disabled={loading}
+                        onClick={goToPrevVideo}
+                        className="rounded-md bg-secondary-500 px-4 py-2 text-white hover:bg-secondary-600 disabled:opacity-50"
+                      >
+                        Prev
+                      </button>
+                    )}
+                    {!isLastVideo() && (
+                      <button
+                        disabled={loading}
+                        onClick={goToNextVideo}
+                        className="rounded-md bg-secondary-500 px-4 py-2 text-white hover:bg-secondary-600 disabled:opacity-50"
+                      >
+                        Next
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      <h1 className="mt-4 text-2xl font-semibold text-white">{videoData?.title}</h1>
+      <p className="pt-2 pb-6 text-gray-300">{videoData?.description}</p>
     </div>
   )
 }

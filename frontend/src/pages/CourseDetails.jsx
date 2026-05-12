@@ -120,7 +120,7 @@ function CourseDetails() {
 
     return (
         <>
-            <div className={`relative w-full bg-richblack-800`}>
+            <div className={`relative w-full bg-primary-800`}>
                 <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative ">
                     <div className="mx-auto grid min-h-[450px] max-w-maxContentTab justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
                         <div className="relative block max-h-[30rem] lg:hidden">
@@ -131,43 +131,41 @@ function CourseDetails() {
                                 className="aspect-auto w-full h-[400px] rounded-lg"
                             />
                         </div>
-                        <div className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5`}>
+                        <div className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-white`}>
                             <div>
                                 <p className="text-4xl font-bold text-richblack-5 sm:text-[42px]">
                                     {courseName}
                                 </p>
                             </div>
-                            <p className={`text-richblack-200`}>{courseDescription}</p>
-                            <div className="text-md flex flex-wrap items-center gap-2">
-                                <span className="text-yellow-25">{avgReviewCount}</span>
+                            <p className={`text-gray-300`}>{courseDescription}</p>
+                            <div className="text-md flex flex-wrap items-center gap-2 text-gray-300">
+                                <span className="text-accent-500 font-semibold">{avgReviewCount}</span>
                                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                                <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                                <span>{`${studentEnrolled.length} students enrolled`}</span>
+                                <span className="">{`(${ratingAndReviews.length} reviews)`}</span>
+                                <span className="">{`${studentEnrolled.length} students enrolled`}</span>
                             </div>
                             <div>
                                 <p className="">
                                     Created By {`${instructor.firstName} ${instructor.lastName}`}
                                 </p>
                             </div>
-                            <div className="flex flex-wrap gap-5 text-lg">
+                            <div className="flex flex-wrap gap-5 text-lg text-gray-300">
                                 <p className="flex items-center gap-2">
-                                    {" "}
                                     <BiInfoCircle /> Created at {formatDate(createdAt)}
                                 </p>
                                 <p className="flex items-center gap-2">
-                                    {" "}
                                     <HiOutlineGlobeAlt /> English
                                 </p>
                             </div>
                         </div>
-                        <div className="flex w-full flex-col gap-4 border-y border-y-richblack-500 py-4 lg:hidden">
-                            <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
+                        <div className="flex w-full flex-col gap-4 border-y border-y-gray-700 py-4 lg:hidden">
+                            <p className="space-x-3 pb-4 text-3xl font-semibold text-white">
                                 Rs. {price}
                             </p>
-                            <button className="cursor-pointer rounded-md bg-yellow-50 px-[20px] py-[8px] font-semibold text-richblack-900" onClick={handleBuyCourse}>
+                            <button className="cursor-pointer rounded-md bg-secondary-500 px-5 py-2 font-semibold text-white hover:bg-secondary-600 transition" onClick={handleBuyCourse}>
                                 Buy Now
                             </button>
-                            <button className="cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5">Add to Cart</button>
+                            <button className="cursor-pointer rounded-md bg-primary-700 border border-gray-700 px-5 py-2 font-semibold text-accent-500 hover:bg-primary-600 transition">Add to Cart</button>
                         </div>
                     </div>
 
@@ -184,16 +182,16 @@ function CourseDetails() {
             <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
                 <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
 
-                    <div className="my-8 border border-richblack-600 p-8">
-                        <p className="text-3xl font-semibold">What you'll learn</p>
-                        <div className="mt-5">
+                    <div className="my-8 border border-gray-700 rounded-2xl bg-primary-700 p-8">
+                        <p className="text-3xl font-semibold text-white">What you'll learn</p>
+                        <div className="mt-5 text-gray-300">
                             <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>
                         </div>
                     </div>
 
                     <div className="max-w-[830px] ">
                         <div className="flex flex-col gap-3">
-                            <p className="text-[28px] font-semibold">Course Content</p>
+                            <p className="text-[28px] font-semibold text-white">Course Content</p>
                             <div className="flex flex-wrap justify-between gap-2">
                                 <div className="flex gap-2">
                                     <span>
@@ -206,7 +204,7 @@ function CourseDetails() {
                                 </div>
                                 <div>
                                     <button
-                                        className="text-yellow-25"
+                                        className="text-accent-500"
                                         onClick={() => setIsActive([])}
                                     >
                                         Collapse all sections

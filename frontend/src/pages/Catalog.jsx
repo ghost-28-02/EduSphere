@@ -72,18 +72,18 @@ function Catalog() {
 
     return (
         <>
-            <div className=" box-content bg-richblack-800 px-4">
+            <div className="box-content bg-primary-800 px-4">
                 <div className='mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent'>
-                    <p className="text-sm text-richblack-300">
+                    <p className="text-sm text-gray-300">
                         {`Home / Catalog / `}
-                        <span className="text-yellow-25">
+                        <span className="text-accent-500">
                             {catalogPageData?.selectedCategory?.name}
                         </span>
                     </p>
-                    <p className="text-3xl text-richblack-5">
+                    <p className="text-3xl font-semibold text-white">
                         {catalogPageData?.selectedCategory?.name}
                     </p>
-                    <p className="max-w-[870px] text-richblack-200">
+                    <p className="max-w-[870px] text-gray-300">
                         {catalogPageData?.selectedCategory?.description}
                     </p>
                 </div>
@@ -91,11 +91,11 @@ function Catalog() {
 
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
 
-                <div className="section_heading">Courses to get you started</div>
-                <div className="my-4 flex border-b border-b-richblack-600 text-sm">
-                    <p className={`px-4 py-2 ${active === 1 ? "border-b border-b-yellow-25 text-yellow-25" : "text-richblack-50"} cursor-pointer`}
+                <div className="mb-4 text-2xl lg:text-3xl font-semibold text-white">Courses to get you started</div>
+                <div className="my-4 flex border-b border-b-gray-700 text-sm">
+                    <p className={`px-4 py-2 ${active === 1 ? "border-b border-b-accent-500 text-accent-500" : "text-gray-300"} cursor-pointer`}
                         onClick={() => setActive(1)}>Most Popular</p>
-                    <p className={`px-4 py-2 ${active === 2 ? "border-b border-b-yellow-25 text-yellow-25" : "text-richblack-50"} cursor-pointer`}
+                    <p className={`px-4 py-2 ${active === 2 ? "border-b border-b-accent-500 text-accent-500" : "text-gray-300"} cursor-pointer`}
                         onClick={() => setActive(2)}>New</p>
                 </div>
                 <div>
@@ -104,7 +104,7 @@ function Catalog() {
             </div>
 
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                <div className="section_heading">
+                <div className="mb-4 text-2xl lg:text-3xl font-semibold text-white">
                     Top courses in {catalogPageData?.differentCategory?.name}
                 </div>
                 <div className="py-8">
@@ -113,7 +113,7 @@ function Catalog() {
             </div>
 
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                <div className="section_heading">Frequently Bought</div>
+                <div className="mb-4 text-2xl lg:text-3xl font-semibold text-white">Frequently Bought</div>
                 <div className="py-8">
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         {catalogPageData?.topSellingCourses?.slice(0, 4).map((course, i) => (

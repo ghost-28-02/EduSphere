@@ -18,27 +18,27 @@ const Course_Card = ({course, Height}) => {
   return (
     <>
       <Link to={`/courses/${course._id}`}>
-        <div className="">
+        <div className="group rounded-xl overflow-hidden bg-primary-700 shadow-sm hover:shadow-md transition-shadow duration-200">
           <div className="rounded-lg">
             <img
               src={course?.thumbnail}
               alt="course thumnail"
-              className={`${Height} w-full rounded-xl object-cover `}
+              className={`${Height} w-full rounded-t-xl object-cover`}
             />
           </div>
-          <div className="flex flex-col gap-2 px-1 py-3">
-            <p className="text-xl text-richblack-5">{course?.courseName}</p>
-            <p className="text-sm text-richblack-50">
+          <div className="flex flex-col gap-2 px-4 py-4">
+            <p className="text-lg font-semibold text-white line-clamp-2">{course?.courseName}</p>
+            <p className="text-sm text-gray-300">
               {course?.instructor?.firstName} {course?.instructor?.lastName}
             </p>
-            <div className="flex items-center gap-2">
-              <span className="text-yellow-5">{avgReviewCount || 0}</span>
+            <div className="flex items-center gap-3">
+              <span className="text-accent-500 font-semibold">{avgReviewCount || 0}</span>
               <RatingStars Review_Count={avgReviewCount} />
-              <span className="text-richblack-400">
+              <span className="text-sm text-gray-400">
                 {course?.ratingAndReviews?.length} Ratings
               </span>
             </div>
-            <p className="text-xl text-richblack-5">Rs. {course?.price}</p>
+            <p className="text-lg font-semibold text-white mt-2">Rs. {course?.price}</p>
           </div>
         </div>
       </Link>

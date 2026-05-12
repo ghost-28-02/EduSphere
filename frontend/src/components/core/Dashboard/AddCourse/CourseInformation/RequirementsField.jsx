@@ -36,8 +36,8 @@ function RequirementsField({ name, label, register, setValue, errors, getValues 
     return (
         <>
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-richblack-5" htmlFor={name}>
-                    {label} <sup className="text-pink-200">*</sup>
+                <label className="text-sm text-white" htmlFor={name}>
+                    {label} <sup className="text-coral-500">*</sup>
                 </label>
                 <div className="flex flex-col items-start space-y-2">
                     <input
@@ -50,7 +50,7 @@ function RequirementsField({ name, label, register, setValue, errors, getValues 
                     <button
                         type="button"
                         onClick={handleAddRequirement}
-                        className="font-semibold text-yellow-50"
+                        className="font-semibold text-secondary-500"
                     >
                         Add
                     </button>
@@ -58,11 +58,11 @@ function RequirementsField({ name, label, register, setValue, errors, getValues 
                 {requirementsList.length > 0 && (
                     <ul className="mt-2 list-inside list-disc">
                         {requirementsList.map((requirement, index) => (
-                            <li key={index} className="flex items-center text-richblack-5">
+                            <li key={index} className="flex items-center text-white">
                                 <span>{requirement}</span>
                                 <button
                                     type="button"
-                                    className="ml-2 text-xs text-pure-greys-300 "
+                                    className="ml-2 text-xs text-gray-400 "
                                     onClick={() => handleRemoveRequirement(index)}
                                 >
                                     clear
@@ -72,7 +72,7 @@ function RequirementsField({ name, label, register, setValue, errors, getValues 
                     </ul>
                 )}
                 {errors[name] && (
-                    <span className="ml-2 text-xs tracking-wide text-pink-200">
+                        <span className="ml-2 text-xs tracking-wide text-coral-500">
                         {label} is required
                     </span>
                 )}

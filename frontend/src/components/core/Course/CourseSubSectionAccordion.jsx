@@ -7,10 +7,10 @@ function CourseSubSectionAccordion({ subSec }) {
     <div>
       <div className="flex justify-between py-2">
         <div className={`flex items-center gap-2`}>
-          <span>
+          <span className="flex items-center justify-center h-8 w-8 rounded-md bg-primary-600 text-white">
             <HiOutlineVideoCamera />
           </span>
-          <p>{subSec?.title}</p>
+          <p className="text-gray-200">{subSec?.title}</p>
         </div>
       </div>
     </div>

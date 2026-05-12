@@ -25,26 +25,26 @@ function ExploreMore() {
     }
 
     return (
-        <div className="relative w-full bg-richblack-900">
+        <div className="relative w-full bg-gray-900 z-10">
 
-            <div className="relative w-11/12 mx-auto text-center text-white flex flex-col items-center py-20">
+            <div className="relative mx-auto flex w-11/12 flex-col items-center py-20 text-center text-white">
 
-                <div className="text-4xl font-semibold">
+                <div className="text-3xl font-semibold leading-tight sm:text-4xl">
                     Unlock the <HighlightText text={"Power of Code"} />
                 </div>
 
-                <p className="text-richblack-300 text-lg mt-3">
+                <p className="mt-3 text-base text-gray-300 sm:text-lg">
                     Learn to Build Anything You Can Imagine
                 </p>
-                <div className="flex gap-4 rounded-full bg-richblack-800 mt-6 p-1 border-b border-richblack-500 mb-28">
+                <div className="mt-6 mb-28 flex max-w-full flex-wrap justify-center gap-3 rounded-full border border-gray-700 bg-primary-700 p-2 shadow-lg shadow-black/20">
                     {tabsName.map((element, index) => (
                         <div
                             key={index}
                             onClick={() => setMyCards(element)}
-                            className={`px-8 py-2 rounded-full cursor-pointer transition-all duration-200
+                            className={`cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 sm:px-6
                                     ${currentTab === element
-                                    ? "bg-richblack-900 text-richblack-5"
-                                    : "text-richblack-300 hover:bg-richblack-900 hover:text-richblack-5"
+                                    ? "bg-primary-800 text-white shadow-md shadow-black/20"
+                                    : "text-gray-300 hover:bg-primary-800 hover:text-white"
                                 }
                             `}
                         >
@@ -53,7 +53,7 @@ function ExploreMore() {
                     ))}
                 </div>
 
-                <div className="absolute -bottom-40 flex gap-14">
+                <div className="grid w-full gap-6 lg:absolute lg:-bottom-40 lg:grid-cols-3 lg:gap-10">
                     {courses.map((element, index) => (
                         <CourseCard
                             key={index}

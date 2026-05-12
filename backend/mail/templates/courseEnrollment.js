@@ -1,98 +1,19 @@
+const { DASHBOARD_URL, ctaButton, shell } = require("./_sharedEmail");
+
 exports.courseEnrollmentTemplate = (courseName, name) => {
-    return `<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Course Enrollment Confirmation</title>
-        <style>
-            body {
-                background-color: #ffffff;
-                font-family: Arial, sans-serif;
-                font-size: 16px;
-                line-height: 1.5;
-                color: #333333;
-                margin: 0;
-                padding: 0;
-            }
-
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                text-align: center;
-            }
-
-            .logo {
-                max-width: 200px;
-                margin-bottom: 20px;
-            }
-
-            .message {
-                font-size: 18px;
-                font-weight: bold;
-                margin-bottom: 20px;
-            }
-
-            .body {
-                font-size: 16px;
-                margin-bottom: 20px;
-            }
-
-            .highlight {
-                font-weight: bold;
-                color: #4f46e5;
-            }
-
-            .cta {
-                display: inline-block;
-                padding: 12px 20px;
-                background-color: #4f46e5;
-                color: #ffffff;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
-                margin-top: 20px;
-            }
-
-            .support {
-                font-size: 14px;
-                color: #999999;
-                margin-top: 30px;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="container">
-            <a href="https://studynotion-edtech-project.vercel.app">
-                <img class="logo" src="https://res.cloudinary.com/dfryej1yt/image/upload/v1769185735/EduSphere/fesztk4wmwascixusg0c.png" alt="EduSphere Logo">
-            </a>
-
-            <div class="message">Course Enrollment Confirmation</div>
-
-            <div class="body">
-                <p>Dear ${name},</p>
-
-                <p>
-                    You have successfully enrolled in the course:
-                </p>
-
-                <p class="highlight">${courseName}</p>
-
-                <p>
-                    You can now access all course materials and start learning from your dashboard.
-                </p>
-
-                <a class="cta" href="https://studynotion-edtech-project.vercel.app/dashboard">
-                    Go to Dashboard
-                </a>
+    return shell({
+        preheader: `You are enrolled in ${courseName}`,
+        eyebrow: "Enrollment confirmed",
+        title: `Welcome to ${courseName}`,
+        intro: `Hi ${name || "Learner"}, your enrollment is confirmed. You now have access to the course content and can begin learning right away.`,
+        body: `
+            <div style="background:#19313b;border:1px solid #29434d;border-radius:18px;padding:20px;">
+                <div style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;font-weight:700;">Course</div>
+                <div style="margin-top:8px;font-size:20px;line-height:30px;font-weight:800;color:#e9c46a;">${courseName}</div>
+                <p style="margin:14px 0 0;color:#cbd5e1;line-height:24px;">You can return to this course anytime from your dashboard. Your progress will be saved as you move through the lessons.</p>
             </div>
-
-            <div class="support">
-                Need help? Contact us at
-                <a href="mailto:info@edusphere.com">info@edusphere.com</a>
-            </div>
-        </div>
-    </body>
-    </html>`;
+        `,
+        cta: ctaButton("Open Dashboard", DASHBOARD_URL),
+        footerNote: "If you need help accessing the course, contact support and include the course name for faster assistance.",
+    });
 };

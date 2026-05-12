@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Link, matchPath } from 'react-router-dom';
+import { Link, matchPath, useLocation } from 'react-router-dom';
 import Logo from '../../assets/Logo/Logo-Full-Light.png'
 import { NavbarLinks } from '../../data/navbar-links';
-import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaShoppingCart } from 'react-icons/fa';
+import { HiMenu, HiOutlineX } from 'react-icons/hi';
 import ProfileDropDown from '../core/Auth/ProfileDropDown';
 import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/apis';
@@ -17,6 +17,8 @@ function Navbar() {
     const { totalItems } = useSelector((state) => state.cart);
 
     const [subLinks, setSubLinks] = useState([]);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
     const fetchSublinks = async () => {
         try {
@@ -35,107 +37,207 @@ function Navbar() {
     const location = useLocation();
     const matchRoute = (route) => {
         return matchPath({ path: route }, location.pathname)
-    }    
+    }
+
+    const closeMobileMenu = () => setIsMobileMenuOpen(false);
+    const closeAllMobilePanels = () => {
+        setIsMobileMenuOpen(false);
+        setIsCatalogOpen(false);
+    };
+
+    const navLinkClasses = (path) => {
+        const isActive = matchRoute(path);
+        return `rounded-lg px-2 py-1.5 text-sm font-medium transition-colors duration-200 ${isActive ? 'text-accent-500' : 'text-gray-200 hover:text-secondary-500'}`;
+    };
+
+    const renderCatalogDropdown = (isMobile = false) => {
+        if (isMobile) {
+            return (
+                <div className='rounded-xl border border-gray-700 bg-primary-700 px-3 py-2'>
+                    <button
+                        type='button'
+                        className={`flex w-full items-center justify-between gap-2 rounded-lg py-1 text-sm font-medium transition-colors duration-200 ${matchRoute('/catalog/:catalogName') ? 'text-accent-500' : 'text-gray-100 hover:text-secondary-500'}`}
+                        onClick={() => setIsCatalogOpen((prev) => !prev)}
+                        aria-expanded={isCatalogOpen}
+                        aria-controls='mobile-catalog-menu'
+                    >
+                        <span>Catalog</span>
+                        <MdArrowDropDown className={`text-lg transition-transform duration-200 ${isCatalogOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    <div
+                        id='mobile-catalog-menu'
+                        className={`grid overflow-hidden transition-all duration-300 ease-out ${isCatalogOpen ? 'mt-3 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                    >
+                        <div className='min-h-0 space-y-1 rounded-lg bg-primary-600 p-2'>
+                            {subLinks.length ? (
+                                subLinks.map((link, index) => (
+                                    <Link
+                                        to={`/catalog/${link.name.split(' ').join('-').toLowerCase()}`}
+                                        key={index}
+                                        className='block rounded-lg px-3 py-2 text-sm text-gray-100 transition-colors duration-200 hover:bg-primary-500 hover:text-white'
+                                        onClick={closeAllMobilePanels}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))
+                            ) : (
+                                <p className='px-3 py-3 text-center text-sm text-gray-300'>
+                                    No Courses Found
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div className={`group relative flex cursor-pointer items-center gap-1.5 ${matchRoute('/catalog/:catalogName') ? 'text-accent-500' : 'text-gray-200'}`}>
+                <p className="text-sm font-medium">Catalog</p>
+                <MdArrowDropDown className="text-lg transition-transform duration-200 group-hover:rotate-180" />
+
+                <div className="invisible absolute left-1/2 top-full z-[1000] mt-3 flex w-[300px] -translate-x-1/2 flex-col rounded-2xl border border-gray-700 bg-primary-600 p-3 text-gray-100 opacity-0 shadow-xl shadow-black/30 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+
+                    <div className="absolute left-1/2 -top-2 h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm border-l border-t border-gray-700 bg-primary-600" />
+
+                    {subLinks.length ? (
+                        subLinks.map((link, index) => (
+                            <Link
+                                to={`/catalog/${link.name.split(' ').join('-').toLowerCase()}`}
+                                key={index}
+                                className="rounded-xl px-4 py-3 text-sm text-gray-100 transition-colors duration-200 hover:bg-primary-500 hover:text-white"
+                            >
+                                {link.name}
+                            </Link>
+                        ))
+                    ) : (
+                        <p className="px-4 py-4 text-center text-sm text-gray-300">
+                            No Courses Found
+                        </p>
+                    )}
+
+                </div>
+            </div>
+        );
+    };
+
+    const renderDesktopNav = () => (
+        <nav className="hidden md:flex">
+            <ul className="flex flex-row items-center gap-2 text-gray-100 lg:gap-4">
+                {NavbarLinks.map((link, index) => (
+                    <li key={index}>
+                        {link.title === 'Catalog' ? (
+                            renderCatalogDropdown(false)
+                        ) : (
+                            <Link to={link?.path} className={navLinkClasses(link?.path)}>
+                                {link.title}
+                            </Link>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    );
+
+    const renderActions = (isMobile = false) => (
+        <div className={`flex items-center ${isMobile ? 'flex-col gap-3' : 'gap-3'}`}>
+            {user && user?.accountType !== 'Instructor' && (
+                <Link
+                    to={'/dashboard/cart'}
+                    className={`relative flex items-center justify-center rounded-full transition-colors duration-200 ${isMobile ? 'h-11 w-11 bg-primary-600 text-gray-100 hover:bg-primary-500' : 'h-10 w-10 text-gray-200 hover:bg-primary-700 hover:text-white'}`}
+                    onClick={closeAllMobilePanels}
+                    aria-label="Open cart"
+                >
+                    <FaShoppingCart className="text-lg" />
+                    {totalItems > 0 && (
+                        <div className={`absolute flex items-center justify-center rounded-full bg-coral-500 ${isMobile ? '-right-1 -top-1 h-5 min-w-5 px-1' : '-right-2 -top-2 h-[18px] min-w-[18px] px-1'}`}>
+                            <span className="text-xs font-semibold leading-none text-white">{totalItems}</span>
+                        </div>
+                    )}
+                </Link>
+            )}
+
+            {token === null && (
+                <div className={`flex ${isMobile ? 'w-full flex-col gap-3' : 'items-center gap-3'}`}>
+                    <Link to={'/login'} onClick={closeAllMobilePanels} className={`inline-flex items-center justify-center rounded-full border border-gray-700 px-4 py-2 text-sm font-medium text-gray-100 transition-colors duration-200 hover:border-secondary-500 hover:bg-secondary-500 hover:text-white ${isMobile ? 'w-full' : ''}`}>
+                        Log in
+                    </Link>
+                    <Link to={'/signup'} onClick={closeAllMobilePanels} className={`inline-flex items-center justify-center rounded-full bg-secondary-500 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-secondary-600 ${isMobile ? 'w-full' : ''}`}>
+                        Sign up
+                    </Link>
+                </div>
+            )}
+
+            {token !== null && (
+                <div onClick={isMobile ? closeAllMobilePanels : undefined} className={isMobile ? 'w-full' : ''}>
+                    <ProfileDropDown />
+                </div>
+            )}
+        </div>
+    );
 
     return (
-        <div className={`sticky top-0 z-50 flex h-14 items-center justify-center border-b border-richblack-700 ${ location.pathname === "/" ? "bg-richblack-900" : "bg-richblack-800"} transition-all duration-200`}>
-            <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
-                <Link to={"/"}>
-                    <img src={Logo}
+        <div className={`sticky top-0 z-50 border-b border-gray-700/80 bg-primary-800/95 shadow-lg shadow-black/20 backdrop-blur-md transition-all duration-200`}>
+            <div className='mx-auto flex h-16 w-11/12 max-w-maxContent items-center justify-between gap-4'>
+                <Link to={'/'} onClick={closeAllMobilePanels} className="flex items-center">
+                    <img
+                        src={Logo}
                         alt='Logo'
                         width={160}
                         height={42}
+                        className="h-10 w-auto"
                     />
                 </Link>
-                <nav>
-                    <ul className='flex flex-row gap-x-6 text-richblack-25'>
-                        {
-                            NavbarLinks.map((link, index) => {
-                                return (
-                                    <li key={index} >
-                                        {
-                                            link.title === "Catalog" ? (
-                                                <div className={`group relative flex cursor-pointer items-center gap-1 ${matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-25"}`}>
-                                                    <p>{link.title}</p>
-                                                    <MdArrowDropDown />
 
-                                                    <div className="invisible absolute left-1/2 top-full mt-3 -translate-x-1/2 z-[1000] flex w-[300px] flex-col rounded-md bg-richblack-5 p-4 text-richblue-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                {renderDesktopNav()}
 
-                                                        <div className="absolute left-1/2 -top-2  h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-richblack-5">
-                                                        </div>
+                <div className='hidden items-center gap-2 md:flex'>
+                    {renderActions(false)}
+                </div>
 
-                                                        {subLinks.length ? (
-                                                            subLinks.map((link, index) => (
-                                                                <Link
-                                                                    to={`/catalog/${link.name.split(" ").join("-").toLowerCase()}`}
-                                                                    key={index}
-                                                                    className="rounded-lg py-3 px-4 hover:bg-richblack-50"
-                                                                >
-                                                                    {link.name}
-                                                                </Link>
-                                                            ))
-                                                        ) : (
-                                                            <p className="py-4 text-center text-sm">
-                                                                No Courses Found
-                                                            </p>
-                                                        )}
+                <button
+                    type='button'
+                    className='inline-flex items-center justify-center rounded-lg border border-gray-700 bg-primary-700 p-2 text-gray-100 transition-colors duration-200 hover:border-secondary-500 hover:bg-primary-600 hover:text-white md:hidden'
+                    onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                    aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={isMobileMenuOpen}
+                    aria-controls='mobile-navigation'
+                >
+                    {isMobileMenuOpen ? <HiOutlineX className='text-2xl' /> : <HiMenu className='text-2xl' />}
+                </button>
+            </div>
 
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <Link to={link?.path}>
-                                                    <p className={`${matchRoute(link?.path) ? "text-yellow-25" : 'text-richblack-25'}`}>
-                                                        {link.title}
-                                                    </p>
-                                                </Link>
-                                            )
-                                        }
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </nav>
-                <div className='flex gap-x-4 items-center '>
-
-                    { 
-                        user && user?.accountType !== "Instructor" && (
-                            <Link to={'/dashboard/cart'} className='relative'>
-                                <FaShoppingCart className="text-white text-xl" />
-                                {
-                                    totalItems > 0 && (
-                                        <div className='absolute h-[17px] w-[17px] -top-2 -right-2 bg-richblack-600 rounded-full flex items-center justify-center'>
-                                            <span className='text-yellow-50 text-sm '>{totalItems}</span>
+            <div
+                id='mobile-navigation'
+                className={`overflow-hidden border-t border-gray-700 md:hidden transition-all duration-300 ease-out ${isMobileMenuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'}`}
+            >
+                <div className='mx-auto flex w-11/12 max-w-maxContent flex-col gap-5 py-5'>
+                    <nav>
+                        <ul className='flex flex-col gap-2'>
+                            {NavbarLinks.map((link, index) => (
+                                <li key={index}>
+                                    {link.title === 'Catalog' ? (
+                                        <div className='rounded-xl border border-gray-700 bg-primary-700 px-3 py-2'>
+                                            {renderCatalogDropdown(true)}
                                         </div>
-                                    )
-                                }
-                            </Link>
-                        )
-                    }
-                    {
-                        token === null && (
-                            <Link to={"/login"}>
-                                <button className='bg-richblack-800 px-3 py-2 border border-richblack-700 text-richblack-100 rounded-lg'>
-                                    Log in
-                                </button>
-                            </Link>
-                        )
-                    }
-                    {
-                        token === null && (
-                            <Link to={'/signup'}>
-                                <button className='bg-richblack-800 px-3 py-2 border border-richblack-700 text-richblack-100 rounded-lg'>
-                                    Sign up
-                                </button>
-                            </Link>
-                        )
-                    }
-                    {
-                        token !== null && (
-                            <ProfileDropDown />
-                        )
-                    }
+                                    ) : (
+                                        <Link
+                                            to={link?.path}
+                                            onClick={closeAllMobilePanels}
+                                            className={`flex items-center rounded-xl px-3 py-3 text-sm font-medium transition-colors duration-200 ${matchRoute(link?.path) ? 'bg-primary-700 text-accent-500' : 'text-gray-100 hover:bg-primary-700 hover:text-secondary-500'}`}
+                                        >
+                                            {link.title}
+                                        </Link>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
 
+                    <div className='flex flex-col gap-3 border-t border-gray-700 pt-4'>
+                        {renderActions(true)}
+                    </div>
                 </div>
             </div>
         </div >

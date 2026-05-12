@@ -31,42 +31,42 @@ const timeline = [
 function TimelineSection() {
     return (
         <div>
-            <div className="flex flex-col lg:flex-row gap-20 mb-20 items-center">
-                <div className="lg:w-[45%] flex flex-col gap-14 lg:gap-3">
+            <div className="flex flex-col items-center gap-14 lg:flex-row lg:gap-20">
+                <div className="flex flex-col gap-10 lg:w-[45%] lg:gap-6">
                     {timeline.map((ele, i) => {
                         return (
-                            <div className="flex flex-col lg:gap-3" key={i}>
-                                <div className="flex gap-6" key={i}>
-                                    <div className="w-[52px] h-[52px] bg-white rounded-full flex justify-center items-center shadow-[#00000012] shadow-[0_0_62px_0]">
+                            <div className="flex flex-col gap-4" key={i}>
+                                <div className="flex gap-5" key={i}>
+                                    <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full border border-gray-700 bg-primary-700 shadow-lg shadow-black/10">
                                         <img src={ele.Logo} alt="" />
                                     </div>
                                     <div>
-                                        <h2 className="font-semibold text-[18px]">{ele.heading}</h2>
-                                        <p className="text-base">{ele.description}</p>
+                                        <h2 className="text-[18px] font-semibold text-white">{ele.heading}</h2>
+                                        <p className="text-base text-gray-300">{ele.description}</p>
                                     </div>
                                 </div>
                                 <div
                                     className={`hidden ${timeline.length - 1 === i ? "hidden" : "lg:block"
-                                        }  h-14 border-dotted border-r border-richblack-100 bg-richblack-400/0 w-[26px]`}
+                                        } h-14 w-[26px] border-r border-dotted border-gray-700 bg-transparent`}
                                 ></div>
                             </div>
                         );
                     })}
                 </div>
-                <div className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]">
-                    <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-10 ">
+                <div className="relative h-fit w-fit">
+                    <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 translate-y-1/2 flex-col gap-4 rounded-2xl border border-gray-700 bg-secondary-700 px-5 py-5 text-white shadow-xl shadow-black/20 lg:flex-row lg:gap-0 lg:px-7 lg:py-8">
                         {/* Section 1 */}
-                        <div className="flex gap-5 items-center lg:border-r border-caribbeangreen-300 px-7 lg:px-14">
+                        <div className="flex items-center gap-5 border-gray-700 px-2 lg:border-r lg:px-8">
                             <h1 className="text-3xl font-bold w-[75px]">10</h1>
-                            <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
+                            <h1 className="w-[75px] text-sm text-secondary-100">
                                 Years experiences
                             </h1>
                         </div>
 
                         {/* Section 2 */}
-                        <div className="flex gap-5 items-center lg:px-14 px-7">
+                        <div className="flex items-center gap-5 px-2 lg:px-8">
                             <h1 className="text-3xl font-bold w-[75px]">250</h1>
-                            <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
+                            <h1 className="w-[75px] text-sm text-secondary-100">
                                 types of courses
                             </h1>
                         </div>
@@ -75,7 +75,7 @@ function TimelineSection() {
                     <img
                         src={timelineImage}
                         alt="timelineImage"
-                        className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
+                        className="h-[400px] w-full rounded-3xl border border-gray-700 object-cover shadow-2xl shadow-black/20 lg:h-fit"
                     />
                 </div>
             </div>

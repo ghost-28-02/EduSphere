@@ -34,8 +34,8 @@ export default function UpdatePassword() {
 
   return (
     <form onSubmit={handleSubmit(submitPasswordForm)}>
-      <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-        <h2 className="text-lg font-semibold text-richblack-5">
+      <div className="my-10 flex flex-col gap-y-6 rounded-xl border border-gray-700 bg-primary-700 p-8 px-12 shadow-sm shadow-black/20">
+        <h2 className="text-lg font-semibold text-white">
           Password
         </h2>
 
@@ -44,7 +44,7 @@ export default function UpdatePassword() {
           <div>
             {/* Old Password */}
             <div className="relative flex flex-col gap-2 lg:w-[50%]">
-              <label htmlFor="oldPassword" className="lable-style">
+              <label htmlFor="oldPassword" className="label-style">
                 Current Password
               </label>
               <input
@@ -55,16 +55,16 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowOldPassword((p) => !p)}
-                className="absolute right-3 top-[38px] cursor-pointer"
+                className="absolute right-3 top-[38px] cursor-pointer text-gray-400"
               >
                 {showOldPassword ? (
-                  <AiOutlineEyeInvisible size={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible size={24} />
                 ) : (
-                  <AiOutlineEye size={24} fill="#AFB2BF" />
+                  <AiOutlineEye size={24} />
                 )}
               </span>
               {errors.oldPassword && (
-                <span className="text-xs text-yellow-100">
+                <span className="text-xs text-coral-500">
                   Current password is required
                 </span>
               )}
@@ -74,7 +74,7 @@ export default function UpdatePassword() {
           <div className="flex flex-col gap-5 lg:flex-row">
             {/* New Password */}
             <div className="relative flex flex-col gap-2 lg:w-[50%]">
-              <label htmlFor="newPassword" className="lable-style">
+              <label htmlFor="newPassword" className="label-style">
                 New Password
               </label>
               <input
@@ -85,16 +85,16 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowNewPassword((p) => !p)}
-                className="absolute right-3 top-[38px] cursor-pointer"
+                className="absolute right-3 top-[38px] cursor-pointer text-gray-400"
               >
                 {showNewPassword ? (
-                  <AiOutlineEyeInvisible size={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible size={24} />
                 ) : (
-                  <AiOutlineEye size={24} fill="#AFB2BF" />
+                  <AiOutlineEye size={24} />
                 )}
               </span>
               {errors.newPassword && (
-                <span className="text-xs text-yellow-100">
+                <span className="text-xs text-coral-500">
                   New password is required
                 </span>
               )}
@@ -102,7 +102,7 @@ export default function UpdatePassword() {
 
             {/* Confirm New Password */}
             <div className="relative flex flex-col gap-2 lg:w-[50%]">
-              <label htmlFor="confirmNewPassword" className="lable-style">
+              <label htmlFor="confirmNewPassword" className="label-style">
                 Confirm New Password
               </label>
               <input
@@ -116,16 +116,16 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowConfirmPassword((p) => !p)}
-                className="absolute right-3 top-[38px] cursor-pointer"
+                className="absolute right-3 top-[38px] cursor-pointer text-gray-400"
               >
                 {showConfirmPassword ? (
-                  <AiOutlineEyeInvisible size={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible size={24} />
                 ) : (
-                  <AiOutlineEye size={24} fill="#AFB2BF" />
+                  <AiOutlineEye size={24} />
                 )}
               </span>
               {errors.confirmNewPassword && (
-                <span className="text-xs text-yellow-100">
+                <span className="text-xs text-coral-500">
                   Passwords do not match
                 </span>
               )}
@@ -141,7 +141,7 @@ export default function UpdatePassword() {
         <button
           type="button"
           onClick={() => navigate("/dashboard/my-profile")}
-          className="rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
+          className="rounded-md bg-primary-600 py-2 px-5 font-semibold text-gray-200 transition hover:bg-primary-500 hover:text-white"
         >
           Cancel
         </button>

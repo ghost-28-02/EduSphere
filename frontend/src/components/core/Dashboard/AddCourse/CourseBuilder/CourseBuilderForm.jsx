@@ -84,12 +84,12 @@ function CourseBuilderForm() {
 
   return (
     <>
-      <div className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
-        <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
+      <div className="space-y-8 rounded-xl border border-gray-700 bg-primary-700 p-6 shadow-sm shadow-black/20">
+        <p className="text-2xl font-semibold text-white">Course Builder</p>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor="sectionName">
-              Section name <sup className="text-pink-200">*</sup>
+            <label className="text-sm text-white" htmlFor="sectionName">
+              Section name <sup className="text-coral-500">*</sup>
             </label>
             <input
               id='sectionName'
@@ -100,7 +100,7 @@ function CourseBuilderForm() {
             />
             {
               errors.sectionName && (
-                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                <span className="ml-2 text-xs tracking-wide text-coral-500">
                   Section name is required
                 </span>
               )
@@ -114,13 +114,13 @@ function CourseBuilderForm() {
             customClasses="flex items-center text-white gap-2 "
             outline={true}
             >
-              <IoAddCircleOutline size={20} className="text-yellow-50"/>
+              <IoAddCircleOutline size={20} className="text-secondary-500"/>
             </IconBtn>
             {
               editSectionName && (
                 <button
                 type="button"
-                className="text-sm text-richblack-300 underline"
+                className="text-sm text-gray-300 underline transition hover:text-white"
                 onClick={cancelEdit}
                 >
                   Cancel Edit
@@ -140,13 +140,13 @@ function CourseBuilderForm() {
         <div className="flex justify-end gap-x-3">
           <button
           onClick={goBack}
-          className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
+          className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-primary-600 py-[8px] px-[20px] font-semibold text-gray-200 transition hover:bg-primary-500 hover:text-white`}
           >
             Back
           </button>
           <IconBtn
           disabled={loading}
-          customClasses="bg-yellow-100 px-4 py-2 rounded-md text-black font-semibold flex gap-2 items-center"
+          customClasses="bg-secondary-500 px-4 py-2 rounded-md text-white font-semibold flex gap-2 items-center"
           text={"Next"}
           onclick={goToNext}
           >

@@ -5,7 +5,6 @@ import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
 import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper/modules'
-import ReactStars from "react-rating-stars-component";
 
 import { FaStar } from "react-icons/fa"
 
@@ -31,7 +30,7 @@ function ReviewSlider() {
 
     return (
         <div className="w-full text-white">
-            <div className="mx-auto flex max-w-maxContent px-4 py-12">
+            <div className="mx-auto flex max-w-maxContent px-0 py-6 sm:px-4 sm:py-12">
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={25}
@@ -52,7 +51,7 @@ function ReviewSlider() {
                     {reviews.map((review, i) => {
                         return (
                             <SwiperSlide key={i}>
-                                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
+                                <div className="flex h-full flex-col gap-4 rounded-2xl border border-gray-700 bg-primary-700 p-5 text-[14px] text-gray-100 shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
                                     <div className="flex items-center gap-4">
                                         <img
                                             src={
@@ -64,13 +63,13 @@ function ReviewSlider() {
                                             className="h-9 w-9 rounded-full object-cover"
                                         />
                                         <div className="flex flex-col">
-                                            <h1 className="font-semibold text-richblack-5">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
-                                            <h2 className="text-[12px] font-medium text-richblack-500">
+                                            <h1 className="font-semibold text-white">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
+                                            <h2 className="text-[12px] font-medium text-gray-400">
                                                 {review?.course?.courseName}
                                             </h2>
                                         </div>
                                     </div>
-                                    <p className="font-medium text-richblack-25">
+                                    <p className="font-medium leading-6 text-gray-300">
                                         {review?.review.split(" ").length > truncateWords
                                             ? `${review?.review
                                                 .split(" ")
@@ -79,18 +78,17 @@ function ReviewSlider() {
                                             : `${review?.review}`}
                                     </p>
                                     <div className="flex items-center gap-2 ">
-                                        <h3 className="font-semibold text-yellow-100">
+                                        <h3 className="font-semibold text-accent-500">
                                             {review.rating.toFixed(1)}
                                         </h3>
-                                        <ReactStars
-                                            count={5}
-                                            value={review.rating}
-                                            size={20}
-                                            edit={false}
-                                            activeColor="#ffd700"
-                                            emptyIcon={<FaStar />}
-                                            fullIcon={<FaStar />}
-                                        />
+                                        <div className="flex items-center gap-1">
+                                            {Array.from({ length: 5 }, (_, starIndex) => (
+                                                <FaStar
+                                                    key={starIndex}
+                                                    className={`${starIndex < Math.round(review.rating) ? 'text-accent-500' : 'text-gray-600'} text-sm`}
+                                                />
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </SwiperSlide>

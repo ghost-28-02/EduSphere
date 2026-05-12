@@ -75,12 +75,12 @@ function Upload({ name, label, register, setValue, errors, video = false, viewDa
     return (
         <>
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-richblack-5" htmlFor={name}>
-                    {label} {!viewData && <sup className="text-pink-200">*</sup>}
+                <label className="text-sm text-white" htmlFor={name}>
+                    {label} {!viewData && <sup className="text-coral-500">*</sup>}
                 </label>
                 <div
-                    className={`${isDragActive ? "bg-richblack-600" : "bg-richblack-700"
-                        } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
+                    className={`${isDragActive ? "bg-primary-600" : "bg-primary-700"
+                        } flex min-h-[250px] cursor-pointer items-center justify-center rounded-xl border-2 border-dotted border-gray-700 transition hover:bg-primary-600`}
                 >
                     {
                         previewSource ? (
@@ -105,7 +105,7 @@ function Upload({ name, label, register, setValue, errors, video = false, viewDa
                                                 setSelectedFile(null)
                                                 setValue(name, null)
                                             }}
-                                            className="mt-3 text-richblack-400 underline"
+                                            className="mt-3 text-gray-400 underline"
                                         >
                                             Cancel
                                         </button>
@@ -118,15 +118,15 @@ function Upload({ name, label, register, setValue, errors, video = false, viewDa
                                 {...getRootProps()}
                             >
                                 <input {...getInputProps()} />
-                                <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
-                                    <FiUploadCloud className="text-2xl text-yellow-50" />
+                                <div className="grid aspect-square w-14 place-items-center rounded-full bg-primary-600 text-white">
+                                    <FiUploadCloud className="text-2xl" />
                                 </div>
-                                <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
+                                <p className="mt-2 max-w-[200px] text-center text-sm text-gray-300">
                                     Drag and drop an {!video ? "image" : "video"}, or click to{" "}
-                                    <span className="font-semibold text-yellow-50">Browse</span> a
+                                    <span className="font-semibold text-secondary-500">Browse</span> a
                                     file
                                 </p>
-                                <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-richblack-200">
+                                <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-gray-300">
                                     <li>Aspect ratio 16:9</li>
                                     <li>Recommended size 1024x576</li>
                                 </ul>
@@ -136,7 +136,7 @@ function Upload({ name, label, register, setValue, errors, video = false, viewDa
                 </div>
                 {
                     errors[name] && (
-                        <span className="ml-2 text-xs tracking-wide text-pink-200">
+                        <span className="ml-2 text-xs tracking-wide text-coral-500">
                             {label} is required
                         </span>
                     )

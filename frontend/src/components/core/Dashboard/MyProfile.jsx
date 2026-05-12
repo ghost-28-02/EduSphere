@@ -11,12 +11,12 @@ function MyProfile() {
     const navigate = useNavigate();
     return (
         <div>
-            <h1 className="mb-14 text-3xl font-medium text-richblack-5">
+            <h1 className="mb-14 text-3xl font-semibold text-white">
                 My Profile
             </h1>
 
             {/* Section 1 */}
-            <div className="flex items-center justify-between rounded-md border border-richblack-700 bg-richblack-800 p-8 px-12">
+            <div className="flex items-center justify-between rounded-xl border border-gray-700 bg-primary-700 p-8 px-12 shadow-sm shadow-black/20">
                 <div className="flex items-center gap-x-4">
                     <img
                         src={user?.image}
@@ -25,10 +25,10 @@ function MyProfile() {
                     />
 
                     <div className="space-y-1">
-                        <p className="text-lg font-semibold text-richblack-5">
+                        <p className="text-lg font-semibold text-white">
                             {user?.firstName} {user?.lastName}
                         </p>
-                        <p className="text-sm text-richblack-300">
+                        <p className="text-sm text-gray-300">
                             {user?.email}
                         </p>
                     </div>
@@ -45,9 +45,9 @@ function MyProfile() {
             </div>
 
             {/* Section 2 */}
-            <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+            <div className="my-10 flex flex-col gap-y-10 rounded-xl border border-gray-700 bg-primary-700 p-8 px-12 shadow-sm shadow-black/20">
                 <div className="flex w-full items-center justify-between">
-                    <p className="text-lg font-semibold text-richblack-5">About</p>
+                    <p className="text-lg font-semibold text-white">About</p>
                     <IconBtn
                         text="Edit"
                         onclick={() => {
@@ -59,8 +59,8 @@ function MyProfile() {
                 </div>
                 <p
                     className={`${user?.additionalDetails?.about
-                        ? "text-richblack-5"
-                        : "text-richblack-400"
+                        ? "text-white"
+                        : "text-gray-400"
                         } text-sm font-medium`}
                 >
                     {user?.additionalDetails?.about ?? "Write Something About Yourself"}
@@ -68,9 +68,9 @@ function MyProfile() {
             </div>
 
             {/* Section 3 */}
-            <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+            <div className="my-10 flex flex-col gap-y-10 rounded-xl border border-gray-700 bg-primary-700 p-8 px-12 shadow-sm shadow-black/20">
                 <div className="flex w-full items-center justify-between">
-                    <p className="text-lg font-semibold text-richblack-5">
+                    <p className="text-lg font-semibold text-white">
                         Personal Details
                     </p>
                     <IconBtn
@@ -85,40 +85,40 @@ function MyProfile() {
                 <div className="flex max-w-[500px] justify-between">
                     <div className="flex flex-col gap-y-5">
                         <div>
-                            <p className="mb-2 text-sm text-richblack-600">First Name</p>
-                            <p className="text-sm font-medium text-richblack-5">
+                            <p className="mb-2 text-sm text-gray-400">First Name</p>
+                            <p className="text-sm font-medium text-white">
                                 {user?.firstName}
                             </p>
                         </div>
                         <div>
-                            <p className="mb-2 text-sm text-richblack-600">Email</p>
-                            <p className="text-sm font-medium text-richblack-5">
+                            <p className="mb-2 text-sm text-gray-400">Email</p>
+                            <p className="text-sm font-medium text-white">
                                 {user?.email}
                             </p>
                         </div>
                         <div>
-                            <p className="mb-2 text-sm text-richblack-600">Gender</p>
-                            <p className="text-sm font-medium text-richblack-5">
+                            <p className="mb-2 text-sm text-gray-400">Gender</p>
+                            <p className="text-sm font-medium text-white">
                                 {user?.additionalDetails?.gender ?? "Add Gender"}
                             </p>
                         </div>
                     </div>
                     <div className="flex flex-col gap-y-5">
                         <div>
-                            <p className="mb-2 text-sm text-richblack-600">Last Name</p>
-                            <p className="text-sm font-medium text-richblack-5">
+                            <p className="mb-2 text-sm text-gray-400">Last Name</p>
+                            <p className="text-sm font-medium text-white">
                                 {user?.lastName}
                             </p>
                         </div>
                         <div>
-                            <p className="mb-2 text-sm text-richblack-600">Phone Number</p>
-                            <p className="text-sm font-medium text-richblack-5">
+                            <p className="mb-2 text-sm text-gray-400">Phone Number</p>
+                            <p className="text-sm font-medium text-white">
                                 {user?.additionalDetails?.contactNumber ?? "Add Contact Number"}
                             </p>
                         </div>
                         <div>
-                            <p className="mb-2 text-sm text-richblack-600">Date Of Birth</p>
-                            <p className="text-sm font-medium text-richblack-5">
+                            <p className="mb-2 text-sm text-gray-400">Date Of Birth</p>
+                            <p className="text-sm font-medium text-white">
                                 {formattedDate(user?.additionalDetails?.dateOfBirth) ??
                                     "Add Date Of Birth"}
                             </p>

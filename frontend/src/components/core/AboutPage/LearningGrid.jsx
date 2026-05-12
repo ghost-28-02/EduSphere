@@ -46,25 +46,25 @@ const LearningGridArray = [
 
 function LearningGrid() {
     return (
-        <div className="mx-auto mb-12 grid w-full max-w-7xl lg:gap-6 xl:gap-0 grid-cols-1 px-4 lg:grid-cols-2 xl:grid-cols-4">
+        <div className="mx-auto mb-12 grid w-full max-w-7xl grid-cols-1 gap-6 px-0 lg:grid-cols-2 xl:grid-cols-4 xl:gap-0">
             {LearningGridArray.map((card, index) => (
                 <div
                     key={index}
                     className={`
-                        lg:rounded-lg xl:rounded-none
+                        overflow-hidden rounded-3xl border border-gray-700 shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 lg:rounded-none
                         ${index === 0 ? "xl:col-span-2" : ""}
                         ${card.order === 3 ? "xl:col-start-2" : ""}
-                        ${card.order % 2 === 1 ? "bg-richblack-700" : card.order % 2 === 0 ? "bg-richblack-800" : "bg-transparent"}
+                        ${card.order % 2 === 1 ? "bg-primary-700" : card.order % 2 === 0 ? "bg-primary-800" : "bg-transparent"}
                         min-h-[294px]
                     `}
                 >
                     {card.order < 0 ? (
-                        <div className="flex h-full w-full flex-col gap-3 p-8">
-                            <div className="text-4xl font-semibold">
+                        <div className="flex h-full w-full flex-col gap-4 p-8">
+                            <div className="text-3xl font-semibold leading-tight text-white sm:text-4xl">
                                 {card.heading}
                                 <HighlightText text={card.highlightText} />
                             </div>
-                            <p className="text-richblack-300 font-medium">
+                            <p className="font-medium leading-8 text-gray-300">
                                 {card.description}
                             </p>
                             <div className="mt-2 w-fit">
@@ -75,8 +75,8 @@ function LearningGrid() {
                         </div>
                     ) : (
                         <div className="flex h-full flex-col gap-6 p-8">
-                            <p className="text-lg text-richblack-5">{card.heading}</p>
-                            <p className="font-medium text-richblack-300">
+                            <p className="text-lg font-semibold text-white">{card.heading}</p>
+                            <p className="font-medium leading-7 text-gray-300">
                                 {card.description}
                             </p>
                         </div>

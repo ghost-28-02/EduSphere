@@ -12,45 +12,56 @@ import ReviewSlider from "../components/common/ReviewSlider";
 
 const Home = () => {
   return (
-    <div>
-      {/* Section 1 */}
+    <div className="bg-gray-900 text-white">
       <HeroSection />
 
       <ExploreMore />
 
-      {/* Section 2 */}
+      <div className="bg-primary-800/90 py-12 sm:py-16 relative">
+        <div className='homepage_bg relative overflow-hidden'>
+          <div className='mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-center gap-6 py-16 mt-24 text-center sm:py-20 relative z-10'>
+            <div className='flex flex-col items-center gap-5'>
+              <p className='text-sm font-semibold uppercase tracking-[0.3em] text-secondary-400'>
+                Start your journey
+              </p>
+              <h2 className='max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl'>
+                Learn with a platform built for modern, focused, and flexible growth.
+              </h2>
+              <p className='max-w-2xl text-sm leading-7 text-gray-300 sm:text-base'>
+                Build the skills you need with structured learning paths, expert guidance, and a clean experience that keeps you moving.
+              </p>
+            </div>
 
-      <div className='bg-pure-greys-5 text-richblack-700'>
-        <div className='homepage_bg h-[310px] '>
-          <div className='w-11/12 max-w-maxContent flex flex-col items-center justify-center gap-5 mx-auto'>
-            <div className='h-[170px]'></div>
-            <div className='flex flex-row gap-7 text-white mt-10'>
+            <div className='flex flex-col gap-4 text-white sm:flex-row'>
               <CTAButton active={true} linkto={"/signup"}>
-                <div className='flex flex-row gap-2 items-center'>
+                <div className='flex items-center gap-2'>
                   Explore Full Catalog
                   <FaArrowRight />
                 </div>
               </CTAButton>
               <CTAButton active={false} linkto={"/signup"}>
-                <div>
+                <div className='flex items-center gap-2'>
                   Learn More
                 </div>
               </CTAButton>
             </div>
           </div>
 
+          <div className='absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent to-gray-900/40 pointer-events-none' />
         </div>
+      </div>
 
-        <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center justify-center gap-5'>
-          <div className='flex lg:flex-row flex-col flex-wrap lg:gap-20 gap-5 justify-center mb-10 mt-[95px]'>
-            <div className='text-4xl font-semibold lg:w-[45%]'>
+      <div className='bg-gray-900 py-16 sm:py-20 lg:py-24'>
+        <div className='mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-center gap-5'>
+          <div className='flex flex-col flex-wrap justify-center gap-8 lg:flex-row lg:gap-16'>
+            <div className='max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:w-[45%] lg:text-5xl'>
               Get the skills you need for a
-              <HighlightText text={"job that is in demand."} />
+              <HighlightText text={'job that is in demand.'} />
             </div>
 
-            <div className='flex flex-col gap-7 lg:w-[40%] items-start'>
-              <div className='text-[16px]'>
-                The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+            <div className='flex flex-col items-start gap-6 lg:w-[40%]'>
+              <div className='max-w-xl text-base leading-7 text-gray-300'>
+                The modern StudyNotion dictates its own terms. Today, being competitive requires more than professional skills.
               </div>
 
               <CTAButton active={true} linkto={"/signup"}>
@@ -60,25 +71,24 @@ const Home = () => {
             </div>
           </div>
 
-          <TimelineSection />
-          <LearningLanguageSection />
+          <div className='mt-8 w-full rounded-3xl border border-gray-700 bg-primary-800/70 p-6 shadow-2xl shadow-black/20 sm:p-8 lg:p-10'>
+            <TimelineSection />
+          </div>
+          <div className='mt-4 w-full rounded-3xl border border-gray-700 bg-primary-800/70 p-6 shadow-2xl shadow-black/20 sm:p-8 lg:p-10'>
+            <LearningLanguageSection />
+          </div>
 
         </div>
       </div>
 
 
-      {/* Section 3 */}
-      <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-center gap-8 bg-richblack-900 py-20 px-4 text-white">
+      <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-center gap-10 bg-gray-900 py-16 text-white sm:py-20 lg:py-24">
         <InstructorSection />
-        <h1 className="text-center text-4xl font-semibold">
+        <h1 className="text-center text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
           Reviews from other learners
         </h1>
         <ReviewSlider />
       </div>
-
-
-
-      {/* Footer */}
 
       <Footer />
 

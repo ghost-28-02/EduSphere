@@ -7,17 +7,17 @@ import CTAButton from '../../common/Button'
 
 function LearningLanguageSection() {
   return (
-    <div className='mt-24 flex flex-wrap mb-10'>
-        <div className='flex flex-col gap-2 items-center'>
-            <div className='text-4xl font-semibold text-center'>
+    <div className='mt-4 flex flex-wrap pb-6'>
+        <div className='flex w-full flex-col items-center gap-4'>
+            <div className='text-center text-3xl font-semibold leading-tight sm:text-4xl'>
                 Your swiss knife for
                 <HighlightText text={"learning any language"} />
             </div>
-            <div className='text-center text-richblack-600 mx-auto text-base w-[70%]'>
+            <div className='mx-auto w-full max-w-3xl text-center text-base leading-7 text-gray-300'>
                 Using spin making learning multiple languages easy. with 20+ languages realistic voice-over, progress tracking, custom schedule and more.
             </div>
 
-            <div className='flex lg:flex-row flex-col items-center justify-center mt-5'>
+            <div className='mt-5 flex flex-col items-center justify-center gap-4 lg:flex-row'>
                 <img src={know_your_progress} alt='know_your_progress' className='object-contain lg:-mr-28'/>
                 <img src={compare_with_others} alt='compare_with_others' className='object-contain lg:-mr-12' />
                 <img src={plan_your_lessons} alt='plan_your_lessons' className='object-contain lg:-ml-28' />

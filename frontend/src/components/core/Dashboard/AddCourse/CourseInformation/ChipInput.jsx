@@ -52,15 +52,15 @@ function ChipInput({ label, name, placeholder, register, errors, setValue, getVa
     return (
         <>
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-richblack-5" htmlFor={name}>
-                    {label} <sup className="text-pink-200">*</sup>
+                <label className="text-sm text-white" htmlFor={name}>
+                    {label} <sup className="text-coral-500">*</sup>
                 </label>
 
                 <div className="flex w-full flex-wrap gap-y-2">
                     {chips?.map((chip, index) => (
                         <div
                             key={index}
-                            className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5"
+                            className="m-1 flex items-center rounded-full bg-accent-500 px-3 py-1 text-sm text-primary-800"
                         >
                             {chip}
                             <button
@@ -83,7 +83,7 @@ function ChipInput({ label, name, placeholder, register, errors, setValue, getVa
                 </div>
 
                 {errors[name] && (
-                    <span className="ml-2 text-xs tracking-wide text-pink-200">
+                        <span className="ml-2 text-xs tracking-wide text-coral-500">
                         {label} is required
                     </span>
                 )}

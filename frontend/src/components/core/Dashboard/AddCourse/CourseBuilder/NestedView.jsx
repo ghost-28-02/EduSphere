@@ -53,14 +53,14 @@ function NestedView({ handleChangeEditSectionName }) {
     }
     return (
         <>
-            <div className="rounded-lg bg-richblack-700 p-6 px-8" id="nestedViewContainer">
+            <div className="rounded-xl border border-gray-700 bg-primary-700 p-6 px-8 shadow-sm shadow-black/20" id="nestedViewContainer">
                 {
                     course?.courseContent?.map((section) => (
                         <details key={section._id} open>
-                            <summary className="flex cursor-pointer items-center justify-between border-b-2 border-b-richblack-600 py-2">
+                            <summary className="flex cursor-pointer items-center justify-between border-b-2 border-b-gray-700 py-2">
                                 <div className="flex items-center gap-x-3">
-                                    <RxDropdownMenu className="text-2xl text-richblack-50" />
-                                    <p className="font-semibold text-richblack-50">
+                                    <RxDropdownMenu className="text-2xl text-white" />
+                                    <p className="font-semibold text-white">
                                         {section.sectionName}
                                     </p>
                                 </div>
@@ -72,7 +72,7 @@ function NestedView({ handleChangeEditSectionName }) {
                                             section.sectionName
                                         )}
                                     >
-                                        <MdEdit className="text-xl text-richblack-300" />
+                                        <MdEdit className="text-xl text-gray-300" />
                                     </button>
                                     <button
                                         onClick={() => setConfirmationModal({
@@ -84,10 +84,10 @@ function NestedView({ handleChangeEditSectionName }) {
                                             btn2Handler: () => setConfirmationModal(null),
                                         })}
                                     >
-                                        <RiDeleteBin6Line className="text-xl text-richblack-300" />
+                                        <RiDeleteBin6Line className="text-xl text-gray-300" />
                                     </button>
-                                    <span className="font-medium text-richblack-300">|</span>
-                                    <AiFillCaretDown className={`text-xl text-richblack-300`} />
+                                    <span className="font-medium text-gray-300">|</span>
+                                    <AiFillCaretDown className={`text-xl text-gray-300`} />
                                 </div>
                             </summary>
                             <div className="px-6 pb-4">
@@ -96,15 +96,15 @@ function NestedView({ handleChangeEditSectionName }) {
                                         <div
                                             key={data?._id}
                                             onClick={() => setViewSubSection(data)}
-                                            className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-richblack-600 py-2"
+                                            className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-gray-700 py-2"
                                         >
                                             <div className="flex items-center gap-x-3 py-2 ">
-                                                <RxDropdownMenu className="text-2xl text-richblack-50" />
-                                                <p className="font-semibold text-richblack-50">
+                                                <RxDropdownMenu className="text-2xl text-white" />
+                                                <p className="font-semibold text-white">
                                                     {data.title}
                                                 </p>
                                                 {data.timeDuration && (
-                                                    <p className="text-xs text-richblack-300">
+                                                    <p className="text-xs text-gray-300">
                                                         {Math.floor(data.timeDuration / 60)}:{(data.timeDuration % 60).toString().padStart(2, '0')} min
                                                     </p>
                                                 )}
@@ -118,7 +118,7 @@ function NestedView({ handleChangeEditSectionName }) {
                                                         setEditSubSection({ ...data, sectionId: section._id })
                                                     }
                                                 >
-                                                    <MdEdit className="text-xl text-richblack-300" />
+                                                    <MdEdit className="text-xl text-gray-300" />
                                                 </button>
                                                 <button
                                                     onClick={() =>
@@ -133,7 +133,7 @@ function NestedView({ handleChangeEditSectionName }) {
                                                         })
                                                     }
                                                 >
-                                                    <RiDeleteBin6Line className="text-xl text-richblack-300" />
+                                                    <RiDeleteBin6Line className="text-xl text-gray-300" />
                                                 </button>
 
                                             </div>
@@ -142,7 +142,7 @@ function NestedView({ handleChangeEditSectionName }) {
                                 }
                                 <button
                                     onClick={() => setAddSubsection(section._id)}
-                                    className="mt-3 flex items-center gap-x-1 text-yellow-50"
+                                    className="mt-3 flex items-center gap-x-1 text-secondary-500"
                                 >
                                     <FaPlus className="text-lg" />
                                     <p>Add Lecture</p>

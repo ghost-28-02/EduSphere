@@ -1,67 +1,18 @@
+const { shell } = require("./_sharedEmail");
+
 exports.contactUsAutoReplyTemplate = (firstName) => {
-  return `<!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>We Received Your Message</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #ffffff;
-        color: #333333;
-        margin: 0;
-        padding: 0;
-      }
+  const safeName = firstName || "there";
 
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        text-align: center;
-      }
-
-      .logo {
-        max-width: 180px;
-        margin-bottom: 20px;
-      }
-
-      .title {
-        font-size: 22px;
-        font-weight: bold;
-        margin-bottom: 15px;
-      }
-
-      .text {
-        font-size: 16px;
-        margin-bottom: 20px;
-      }
-
-      .footer {
-        font-size: 14px;
-        color: #999999;
-        margin-top: 30px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="container">
-      <img
-        class="logo"
-        src="https://res.cloudinary.com/dfryej1yt/image/upload/v1769185735/EduSphere/fesztk4wmwascixusg0c.png"
-        alt="EduSphere Logo"
-      />
-
-      <div class="title">Thanks for contacting us, ${firstName}!</div>
-
-      <div class="text">
-        We've received your message and our team will get back to you shortly.
+  return shell({
+    preheader: "We received your message and will reply soon.",
+    eyebrow: "Message received",
+    title: `Thanks for reaching out, ${safeName}!`,
+    intro: "We have received your message and our team is reviewing it now. You can expect a response as soon as possible.",
+    body: `
+      <div style="background:#19313b;border:1px solid #29434d;border-radius:18px;padding:18px;color:#cbd5e1;">
+        We appreciate you contacting EduSphere. If your message is urgent, please reply to this email with the word <strong style="color:#e9c46a;">urgent</strong> in the subject line so we can prioritize it.
       </div>
-
-      <div class="footer">
-        © EduSphere — All rights reserved
-      </div>
-    </div>
-  </body>
-  </html>`;
+    `,
+    footerNote: "We appreciate your patience while our team responds.",
+  });
 };

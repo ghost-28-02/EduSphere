@@ -1,3 +1,5 @@
+const { DASHBOARD_URL, detailRow, ctaButton, shell } = require("./_sharedEmail");
+
 exports.paymentSuccessEmailTemplate = ({
   name,
   Amount,
@@ -5,112 +7,22 @@ exports.paymentSuccessEmailTemplate = ({
   orderId,
   paymentId,
 }) => {
-  return `<!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Payment सफल रहा</title>
-    <style>
-      body {
-        background-color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        line-height: 1.5;
-        color: #333333;
-        margin: 0;
-        padding: 0;
-      }
-
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        text-align: center;
-      }
-
-      .logo {
-        max-width: 200px;
-        margin-bottom: 20px;
-      }
-
-      .message {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-
-      .body {
-        font-size: 16px;
-        margin-bottom: 20px;
-      }
-
-      .highlight {
-        font-weight: bold;
-        color: #4f46e5;
-      }
-
-      .details {
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 16px;
-        text-align: left;
-      }
-
-      .row {
-        display: flex;
-        justify-content: space-between;
-        margin: 8px 0;
-        font-size: 14px;
-      }
-
-      .cta {
-        display: inline-block;
-        padding: 12px 20px;
-        background-color: #4f46e5;
-        color: #ffffff;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-top: 20px;
-      }
-
-      .support {
-        font-size: 14px;
-        color: #999999;
-        margin-top: 30px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="container">
-      <a href="https://studynotion-edtech-project.vercel.app">
-        <img class="logo" src="https://res.cloudinary.com/dfryej1yt/image/upload/v1769185735/EduSphere/fesztk4wmwascixusg0c.png" alt="EduSphere Logo">
-      </a>
-
-      <div class="message">Payment Successful</div>
-
-      <div class="body">
-        <p>Hi ${name || "Learner"},</p>
-        <p>Your payment is successful.</p>
-        <p>Amount Paid: <span class="highlight">${currency} ${Amount}</span></p>
-
-        <div class="details">
-          <div class="row"><span>Order ID is: </span><span> ${orderId || "-"}</span></div>
-          <div class="row"><span>Payment ID is: </span><span> ${paymentId || "-"}</span></div>
-        </div>
-
-        <a class="cta" href="https://studynotion-edtech-project.vercel.app/dashboard">
-          Go to Dashboard
-        </a>
+  return shell({
+    preheader: `Payment received for ${currency} ${Amount}`,
+    eyebrow: "Payment confirmed",
+    title: "Your payment was successful",
+    intro: `Hi ${name || "Learner"}, your payment has been processed successfully. Your receipt details are below.`,
+    body: `
+      <div style="background:#19313b;border:1px solid #29434d;border-radius:18px;padding:20px;">
+        <div style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;font-weight:700;">Amount paid</div>
+        <div style="margin-top:8px;font-size:30px;line-height:1.1;font-weight:800;color:#e9c46a;">${currency} ${Amount}</div>
       </div>
-
-      <div class="support">
-        Need help? Contact us at
-        <a href="mailto:info@edusphere.com">info@edusphere.com</a>
-      </div>
-    </div>
-  </body>
-  </html>`;
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:16px;border-collapse:collapse;background:#19313b;border:1px solid #29434d;border-radius:18px;padding:0 18px;">
+        ${detailRow("Order ID", orderId || "-")}
+        ${detailRow("Payment ID", paymentId || "-")}
+      </table>
+    `,
+    cta: ctaButton("Go to Dashboard", DASHBOARD_URL),
+    footerNote: "Your payment receipt is stored in your account history for future reference.",
+  });
 };

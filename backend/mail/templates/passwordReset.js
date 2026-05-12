@@ -1,100 +1,19 @@
+const { ctaButton, shell } = require("./_sharedEmail");
+
 exports.passwordResetTemplate = (resetUrl) => {
-    return `<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Password Reset</title>
-        <style>
-            body {
-                background-color: #ffffff;
-                font-family: Arial, sans-serif;
-                font-size: 16px;
-                line-height: 1.5;
-                color: #333333;
-                margin: 0;
-                padding: 0;
-            }
-
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                text-align: center;
-            }
-
-            .logo {
-                max-width: 200px;
-                margin-bottom: 20px;
-            }
-
-            .message {
-                font-size: 18px;
-                font-weight: bold;
-                margin-bottom: 20px;
-            }
-
-            .body {
-                font-size: 16px;
-                margin-bottom: 20px;
-            }
-
-            .highlight {
-                font-weight: bold;
-                color: #4f46e5;
-            }
-
-            .cta {
-                display: inline-block;
-                padding: 12px 20px;
-                background-color: #FFE83D;
-                color: #DBDDEA;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
-                margin-top: 20px;
-            }
-
-            .support {
-                font-size: 14px;
-                color: #999999;
-                margin-top: 30px;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="container">
-            <a href="https://studynotion-edtech-project.vercel.app">
-                <img class="logo" src="https://res.cloudinary.com/dfryej1yt/image/upload/v1769185735/EduSphere/fesztk4wmwascixusg0c.png" alt="EduSphere Logo">
-            </a>
-
-            <div class="message">Password Reset Request</div>
-
-            <div class="body">
-                <p>You requested to reset your account password.</p>
-
-                <p>
-                    Click the button below to set a new password.
-                </p>
-
-                <a class="cta" href="${resetUrl}">
-                    Reset Password
-                </a>
-
-                <p style="margin-top: 20px;">
-                    This link will expire in <span class="highlight">5 minutes</span>.
-                </p>
-
-                <p>
-                    If you did not request this password reset, please ignore this email.
-                </p>
+    return shell({
+        preheader: "Reset your EduSphere password with the secure link below.",
+        eyebrow: "Password reset",
+        title: "Reset your password",
+        intro: "We received a request to reset your EduSphere password. If this was you, use the secure link below to create a new password.",
+        body: `
+            <div style="background:#19313b;border:1px solid #29434d;border-radius:18px;padding:20px;">
+                <p style="margin:0;color:#cbd5e1;line-height:24px;">For your security, this reset link is temporary and can only be used once.</p>
+                <p style="margin:14px 0 0;color:#f8fafc;line-height:24px;"><strong style="color:#e9c46a;">Link expires in 5 minutes.</strong></p>
             </div>
-
-            <div class="support">
-                Need help? Contact us at
-                <a href="mailto:info@edusphere.com">info@edusphere.com</a>
-            </div>
-        </div>
-    </body>
-    </html>`;
+        `,
+        cta: ctaButton("Reset Password", resetUrl),
+        secondaryCta: `<div style="text-align:center;"><a href="${resetUrl}" style="color:#94a3b8;font-size:13px;line-height:20px;word-break:break-all;">If the button does not work, copy and paste this link into your browser.</a></div>`,
+        footerNote: "If you did not request this change, no action is required and your password will remain unchanged.",
+    });
 };

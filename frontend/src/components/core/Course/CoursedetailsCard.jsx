@@ -50,23 +50,21 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
 
   return (
     <>
-      <div
-        className={`flex flex-col gap-4 rounded-md bg-richblack-700 p-4 text-richblack-5`}
-      >
+      <div className={`flex flex-col gap-4 rounded-xl bg-primary-700 p-4 text-white shadow-sm shadow-black/20`}>
         {/* Course Image */}
         <img
           src={ThumbnailImage}
           alt={course?.courseName}
-          className="max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full"
+          className="max-h-[300px] min-h-[180px] w-full overflow-hidden rounded-2xl object-cover"
         />
 
-        <div className="px-4">
-          <div className="space-x-3 pb-4 text-3xl font-semibold">
+        <div className="px-2">
+          <div className="space-x-3 pb-4 text-3xl font-semibold text-white">
             Rs. {CurrentPrice}
           </div>
           <div className="flex flex-col gap-4">
             <button
-              className="cursor-pointer rounded-md bg-yellow-50 px-[20px] py-[8px] font-semibold text-richblack-900"
+              className="cursor-pointer rounded-md bg-secondary-500 px-5 py-2 font-semibold text-white hover:bg-secondary-600 transition"
               onClick={
                 user && course?.studentEnrolled.includes(user?._id)
                   ? () => navigate("/dashboard/enrolled-courses")
@@ -78,28 +76,28 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
                 : "Buy Now"}
             </button>
             {(!user || !course?.studentEnrolled.includes(user?._id)) && (
-              <button onClick={handleAddToCart} className="cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5">
+              <button onClick={handleAddToCart} className="cursor-pointer rounded-md bg-primary-600 border border-gray-700 px-5 py-2 font-semibold text-accent-500 hover:bg-primary-600 transition">
                 Add to Cart
               </button>
             )}
           </div>
           <div>
-            <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
+            <p className="pb-3 pt-6 text-center text-sm text-gray-300">
               30-Day Money-Back Guarantee
             </p>
           </div>
 
           <div className={``}>
-            <p className={`my-2 text-xl font-semibold `}>
+            <p className={`my-2 text-xl font-semibold text-white`}>
               This Course Includes :
             </p>
-            <div className="flex flex-col gap-3 text-sm text-caribbeangreen-100">
+            <div className="flex flex-col gap-3 text-sm text-gray-300">
               {course?.instructions && Array.isArray(course.instructions) && course.instructions.map((item, i) => {
                 const instruction = typeof item === 'string' ? JSON.parse(item) : item
                 const items = Array.isArray(instruction) ? instruction : [instruction]
                 return items.map((inst, idx) => (
-                  <p className={`flex gap-2`} key={`${i}-${idx}`}>
-                    <BsFillCaretRightFill />
+                  <p className={`flex gap-2 items-start`} key={`${i}-${idx}`}>
+                    <BsFillCaretRightFill className="text-accent-500 mt-1" />
                     <span>{inst}</span>
                   </p>
                 ))
@@ -108,7 +106,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
           </div>
           <div className="text-center">
             <button
-              className="mx-auto flex items-center gap-2 py-6 text-yellow-100 "
+              className="mx-auto flex items-center gap-2 py-4 text-accent-500 hover:text-accent-600 transition"
               onClick={handleShare}
             >
               <FaShareSquare size={15} /> Share

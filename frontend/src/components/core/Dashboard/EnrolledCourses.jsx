@@ -27,26 +27,26 @@ function EnrolledCourses() {
 
     return (
         <div>
-            <div className="text-3xl text-richblack-50">
+            <div className="text-3xl font-semibold text-white">
                 Enrolled Courses
             </div>
 
             {
                 !enrolledCourses ? (<Spinner />) : (
                     !enrolledCourses.length ? (
-                        <p className="grid h-[10vh] w-full place-content-center text-richblack-5">
+                        <p className="grid h-[10vh] w-full place-content-center text-gray-300">
                             You are not enrolled in any courses yet
                         </p>
                     ) : (
-                        <div className="my-8 text-richblack-5">
-                            <div className="flex rounded-t-lg bg-richblack-500 ">
+                        <div className="my-8 text-white">
+                            <div className="flex rounded-t-lg bg-primary-700 ">
                                 <p className="w-[45%] px-5 py-3">Course Name</p>
                                 <p className="w-1/4 px-2 py-3">Duration</p>
                                 <p className="flex-1 px-2 py-3">Progress</p>
                             </div>
                             {
                                 enrolledCourses.map((course, i, arr) => (
-                                    <div className={`flex items-center border border-richblack-700 ${i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"
+                                    <div className={`flex items-center border border-gray-700 bg-primary-700/50 ${i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"
                                         }`}
                                         key={i}
                                     >
@@ -59,7 +59,7 @@ function EnrolledCourses() {
                                             <img src={course.thumbnail} alt={course?.courseName} className="h-14 w-14 rounded-lg object-cover" />
                                             <div className="flex max-w-xs flex-col gap-2">
                                                 <p className="font-semibold">{course.courseName}</p>
-                                                <p className="text-xs text-richblack-300">
+                                                <p className="text-xs text-gray-300">
                                                     {course.courseDescription.length > 50
                                                         ? `${course.courseDescription.slice(0, 50)}...`
                                                         : course.courseDescription}

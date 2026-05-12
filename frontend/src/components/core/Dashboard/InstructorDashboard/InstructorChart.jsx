@@ -8,17 +8,14 @@ export default function InstructorChart({ courses }) {
   // State to keep track of the currently selected chart
   const [currChart, setCurrChart] = useState("students")
 
-  // Function to generate random colors for the chart
-  const generateRandomColors = (numColors) => {
-    const colors = []
-    for (let i = 0; i < numColors; i++) {
-      const color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
-        Math.random() * 256
-      )}, ${Math.floor(Math.random() * 256)})`
-      colors.push(color)
-    }
-    return colors
-  }
+  const chartPalette = [
+    "rgba(42, 157, 143, 0.85)",
+    "rgba(233, 196, 106, 0.85)",
+    "rgba(244, 162, 97, 0.85)",
+    "rgba(231, 111, 81, 0.85)",
+    "rgba(120, 178, 171, 0.85)",
+    "rgba(68, 199, 181, 0.85)",
+  ]
 
   // Data for the chart displaying student information
   const chartDataStudents = {
@@ -26,7 +23,7 @@ export default function InstructorChart({ courses }) {
     datasets: [
       {
         data: courses.map((course) => course.totalStudentsEnrolled),
-        backgroundColor: generateRandomColors(courses.length),
+        backgroundColor: courses.map((_, index) => chartPalette[index % chartPalette.length]),
       },
     ],
   }
@@ -37,7 +34,7 @@ export default function InstructorChart({ courses }) {
     datasets: [
       {
         data: courses.map((course) => course.totalAmountGenerated),
-        backgroundColor: generateRandomColors(courses.length),
+        backgroundColor: courses.map((_, index) => chartPalette[(index + 2) % chartPalette.length]),
       },
     ],
   }
@@ -53,15 +50,15 @@ export default function InstructorChart({ courses }) {
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-y-4 rounded-md bg-richblack-800 p-6">
-      <p className="text-lg font-bold text-richblack-5">Visualize</p>
+    <div className="flex flex-1 flex-col gap-y-4 rounded-xl border border-gray-700 bg-primary-700 p-6 shadow-sm shadow-black/20">
+      <p className="text-lg font-bold text-white">Visualize</p>
       <div className="space-x-4 font-semibold">
 
         <button
           onClick={() => setCurrChart("students")}
-          className={`rounded-sm p-1 px-3 transition-all duration-200 ${currChart === "students"
-              ? "bg-richblack-700 text-yellow-50"
-              : "text-yellow-400"
+            className={`rounded-full border px-3 py-1 transition-all duration-200 ${currChart === "students"
+              ? "border-secondary-500 bg-secondary-500/10 text-secondary-500"
+              : "border-gray-700 text-gray-300 hover:text-white"
             }`}
         >
           Students
@@ -69,9 +66,9 @@ export default function InstructorChart({ courses }) {
 
         <button
           onClick={() => setCurrChart("income")}
-          className={`rounded-sm p-1 px-3 transition-all duration-200 ${currChart === "income"
-              ? "bg-richblack-700 text-yellow-50"
-              : "text-yellow-400"
+            className={`rounded-full border px-3 py-1 transition-all duration-200 ${currChart === "income"
+              ? "border-secondary-500 bg-secondary-500/10 text-secondary-500"
+              : "border-gray-700 text-gray-300 hover:text-white"
             }`}
         >
           Income

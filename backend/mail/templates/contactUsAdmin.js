@@ -1,3 +1,5 @@
+const { detailRow, formatText, shell } = require("./_sharedEmail");
+
 exports.contactUsTemplate = ({
   firstName,
   lastName,
@@ -6,106 +8,26 @@ exports.contactUsTemplate = ({
   countryCode,
   message,
 }) => {
-  return `<!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>New Contact Request</title>
-    <style>
-      body {
-        background-color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        line-height: 1.4;
-        color: #333333;
-        margin: 0;
-        padding: 0;
-      }
+  const fullName = `${firstName || ""} ${lastName || ""}`.trim() || "Unknown Sender";
 
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      .logo {
-        max-width: 180px;
-        margin-bottom: 20px;
-      }
-
-      .heading {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        text-align: center;
-      }
-
-      .field {
-        margin-bottom: 12px;
-      }
-
-      .label {
-        font-weight: bold;
-        color: #555555;
-      }
-
-      .value {
-        margin-top: 4px;
-      }
-
-      .message-box {
-        background-color: #f9fafb;
-        border-left: 4px solid #4f46e5;
-        padding: 15px;
-        margin-top: 10px;
-        white-space: pre-wrap;
-      }
-
-      .footer {
-        font-size: 14px;
-        color: #999999;
-        margin-top: 30px;
-        text-align: center;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="container">
-      <a href="https://studynotion-edtech-project.vercel.app">
-        <img
-          class="logo"
-          src="https://res.cloudinary.com/dfryej1yt/image/upload/v1769185735/EduSphere/fesztk4wmwascixusg0c.png"
-          alt="EduSphere Logo"
-        />
-      </a>
-
-      <div class="heading">New Contact Us Submission</div>
-
-      <div class="field">
-        <div class="label">Name</div>
-        <div class="value">${firstName} ${lastName}</div>
-      </div>
-
-      <div class="field">
-        <div class="label">Email</div>
-        <div class="value">${email}</div>
-      </div>
-
-      <div class="field">
-        <div class="label">Phone</div>
-        <div class="value">${countryCode || ""} ${phoneNo || "N/A"}</div>
-      </div>
-
-      <div class="field">
-        <div class="label">Message</div>
-        <div class="message-box">${message}</div>
-      </div>
-
-      <div class="footer">
-        This message was submitted via the EduSphere Contact Us form.
-      </div>
-    </div>
-  </body>
-  </html>`;
+  return shell({
+    preheader: `New contact request from ${fullName}`,
+    eyebrow: "New inquiry",
+    title: "Contact form submission received",
+    intro: "A visitor has sent a new message through the EduSphere contact form. The details below can help your team follow up quickly.",
+    body: `
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;background:#19313b;border:1px solid #29434d;border-radius:18px;padding:0 18px;">
+        ${detailRow("Name", formatText(fullName))}
+        ${detailRow("Email", `<a href="mailto:${email}" style="color:#e9c46a;text-decoration:none;">${email}</a>`)}
+        ${detailRow("Phone", formatText(`${countryCode || ""} ${phoneNo || "N/A"}`.trim()))}
+        <tr>
+          <td style="padding:10px 0 12px;color:#94a3b8;font-size:13px;line-height:20px;width:34%;vertical-align:top;">Message</td>
+          <td style="padding:10px 0 12px;color:#f8fafc;font-size:14px;line-height:22px;vertical-align:top;">
+            <div style="background:#13252d;border:1px solid #29434d;border-radius:14px;padding:16px;white-space:pre-wrap;">${formatText(message || "No message provided.")}</div>
+          </td>
+        </tr>
+      </table>
+    `,
+    footerNote: "This alert is internal only and was generated from the public contact form.",
+  });
 };

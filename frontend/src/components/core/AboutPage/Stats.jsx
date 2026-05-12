@@ -9,16 +9,16 @@ const datas= [
 
 const Stats = () => {
   return (
-    <div className="bg-richblack-700">
-      <div className="flex flex-col gap-10 justify-between w-10/12 max-w-maxContent text-white mx-auto ">
-        <div className="grid grid-cols-2 md:grid-cols-4 text-center">
+    <div className="bg-primary-700">
+      <div className="mx-auto flex w-10/12 max-w-maxContent flex-col justify-between gap-10 text-white">
+        <div className="grid grid-cols-2 text-center md:grid-cols-4">
           {datas.map((data, index) => {
             return (
-              <div className="flex flex-col py-10" key={index}>
-                <h1 className="text-[30px] font-bold text-richblack-5">
+              <div className="flex flex-col gap-2 py-10" key={index}>
+                <h1 className="text-3xl font-bold text-white">
                   {data.count}
                 </h1>
-                <h2 className="font-semibold text-[16px] text-richblack-500">
+                <h2 className="text-[16px] font-semibold text-gray-300">
                   {data.label}
                 </h2>
               </div>

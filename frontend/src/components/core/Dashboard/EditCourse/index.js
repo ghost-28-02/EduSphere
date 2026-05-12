@@ -38,14 +38,14 @@ export default function EditCourse() {
 
   return (
     <div>
-      <h1 className="mb-14 text-3xl font-medium text-richblack-5">
+      <h1 className="mb-14 text-3xl font-semibold text-white">
         Edit Course
       </h1>
       <div className="mx-auto max-w-[600px]">
         {course ? (
           <RenderSteps />
         ) : (
-          <p className="mt-14 text-center text-3xl font-semibold text-richblack-100">
+          <p className="mt-14 text-center text-3xl font-semibold text-gray-300">
             Course not found
           </p>
         )}

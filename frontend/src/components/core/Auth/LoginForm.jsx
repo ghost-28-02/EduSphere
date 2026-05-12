@@ -35,11 +35,11 @@ function LoginForm() {
   return (
     <form
       onSubmit={handleOnSubmit}
-      className="mt-6 flex w-full flex-col gap-y-4"
+      className="mt-8 flex w-full flex-col gap-y-5"
     >
       <label className="w-full">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Email Address <sup className="text-pink-200">*</sup>
+        <p className="mb-1 text-sm font-medium leading-6 text-white">
+          Email Address <sup className="text-coral-500">*</sup>
         </p>
         <input
           required
@@ -48,15 +48,12 @@ function LoginForm() {
           value={email}
           onChange={handleOnChange}
           placeholder="Enter email address"
-          style={{
-            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-          }}
-          className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+          className="w-full rounded-xl border border-gray-700 bg-primary-600 px-4 py-3 text-white placeholder:text-gray-400 shadow-sm shadow-black/10 outline-none transition duration-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500"
         />
       </label>
       <label className="relative">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Password <sup className="text-pink-200">*</sup>
+        <p className="mb-1 text-sm font-medium leading-6 text-white">
+          Password <sup className="text-coral-500">*</sup>
         </p>
         <input
           required
@@ -65,30 +62,27 @@ function LoginForm() {
           value={password}
           onChange={handleOnChange}
           placeholder="Enter Password"
-          style={{
-            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-          }}
-          className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5"
+          className="w-full rounded-xl border border-gray-700 bg-primary-600 px-4 py-3 pr-12 text-white placeholder:text-gray-400 shadow-sm shadow-black/10 outline-none transition duration-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500"
         />
         <span
           onClick={() => setShowPassword((prev) => !prev)}
-          className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+          className="absolute right-3 top-[38px] z-[10] cursor-pointer text-gray-400 transition hover:text-white"
         >
           {showPassword ? (
-            <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+            <AiOutlineEyeInvisible fontSize={24} />
           ) : (
-            <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+            <AiOutlineEye fontSize={24} />
           )}
         </span>
         <Link to="/forgot-password">
-          <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
+          <p className="mt-2 ml-auto max-w-max text-xs font-medium text-secondary-500 transition hover:text-secondary-600">
             Forgot Password
           </p>
         </Link>
       </label>
       <button
         type="submit"
-        className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+        className="mt-6 rounded-xl bg-secondary-500 px-4 py-3 font-semibold text-white transition duration-200 hover:bg-secondary-600 hover:shadow-lg hover:shadow-black/20"
       >
         Sign In
       </button>

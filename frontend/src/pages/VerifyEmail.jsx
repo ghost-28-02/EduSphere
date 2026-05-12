@@ -12,15 +12,15 @@ import Spinner from '../components/common/Spinner';
 function VerifyEmail() {
 
     const [otp, setOtp] = useState("");
-    const {signupData, loading} = useSelector((state) => state.auth);
+    const { signupData, loading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!signupData){
+        if (!signupData) {
             navigate('/signup');
         }
-    },[]);
+    }, []);
 
     const handleVerifyAndSignup = (e) => {
         e.preventDefault();
@@ -36,9 +36,9 @@ function VerifyEmail() {
 
         dispatch(
             signUp(
-               accountType,
-               firstName,
-               lastName,
+                accountType,
+                firstName,
+                lastName,
                 email,
                 password,
                 confirmPassword,
@@ -48,19 +48,14 @@ function VerifyEmail() {
         );
     };
 
-  return (
-    <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center">
-        {
-            loading ? (
-                <div>
-                    <Spinner/>
-                </div>
+    return (
+        <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center bg-primary-800 p-4">
+            {loading ? (
+                <Spinner />
             ) : (
-                <div className='max-w-[500px] p-4 lg:p-8"'>
-                    <p className='text-richblack-5 font-semibold text-[1.875rem] leading-[2.375rem]'>
-                        Verify Email
-                    </p>
-                    <p className='text-[1.125rem] leading-[1.625rem] my-4 text-richblack-100'>
+                <div className="w-full max-w-md p-6 lg:p-8 bg-primary-700 rounded-xl border border-gray-700">
+                    <p className="text-white font-semibold text-2xl leading-8">Verify Email</p>
+                    <p className="text-gray-300 text-base leading-relaxed my-4">
                         A verification code has been sent to you. Enter the code below
                     </p>
                     <form onSubmit={handleVerifyAndSignup}>
@@ -69,14 +64,14 @@ function VerifyEmail() {
                             onChange={setOtp}
                             numInputs={6}
                             renderInput={(props) => (
-                               <input
-                               {...props}
-                               placeholder='-'
-                               style={{
+                                <input
+                                    {...props}
+                                    placeholder='-'
+                                    style={{
                                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                                }}
-                               className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50"
-                               />
+                                    className="w-[48px] lg:w-[60px] border-0 bg-primary-800 rounded-[0.5rem] text-white aspect-square text-center focus:border-0 focus:outline-2 focus:outline-secondary-600"
+                                />
                             )}
                             containerStyle={{
                                 justifyContent: "space-between",
@@ -85,29 +80,29 @@ function VerifyEmail() {
                         />
                         <button
                             type="submit"
-                            className="w-full bg-yellow-50 py-[12px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900"
+                            className="w-full bg-secondary-500 py-3 rounded-md mt-6 font-medium text-white hover:bg-secondary-600 transition"
                         >
                             Verify Email
                         </button>
                     </form>
                     <div className="mt-6 flex items-center justify-between">
                         <Link to={'/signup'}>
-                            <p className="text-richblack-5 flex items-center gap-x-2">
+                            <p className="text-white flex items-center gap-x-2">
                                 <BiArrowBack /> Back To Signup
-                            </p> 
+                            </p>
                         </Link>
                         <button
-                            className="flex items-center text-blue-100 gap-x-2"
+                            className="flex items-center text-gray-300 gap-x-2 hover:text-secondary-500"
                             onClick={() => dispatch(sendOtp(signupData.email, navigate))}
                         >
-                            <RxCountdownTimer/>
+                            <RxCountdownTimer />
                             Resend it
                         </button>
                     </div>
                 </div>
             )}
-    </div>
-  )
+        </div>
+    )
 }
 
 export default VerifyEmail;
