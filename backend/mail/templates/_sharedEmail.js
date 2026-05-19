@@ -1,5 +1,5 @@
-const HOME_URL = "https://studynotion-edtech-project.vercel.app";
-const DASHBOARD_URL = "https://studynotion-edtech-project.vercel.app/dashboard";
+const HOME_URL = "https://edu-sphere-weld.vercel.app";
+const DASHBOARD_URL = "https://edu-sphere-weld.vercel.app/dashboard/enrolled-courses";
 const LOGO_URL = "https://res.cloudinary.com/dfryej1yt/image/upload/v1769185735/EduSphere/fesztk4wmwascixusg0c.png";
 const SUPPORT_EMAIL = "info@edusphere.com";
 
