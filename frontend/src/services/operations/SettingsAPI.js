@@ -13,6 +13,7 @@ const {
 
 export function updateDisplayPicture(token, formData) {
     return async (dispatch) => {
+        const toastId = toast.loading("Updating...");
         try {
             const response = await apiConnector(
                 "PUT",
@@ -24,14 +25,14 @@ export function updateDisplayPicture(token, formData) {
                 }
             )
 
-            if (!response.data.success) {
-                const msg = response.data.message;
-                toast.error(msg);
-                dispatch(setLoading(false));
-                return;
-            }
+                if (!response.data.success) {
+                    const msg = response.data.message;
+                    toast.error(msg, { id: toastId });
+                    dispatch(setLoading(false));
+                    return;
+                }
 
-            toast.success("Display Picture Updated Successfully")
+                toast.success("Display Picture Updated Successfully", { id: toastId })
             dispatch(setUser(response.data.data))
 
             console.log("UPDATE_DISPLAY_PICTURE_API API RESPONSE............", response);
@@ -39,7 +40,7 @@ export function updateDisplayPicture(token, formData) {
         } catch (error) {
             console.log("UPDATE_DISPLAY_PICTURE_API API ERROR............", error)
             const errorMessage = error.response?.data?.message || error.message || "Update failed";
-            toast.error(errorMessage);
+            toast.error(errorMessage, { id: toastId });
         }
     }
 }

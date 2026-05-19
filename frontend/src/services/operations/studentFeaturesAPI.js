@@ -30,7 +30,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
 
         if(!res) {
-            toast.error("RazorPay SDK failed to load");
+            toast.error("RazorPay SDK failed to load", { id: toastId });
             return;
         }
         const orderResponse = await apiConnector("POST", COURSE_PAYMENT_API, 
@@ -74,16 +74,15 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
         paymentObject.on("payment.failed", function(response) {
-            toast.error("oops, payment failed");
+            toast.error("oops, payment failed", { id: toastId });
             console.log(response.error);
         })
 
     }
     catch(error) {
         console.log("PAYMENT API ERROR.....", error);
-        toast.error("Could not make Payment");
+        toast.error("Could not make Payment", { id: toastId });
     }
-    toast.dismiss(toastId);
 }
 
 async function sendPaymentSuccessEmail(response, amount, token) {
@@ -109,17 +108,16 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
             Authorization:`Bearer ${token}`,
         })
 
-        if(!response.data.success) {
-            throw new Error(response.data.message);
-        }
-        toast.success("payment Successful, you are addded to the course");
+            if(!response.data.success) {
+                throw new Error(response.data.message);
+            }
+            toast.success("payment Successful, you are addded to the course", { id: toastId });
         navigate("/dashboard/enrolled-courses");
         dispatch(resetCart());
     }   
     catch(error) {
         console.log("PAYMENT VERIFY ERROR....", error);
-        toast.error("Could not verify Payment");
+        toast.error("Could not verify Payment", { id: toastId });
     }
-    toast.dismiss(toastId);
     dispatch(setPaymentLoading(false));
 }

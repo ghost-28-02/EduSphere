@@ -14,6 +14,7 @@ const {
 export function getUserDetails(token, navigate) {
     return async (dispatch) => {
         dispatch(setLoading(true))
+        const toastId = toast.loading("Loading...");
         try {
             const response = await apiConnector(
                 "GET",
@@ -26,7 +27,7 @@ export function getUserDetails(token, navigate) {
             console.log("GET_USER_DETAILS API RESPONSE............", response)
             if (!response.data.success) {
                 const msg = response.data.message;
-                toast.error(msg);
+                toast.error(msg, { id: toastId });
                 setLoading(false);
                 return;
             }
@@ -39,14 +40,16 @@ export function getUserDetails(token, navigate) {
             dispatch(logout(navigate))
             console.log("GET_USER_DETAILS API ERROR............", error)
             const errorMessage = error.response?.data?.message || error.message || "Could Not Get User Details";
-            toast.error(errorMessage);
+            toast.error(errorMessage, { id: toastId });
         }
+        toast.dismiss(toastId)
         dispatch(setLoading(false))
     }
 }
 
 export async function getUserEnrolledCourses(token) {
     let result = [];
+    const toastId = toast.loading("Loading...");
     try {
         const response = await apiConnector(
             "GET",
@@ -59,7 +62,7 @@ export async function getUserEnrolledCourses(token) {
 
         if (!response.data.success) {
             const msg = response.data.message;
-            toast.error(msg);
+            toast.error(msg, { id: toastId });
             return;
         }
 
@@ -67,14 +70,18 @@ export async function getUserEnrolledCourses(token) {
     } catch (error) {
         console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
         const errorMessage = error.response?.data?.message || error.message || "Could Not Get Enrolled Courses";
-        toast.error(errorMessage);
+        toast.error(errorMessage, { id: toastId });
     }
+
+    toast.dismiss(toastId)
 
     return result;
 }
 
 export async function getInstructorDetails(token) {
     let result = [];
+
+    const toastId = toast.loading("Loading...");
 
     try {
         const response = await apiConnector(
@@ -89,7 +96,7 @@ export async function getInstructorDetails(token) {
 
         if (!response.data.success) {
             const msg = response.data.message;
-            toast.error(msg);
+            toast.error(msg, { id: toastId });
             return;
         }
 
@@ -98,8 +105,10 @@ export async function getInstructorDetails(token) {
     } catch (error) {
         console.log("GET_INSTRUCTOR_API ERROR", error);
         const errorMessage = error.response?.data?.message || error.message || "Could not Get Instructor Data";
-        toast.error(errorMessage);
+        toast.error(errorMessage, { id: toastId });
     }
+
+    toast.dismiss(toastId)
 
     return result;
 }
