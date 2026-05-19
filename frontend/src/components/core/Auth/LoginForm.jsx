@@ -37,6 +37,22 @@ function LoginForm() {
       onSubmit={handleOnSubmit}
       className="mt-8 flex w-full flex-col gap-y-5"
     >
+      <div className="flex gap-3">
+        <button
+          type="button"
+          onClick={() => setFormData({ email: 'sachindhoor333@gmail.com', password: 'student123' })}
+          className="rounded-md border border-gray-600 bg-primary-700 px-3 py-1 text-sm text-white hover:bg-primary-600"
+        >
+          Fill Student
+        </button>
+        <button
+          type="button"
+          onClick={() => setFormData({ email: 'sachin.choudhary.cse@gmail.com', password: 'instructor123' })}
+          className="rounded-md border border-gray-600 bg-primary-700 px-3 py-1 text-sm text-white hover:bg-primary-600"
+        >
+          Fill Instructor
+        </button>
+      </div>
       <label className="w-full">
         <p className="mb-1 text-sm font-medium leading-6 text-white">
           Email Address <sup className="text-coral-500">*</sup>

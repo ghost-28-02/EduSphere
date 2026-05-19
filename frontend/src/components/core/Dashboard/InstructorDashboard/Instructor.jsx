@@ -47,7 +47,9 @@ function Instructor() {
                 </p>
             </div>
             {loading ? (
-                <div className="spinner"></div>
+                <div className="min-h-screen flex justify-between items-center">
+                    <div className="spinner"></div>
+                </div>
             ) : courses.length > 0 ? (
                 <div>
                     <div className="my-4 flex h-[450px] flex-col gap-4 lg:flex-row">

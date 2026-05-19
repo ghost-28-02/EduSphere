@@ -1,31 +1,33 @@
-# 🎓 EduSphere — Full-Stack EdTech Platform
+# EduSphere - Full-Stack EdTech Platform
 
 EduSphere is a feature-rich, full-stack **Educational Technology (EdTech) platform** that enables instructors to create and sell online courses while giving students an immersive, interactive learning experience. Built with the **MERN stack**, it includes a payment gateway, cloud media storage, email notifications, and role-based access control.
 
+Live demo: [https://edu-sphere-weld.vercel.app](https://edu-sphere-weld.vercel.app)
+
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Screenshots](#-screenshots)
-- [Prerequisites](#-prerequisites)
-- [Getting Started](#-getting-started)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Screenshots](#screenshots)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
   - [1. Clone the Repository](#1-clone-the-repository)
   - [2. Install Dependencies](#2-install-dependencies)
   - [3. Configure Environment Variables](#3-configure-environment-variables)
   - [4. Run the Application](#4-run-the-application)
-- [Project Structure](#-project-structure)
-- [API Reference](#-api-reference)
-- [User Roles](#-user-roles)
-- [Contributing](#-contributing)
-- [License](#-license)
+- [Project Structure](#project-structure)
+- [API Reference](#api-reference)
+- [User Roles](#user-roles)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## ✨ Features
+## Features
 
-### 👨‍🎓 Student
+### Student
 - Browse and search courses by category
 - View detailed course information (curriculum, instructor, reviews)
 - Add courses to a shopping cart and purchase via **Razorpay**
@@ -34,23 +36,23 @@ EduSphere is a feature-rich, full-stack **Educational Technology (EdTech) platfo
 - Rate and review completed courses
 - Manage profile, avatar, and account settings
 
-### 👨‍🏫 Instructor
+### Instructor
 - Create, edit, and publish courses
 - Organise content into **Sections** and **Sub-sections** (video lectures)
 - Upload video lectures and thumbnails to **Cloudinary**
 - View instructor dashboard with revenue analytics and charts
 
-### 🛡️ Admin
+### Admin
 - Create and manage course categories
 - Platform-wide content management
 
-### 🔐 Authentication & Security
+### Authentication & Security
 - Email + OTP-based signup verification
 - JWT-based stateless authentication
 - Role-based route protection (Student / Instructor / Admin)
 - Forgot / reset password via email token
 
-### 📧 Email Notifications
+### Email Notifications
 - OTP verification email on signup
 - Payment success and course enrollment confirmation
 - Password reset and update notifications
@@ -58,7 +60,7 @@ EduSphere is a feature-rich, full-stack **Educational Technology (EdTech) platfo
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 | Technology | Version | Purpose |
@@ -87,7 +89,7 @@ EduSphere is a feature-rich, full-stack **Educational Technology (EdTech) platfo
 | Bcrypt | 6.0.0 | Password hashing |
 | Cloudinary | 2.8.0 | Image & video cloud storage |
 | Razorpay | 2.9.6 | Payment gateway |
-| Nodemailer | 7.0.12 | Transactional emails |
+| Resend | — | Transactional emails |
 | OTP Generator | 4.0.1 | One-time password generation |
 | Express File Upload | 1.5.2 | Multipart file handling |
 | Cookie Parser | 1.4.7 | Cookie handling |
@@ -97,13 +99,13 @@ EduSphere is a feature-rich, full-stack **Educational Technology (EdTech) platfo
 
 ---
 
-## 🖼 Screenshots
+## Screenshots
 
 > Add screenshots of the Home page, Course Catalog, Course Details, Dashboard, and Video Player pages here.
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 Make sure the following are installed on your machine before proceeding:
 
@@ -112,11 +114,11 @@ Make sure the following are installed on your machine before proceeding:
 - [MongoDB](https://www.mongodb.com/) — local instance **or** a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cluster
 - [Cloudinary](https://cloudinary.com/) account (for image & video uploads)
 - [Razorpay](https://razorpay.com/) account (for payment processing)
-- An SMTP email provider (e.g., Gmail, SendGrid, Mailtrap)
+- [Resend](https://resend.com/) account (for transactional emails)
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
@@ -164,13 +166,13 @@ CLOUDINARY_API_SECRET=your_api_secret
 RAZORPAY_KEY=your_razorpay_key_id
 RAZORPAY_SECRET=your_razorpay_key_secret
 
-# ── Email (SMTP) ──────────────────────────────────────────
-MAIL_HOST=smtp.gmail.com
-MAIL_USER=your_email@gmail.com
-MAIL_PASS=your_email_app_password
+# ── Email (Brevo) ─────────────────────────────────────────
+BREVO_API_KEY=your_brevo_api_key
+BREVO_SENDER_EMAIL=noreply@yourdomain.com
+BREVO_SENDER_NAME=EduSphere
 ```
 
-> **Tip:** If using Gmail, generate an [App Password](https://support.google.com/accounts/answer/185833) instead of your account password.
+> **Tip:** Verify your sender domain in Brevo and use a verified `BREVO_SENDER_EMAIL`.
 
 ### 4. Run the Application
 
@@ -201,7 +203,7 @@ npm run server
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 EduSphere/
@@ -248,7 +250,7 @@ EduSphere/
 │   │   └── User.js                   # Routes for auth/user actions
 │   ├── utils/                        # Shared backend utilities/helpers
 │   │   ├── cloudinaryUploader.js     # Media upload helper wrapper (Cloudinary)
-│   │   ├── mailSender.js             # Email sending utility (nodemailer or similar)
+│   │   ├── mailSender.js             # Email sending utility (Resend or similar)
 │   │   └── secToDuration.js          # Convert seconds -> duration string (hh:mm:ss etc.)
 │   └── mail/                         # Email templates and mail-related code
 │       └── templates/                # Email HTML/text templates
@@ -334,66 +336,66 @@ EduSphere/
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 All API routes are prefixed with `/api/v1`.
 
-### 🔑 Authentication — `/api/v1/auth`
+### Authentication - `/api/v1/auth`
 
 | Method | Endpoint | Description | Auth |
 |---|---|---|---|
 | POST | `/signup` | Register a new user | Public |
 | POST | `/login` | Login and receive JWT | Public |
 | POST | `/sendotp` | Send OTP to email | Public |
-| POST | `/changePassword` | Change current password | 🔒 Required |
+| POST | `/changePassword` | Change current password | Required |
 | POST | `/reset-password-token` | Request password reset email | Public |
 | POST | `/reset-password` | Reset password using token | Public |
 
-### 📚 Courses — `/api/v1/course`
+### Courses - `/api/v1/course`
 
 | Method | Endpoint | Description | Auth |
 |---|---|---|---|
 | GET | `/getAllCourses` | List all published courses | Public |
 | POST | `/getCourseDetails` | Get details of a single course | Public |
-| POST | `/getFullCourseDetails` | Get course with all sections & videos | 🔒 Required |
-| POST | `/createCourse` | Create a new course | 🔒 Instructor |
-| POST | `/editCourse` | Update an existing course | 🔒 Instructor |
-| DELETE | `/deleteCourse` | Delete a course | 🔒 Instructor |
-| GET | `/getInstructorCourses` | Get instructor's own courses | 🔒 Instructor |
-| POST | `/addSection` | Add a section to a course | 🔒 Instructor |
-| POST | `/updateSection` | Edit a section | 🔒 Instructor |
-| POST | `/deleteSection` | Remove a section | 🔒 Instructor |
-| POST | `/addSubSection` | Upload a video lecture | 🔒 Instructor |
-| POST | `/updateSubSection` | Edit a video lecture | 🔒 Instructor |
-| POST | `/deleteSubSection` | Remove a video lecture | 🔒 Instructor |
-| POST | `/createCategory` | Create a course category | 🔒 Admin |
+| POST | `/getFullCourseDetails` | Get course with all sections & videos | Required |
+| POST | `/createCourse` | Create a new course | Instructor |
+| POST | `/editCourse` | Update an existing course | Instructor |
+| DELETE | `/deleteCourse` | Delete a course | Instructor |
+| GET | `/getInstructorCourses` | Get instructor's own courses | Instructor |
+| POST | `/addSection` | Add a section to a course | Instructor |
+| POST | `/updateSection` | Edit a section | Instructor |
+| POST | `/deleteSection` | Remove a section | Instructor |
+| POST | `/addSubSection` | Upload a video lecture | Instructor |
+| POST | `/updateSubSection` | Edit a video lecture | Instructor |
+| POST | `/deleteSubSection` | Remove a video lecture | Instructor |
+| POST | `/createCategory` | Create a course category | Admin |
 | GET | `/showAllCategories` | List all categories | Public |
 | POST | `/getCategoryPageDetails` | Get courses in a category | Public |
-| POST | `/createRating` | Submit a rating & review | 🔒 Student |
+| POST | `/createRating` | Submit a rating & review | Student |
 | GET | `/getAverageRating` | Get average rating for a course | Public |
 | GET | `/getAllRating` | Get all ratings for a course | Public |
-| POST | `/updateCourseProgress` | Mark a lecture as complete | 🔒 Student |
+| POST | `/updateCourseProgress` | Mark a lecture as complete | Student |
 
-### 👤 Profile — `/api/v1/profile`
-
-| Method | Endpoint | Description | Auth |
-|---|---|---|---|
-| GET | `/getUserDetails` | Get authenticated user's profile | 🔒 Required |
-| PUT | `/updateProfile` | Update profile information | 🔒 Required |
-| PUT | `/updateProfilePicture` | Upload new profile picture | 🔒 Required |
-| DELETE | `/deleteAccount` | Permanently delete account | 🔒 Required |
-| GET | `/getEnrolledCourses` | Get student's enrolled courses | 🔒 Required |
-| GET | `/instructorDashboard` | Get instructor analytics data | 🔒 Instructor |
-
-### 💳 Payments — `/api/v1/payment`
+### Profile - `/api/v1/profile`
 
 | Method | Endpoint | Description | Auth |
 |---|---|---|---|
-| POST | `/capturePayment` | Initiate a Razorpay order | 🔒 Student |
-| POST | `/verifyPayment` | Verify payment & enroll in course | 🔒 Student |
-| POST | `/sendPaymentSuccessEmail` | Send payment confirmation email | 🔒 Student |
+| GET | `/getUserDetails` | Get authenticated user's profile | Required |
+| PUT | `/updateProfile` | Update profile information | Required |
+| PUT | `/updateProfilePicture` | Upload new profile picture | Required |
+| DELETE | `/deleteAccount` | Permanently delete account | Required |
+| GET | `/getEnrolledCourses` | Get student's enrolled courses | Required |
+| GET | `/instructorDashboard` | Get instructor analytics data | Instructor |
 
-### 📬 Contact — `/api/v1/reach`
+### Payments - `/api/v1/payment`
+
+| Method | Endpoint | Description | Auth |
+|---|---|---|---|
+| POST | `/capturePayment` | Initiate a Razorpay order | Student |
+| POST | `/verifyPayment` | Verify payment & enroll in course | Student |
+| POST | `/sendPaymentSuccessEmail` | Send payment confirmation email | Student |
+
+### Contact - `/api/v1/reach`
 
 | Method | Endpoint | Description | Auth |
 |---|---|---|---|
@@ -401,7 +403,7 @@ All API routes are prefixed with `/api/v1`.
 
 ---
 
-## 👥 User Roles
+## User Roles
 
 EduSphere has three distinct account types, each with different permissions:
 
@@ -413,7 +415,7 @@ EduSphere has three distinct account types, each with different permissions:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Follow these steps:
 
@@ -427,10 +429,10 @@ Please follow the existing code style and include clear commit messages.
 
 ---
 
-## 📄 License
+## License
 
 This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
-<p align="center">Made with ❤️ by the EduSphere team</p>
+<p align="center">Made by the EduSphere team</p>
