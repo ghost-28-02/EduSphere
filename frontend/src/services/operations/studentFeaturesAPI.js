@@ -77,6 +77,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
             toast.error("oops, payment failed", { id: toastId });
             console.log(response.error);
         })
+        toast.dismiss(toastId);
 
     }
     catch(error) {
