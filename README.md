@@ -1,8 +1,16 @@
 # EduSphere - Full-Stack EdTech Platform
 
+![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-5.2-000000?logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb&logoColor=white)
+![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.11-764ABC?logo=redux&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
 EduSphere is a feature-rich, full-stack **Educational Technology (EdTech) platform** that enables instructors to create and sell online courses while giving students an immersive, interactive learning experience. Built with the **MERN stack**, it includes a payment gateway, cloud media storage, email notifications, and role-based access control.
 
-Live demo: [https://edu-sphere-weld.vercel.app](https://edu-sphere-weld.vercel.app)
+**Live demo:** [https://edu-sphere-weld.vercel.app](https://edu-sphere-weld.vercel.app)
 
 ---
 
@@ -89,7 +97,7 @@ Live demo: [https://edu-sphere-weld.vercel.app](https://edu-sphere-weld.vercel.a
 | Bcrypt | 6.0.0 | Password hashing |
 | Cloudinary | 2.8.0 | Image & video cloud storage |
 | Razorpay | 2.9.6 | Payment gateway |
-| Resend | — | Transactional emails |
+| Brevo (sib-api-v3-sdk) | 8.5.0 | Transactional emails |
 | OTP Generator | 4.0.1 | One-time password generation |
 | Express File Upload | 1.5.2 | Multipart file handling |
 | Cookie Parser | 1.4.7 | Cookie handling |
@@ -101,7 +109,42 @@ Live demo: [https://edu-sphere-weld.vercel.app](https://edu-sphere-weld.vercel.a
 
 ## Screenshots
 
-> Add screenshots of the Home page, Course Catalog, Course Details, Dashboard, and Video Player pages here.
+
+### Home Page
+
+![Home Page](screenshots/home.png)
+
+### Course Catalog
+
+![Course Catalog](screenshots/catalog.png)
+
+### Course Details
+
+![Course Details](screenshots/course-details.png)
+
+### Shopping Cart & Checkout
+
+![Cart and Checkout](screenshots/cart.png)
+
+### Student Dashboard
+
+![Student Dashboard](screenshots/student-dashboard.png)
+
+### Instructor Dashboard
+
+![Instructor Dashboard](screenshots/instructor-dashboard.png)
+
+### Course Builder (Instructor)
+
+![Course Builder](screenshots/course-builder.png)
+
+### Video Player / View Course
+
+![Video Player](screenshots/view-course.png)
+
+### Authentication (Login / Signup / OTP)
+
+![Authentication](screenshots/auth.png)
 
 ---
 
@@ -114,7 +157,7 @@ Make sure the following are installed on your machine before proceeding:
 - [MongoDB](https://www.mongodb.com/) — local instance **or** a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cluster
 - [Cloudinary](https://cloudinary.com/) account (for image & video uploads)
 - [Razorpay](https://razorpay.com/) account (for payment processing)
-- [Resend](https://resend.com/) account (for transactional emails)
+- [Brevo](https://www.brevo.com/) account (for transactional emails)
 
 ---
 
