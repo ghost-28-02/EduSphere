@@ -69,3 +69,10 @@ export const settingsEndpoints = {
   CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
   DELETE_PROFILE_API: BASE_URL + "/profile/deleteAccount",
 }
+
+// ADMIN PANEL API
+export const adminEndpoints = {
+  CREATE_CATEGORY_API: BASE_URL + "/course/createCategory",
+  SHOW_ALL_CATEGORIES_API: BASE_URL + "/course/showAllCategories",
+  GET_ALL_COURSES_API: BASE_URL + "/course/getAllCourses",
+}
