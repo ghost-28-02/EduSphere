@@ -59,7 +59,7 @@ router.post("/getCourseDetails",getCourseDetails);
 router.post("/getCourseDetails", getCourseDetails);
 router.post("/getFullCourseDetails", auth, getFullCourseDetails);
 router.post("/editCourse", auth, isInstructor, editCourse);
-router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses);
+router.get("/getInstructorCourses", auth, getInstructorCourses);
 router.delete("/deleteCourse", deleteCourse);
 
 router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
