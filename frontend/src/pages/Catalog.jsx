@@ -73,23 +73,23 @@ function Catalog() {
     return (
         <>
             <div className="box-content bg-primary-800 px-4">
-                <div className='mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent'>
-                    <p className="text-sm text-gray-300">
+                <div className='mx-auto flex min-h-[200px] max-w-maxContentTab flex-col justify-center gap-3 py-8 sm:min-h-[260px] sm:gap-4 lg:max-w-maxContent'>
+                    <p className="text-xs text-gray-300 sm:text-sm">
                         {`Home / Catalog / `}
                         <span className="text-accent-500">
                             {catalogPageData?.selectedCategory?.name}
                         </span>
                     </p>
-                    <p className="text-3xl font-semibold text-white">
+                    <p className="text-2xl font-semibold text-white sm:text-3xl">
                         {catalogPageData?.selectedCategory?.name}
                     </p>
-                    <p className="max-w-[870px] text-gray-300">
+                    <p className="max-w-[870px] text-sm text-gray-300 sm:text-base">
                         {catalogPageData?.selectedCategory?.description}
                     </p>
                 </div>
             </div>
 
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-8 sm:py-12 lg:max-w-maxContent">
 
                 <div className="mb-4 text-2xl lg:text-3xl font-semibold text-white">Courses to get you started</div>
                 <div className="my-4 flex border-b border-b-gray-700 text-sm">
@@ -103,7 +103,7 @@ function Catalog() {
                 </div>
             </div>
 
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-8 sm:py-12 lg:max-w-maxContent">
                 <div className="mb-4 text-2xl lg:text-3xl font-semibold text-white">
                     Top courses in {catalogPageData?.differentCategory?.name}
                 </div>
@@ -112,7 +112,7 @@ function Catalog() {
                 </div>
             </div>
 
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-8 sm:py-12 lg:max-w-maxContent">
                 <div className="mb-4 text-2xl lg:text-3xl font-semibold text-white">Frequently Bought</div>
                 <div className="py-8">
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
