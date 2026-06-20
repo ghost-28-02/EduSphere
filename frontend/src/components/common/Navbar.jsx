@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { Link, matchPath, useLocation } from 'react-router-dom';
+import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/Logo/Logo-Full-Light.png'
 import { NavbarLinks } from '../../data/navbar-links';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaShoppingCart } from 'react-icons/fa';
 import { HiMenu, HiOutlineX } from 'react-icons/hi';
 import ProfileDropDown from '../core/Auth/ProfileDropDown';
 import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/apis';
 import { MdArrowDropDown } from "react-icons/md";
+import { logout } from '../../services/operations/authAPI';
 
 function Navbar() {
 
     const { token } = useSelector((state) => state.auth);
     const { user } = useSelector((state) => state.profile);
     const { totalItems } = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [subLinks, setSubLinks] = useState([]);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -53,10 +56,10 @@ function Navbar() {
     const renderCatalogDropdown = (isMobile = false) => {
         if (isMobile) {
             return (
-                <div className='rounded-xl border border-gray-700 bg-primary-700 px-3 py-2'>
+                <div>
                     <button
                         type='button'
-                        className={`flex w-full items-center justify-between gap-2 rounded-lg py-1 text-sm font-medium transition-colors duration-200 ${matchRoute('/catalog/:catalogName') ? 'text-accent-500' : 'text-gray-100 hover:text-secondary-500'}`}
+                        className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-3 text-sm font-medium transition-colors duration-200 ${matchRoute('/catalog/:catalogName') ? 'bg-primary-700 text-accent-500' : 'text-gray-100 hover:bg-primary-700 hover:text-secondary-500'}`}
                         onClick={() => setIsCatalogOpen((prev) => !prev)}
                         aria-expanded={isCatalogOpen}
                         aria-controls='mobile-catalog-menu'
@@ -67,7 +70,7 @@ function Navbar() {
 
                     <div
                         id='mobile-catalog-menu'
-                        className={`grid overflow-hidden transition-all duration-300 ease-out ${isCatalogOpen ? 'mt-3 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                        className={`grid overflow-hidden transition-all duration-300 ease-out ${isCatalogOpen ? 'mt-1 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                     >
                         <div className='min-h-0 space-y-1 rounded-lg bg-primary-600 p-2'>
                             {subLinks.length ? (
@@ -93,9 +96,15 @@ function Navbar() {
         }
 
         return (
-            <div className={`group relative flex cursor-pointer items-center gap-1.5 ${matchRoute('/catalog/:catalogName') ? 'text-accent-500' : 'text-gray-200'}`}>
-                <p className="text-sm font-medium">Catalog</p>
-                <MdArrowDropDown className="text-lg transition-transform duration-200 group-hover:rotate-180" />
+            <div className="group relative">
+                <button
+                    type="button"
+                    className={`flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-medium transition-colors duration-200 ${matchRoute('/catalog/:catalogName') ? 'text-accent-500' : 'text-gray-200 group-hover:text-secondary-500'}`}
+                    aria-haspopup="true"
+                >
+                    <span>Catalog</span>
+                    <MdArrowDropDown className="text-base transition-transform duration-200 group-hover:rotate-180" />
+                </button>
 
                 <div className="invisible absolute left-1/2 top-full z-[1000] mt-3 flex w-[300px] -translate-x-1/2 flex-col rounded-2xl border border-gray-700 bg-primary-600 p-3 text-gray-100 opacity-0 shadow-xl shadow-black/30 transition-all duration-200 group-hover:visible group-hover:opacity-100">
 
@@ -177,6 +186,50 @@ function Navbar() {
         </div>
     );
 
+    const mobileActionLinkClasses = 'flex items-center justify-between rounded-xl px-3 py-3 text-sm font-medium text-gray-100 transition-colors duration-200 hover:bg-primary-700 hover:text-secondary-500';
+
+    const renderMobileActions = () => {
+        if (token === null) {
+            return (
+                <div className='flex flex-col gap-3'>
+                    <Link to={'/login'} onClick={closeAllMobilePanels} className='inline-flex w-full items-center justify-center rounded-full border border-gray-700 px-4 py-2 text-sm font-medium text-gray-100 transition-colors duration-200 hover:border-secondary-500 hover:bg-secondary-500 hover:text-white'>
+                        Log in
+                    </Link>
+                    <Link to={'/signup'} onClick={closeAllMobilePanels} className='inline-flex w-full items-center justify-center rounded-full bg-secondary-500 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-secondary-600'>
+                        Sign up
+                    </Link>
+                </div>
+            );
+        }
+
+        return (
+            <div className='flex flex-col gap-2'>
+                {user && user?.accountType !== 'Instructor' && (
+                    <Link to={'/dashboard/cart'} onClick={closeAllMobilePanels} className={mobileActionLinkClasses}>
+                        <span>Cart</span>
+                        {totalItems > 0 && (
+                            <span className='flex h-5 min-w-5 items-center justify-center rounded-full bg-coral-500 px-1 text-xs font-semibold text-white'>
+                                {totalItems}
+                            </span>
+                        )}
+                    </Link>
+                )}
+
+                <Link to={'/dashboard/my-profile'} onClick={closeAllMobilePanels} className={mobileActionLinkClasses}>
+                    <span>Dashboard</span>
+                </Link>
+
+                <button
+                    type='button'
+                    onClick={() => { dispatch(logout(navigate)); closeAllMobilePanels(); }}
+                    className={`${mobileActionLinkClasses} text-left`}
+                >
+                    <span>Logout</span>
+                </button>
+            </div>
+        );
+    };
+
     return (
         <div className={`sticky top-0 z-50 border-b border-gray-700/80 bg-primary-800/95 shadow-lg shadow-black/20 backdrop-blur-md transition-all duration-200`}>
             <div className='mx-auto flex h-16 w-11/12 max-w-maxContent items-center justify-between gap-4'>
@@ -208,19 +261,39 @@ function Navbar() {
                 </button>
             </div>
 
+            {/* Mobile backdrop */}
+            <div
+                onClick={closeAllMobilePanels}
+                className={`fixed inset-0 z-[60] bg-black/60 transition-opacity duration-300 md:hidden ${isMobileMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+                aria-hidden="true"
+            />
+
+            {/* Mobile right slide-in drawer */}
             <div
                 id='mobile-navigation'
-                className={`overflow-hidden border-t border-gray-700 md:hidden transition-all duration-300 ease-out ${isMobileMenuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'}`}
+                className={`fixed right-0 top-0 z-[70] flex h-screen w-[280px] max-w-[80vw] flex-col overflow-y-auto border-l border-gray-700 bg-primary-800 shadow-2xl shadow-black/40 transition-transform duration-300 ease-out md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                role="dialog"
+                aria-modal="true"
             >
-                <div className='mx-auto flex w-11/12 max-w-maxContent flex-col gap-5 py-5'>
+                <div className='flex items-center justify-between border-b border-gray-700 px-5 py-4'>
+                    <span className='text-sm font-semibold text-gray-100'>Menu</span>
+                    <button
+                        type='button'
+                        onClick={closeAllMobilePanels}
+                        aria-label='Close menu'
+                        className='inline-flex items-center justify-center rounded-lg p-1 text-gray-200 transition-colors duration-200 hover:bg-primary-700 hover:text-white'
+                    >
+                        <HiOutlineX className='text-2xl' />
+                    </button>
+                </div>
+
+                <div className='flex flex-1 flex-col gap-5 px-5 py-5'>
                     <nav>
                         <ul className='flex flex-col gap-2'>
                             {NavbarLinks.map((link, index) => (
                                 <li key={index}>
                                     {link.title === 'Catalog' ? (
-                                        <div className='rounded-xl border border-gray-700 bg-primary-700 px-3 py-2'>
-                                            {renderCatalogDropdown(true)}
-                                        </div>
+                                        renderCatalogDropdown(true)
                                     ) : (
                                         <Link
                                             to={link?.path}
@@ -236,7 +309,7 @@ function Navbar() {
                     </nav>
 
                     <div className='flex flex-col gap-3 border-t border-gray-700 pt-4'>
-                        {renderActions(true)}
+                        {renderMobileActions()}
                     </div>
                 </div>
             </div>

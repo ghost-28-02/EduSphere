@@ -13,13 +13,13 @@ function RenderCartCourses() {
             {
                 cart.map((course, indx) => (
                     <div key={course._id}
-                        className={`flex w-full flex-wrap items-start justify-between gap-6 ${indx !== cart.length - 1 && "border-b border-b-gray-700 pb-6"
+                        className={`flex w-full flex-col items-start justify-between gap-6 sm:flex-row sm:flex-wrap ${indx !== cart.length - 1 && "border-b border-b-gray-700 pb-6"
                             } ${indx !== 0 && "mt-6"} `}>
-                        <div className="flex flex-1 flex-col gap-4 xl:flex-row">
-                            <img 
-                                src={course?.thumbnail} 
-                                alt={course?.courseName} 
-                                className="h-[148px] w-[220px] rounded-lg object-cover"
+                        <div className="flex w-full flex-1 flex-col gap-4 xl:flex-row">
+                            <img
+                                src={course?.thumbnail}
+                                alt={course?.courseName}
+                                className="h-[180px] w-full rounded-lg object-cover sm:h-[148px] sm:w-[220px]"
                             />
                             <div className="flex flex-col space-y-1">
                                 <p className="text-lg font-medium text-white">
@@ -37,15 +37,15 @@ function RenderCartCourses() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col items-end space-y-2">
+                        <div className="flex w-full flex-row-reverse items-center justify-between gap-4 sm:w-auto sm:flex-col sm:items-end sm:space-y-2">
                             <button
                                 onClick={() => dispatch(removeFromCart(course._id))}
-                                className="flex items-center gap-x-1 rounded-md border border-gray-700 bg-primary-700 py-3 px-[12px] text-coral-500 transition hover:bg-primary-600"
+                                className="flex items-center gap-x-1 rounded-md border border-gray-700 bg-primary-700 py-2 px-3 text-coral-500 transition hover:bg-primary-600 sm:py-3"
                             >
                                 <RiDeleteBin6Line />
                                 <span>Remove</span>
                             </button>
-                            <p className="mb-6 text-3xl font-medium text-highlight-500">
+                            <p className="text-2xl font-medium text-highlight-500 sm:mb-6 sm:text-3xl">
                                 ₹ {course?.price}
                             </p>
                         </div>

@@ -115,9 +115,9 @@ function Catalog() {
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
                 <div className="mb-4 text-2xl lg:text-3xl font-semibold text-white">Frequently Bought</div>
                 <div className="py-8">
-                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         {catalogPageData?.topSellingCourses?.slice(0, 4).map((course, i) => (
-                                <Course_Card course={course} key={i} Height={"h-[400px]"} />
+                                <Course_Card course={course} key={i} Height={"h-[220px] sm:h-[300px] lg:h-[400px]"} />
                         ))}
                     </div>
                 </div>

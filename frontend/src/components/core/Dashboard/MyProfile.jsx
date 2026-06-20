@@ -11,9 +11,19 @@ function MyProfile() {
     const navigate = useNavigate();
     return (
         <div>
-            <h1 className="mb-14 text-3xl font-semibold text-white">
-                My Profile
-            </h1>
+            <div className="mb-14 flex items-center justify-between gap-4">
+                <h1 className="text-3xl font-semibold text-white">
+                    My Profile
+                </h1>
+                <IconBtn
+                    text="Edit"
+                    onclick={() => {
+                        navigate("/dashboard/settings")
+                    }}
+                >
+                    <RiEditBoxLine />
+                </IconBtn>
+            </div>
 
             {/* Section 1 */}
             <div className="flex items-center justify-between rounded-xl border border-gray-700 bg-primary-700 p-8 px-12 shadow-sm shadow-black/20">
@@ -33,29 +43,12 @@ function MyProfile() {
                         </p>
                     </div>
                 </div>
-
-                <IconBtn
-                    text="Edit"
-                    onclick={() => {
-                        navigate("/dashboard/settings")
-                    }}
-                >
-                    <RiEditBoxLine />
-                </IconBtn>
             </div>
 
             {/* Section 2 */}
             <div className="my-10 flex flex-col gap-y-10 rounded-xl border border-gray-700 bg-primary-700 p-8 px-12 shadow-sm shadow-black/20">
                 <div className="flex w-full items-center justify-between">
                     <p className="text-lg font-semibold text-white">About</p>
-                    <IconBtn
-                        text="Edit"
-                        onclick={() => {
-                            navigate("/dashboard/settings")
-                        }}
-                    >
-                        <RiEditBoxLine />
-                    </IconBtn>
                 </div>
                 <p
                     className={`${user?.additionalDetails?.about
@@ -73,14 +66,6 @@ function MyProfile() {
                     <p className="text-lg font-semibold text-white">
                         Personal Details
                     </p>
-                    <IconBtn
-                        text="Edit"
-                        onclick={() => {
-                            navigate("/dashboard/settings")
-                        }}
-                    >
-                        <RiEditBoxLine />
-                    </IconBtn>
                 </div>
                 <div className="flex max-w-[500px] justify-between">
                     <div className="flex flex-col gap-y-5">

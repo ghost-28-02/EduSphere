@@ -17,7 +17,7 @@ export default function RenderTotalAmount() {
   }
 
   return (
-    <div className="min-w-[280px] rounded-xl border border-gray-700 bg-primary-700 p-6 shadow-sm shadow-black/20">
+    <div className="w-full rounded-xl border border-gray-700 bg-primary-700 p-6 shadow-sm shadow-black/20 lg:w-auto lg:min-w-[280px]">
       <p className="mb-1 text-sm font-medium text-gray-400">Total:</p>
       <p className="mb-6 text-3xl font-semibold text-highlight-500">₹ {total}</p>
       <IconBtn

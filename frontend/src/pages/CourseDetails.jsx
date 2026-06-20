@@ -16,6 +16,9 @@ import CourseDetailsCard from "../components/core/Course/CoursedetailsCard";
 import ReactMarkdown from "react-markdown";
 import CourseAccordionBar from "../components/core/Course/CourseAccordionBar";
 import { formatDate } from "../services/formatDate";
+import { toast } from "react-hot-toast";
+import { addToCart } from "../slices/cartSlice";
+import { ACCOUNT_TYPE } from "../utils/constants";
 
 
 function CourseDetails() {
@@ -88,6 +91,25 @@ function CourseDetails() {
 
     }
 
+    const handleAddToCart = () => {
+        if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+            toast.error("You are an Instructor. You can't buy a course.")
+            return
+        }
+        if (token) {
+            dispatch(addToCart(courseData?.courseDetails))
+            return
+        }
+        setConfirmationModal({
+            text1: "You are not logged in!",
+            text2: "Please login to add To Cart",
+            btn1Text: "Login",
+            btn2Text: "Cancel",
+            btn1Handler: () => navigate("/login"),
+            btn2Handler: () => setConfirmationModal(null),
+        })
+    }
+
     if (loading || !courseData) {
         return (
             <div>
@@ -128,12 +150,12 @@ function CourseDetails() {
                             <img
                                 src={thumbnail}
                                 alt="course thumbnail"
-                                className="aspect-auto w-full h-[400px] rounded-lg"
+                                className="aspect-auto h-[220px] w-full rounded-lg object-cover sm:h-[300px]"
                             />
                         </div>
                         <div className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-white`}>
                             <div>
-                                <p className="text-4xl font-bold text-richblack-5 sm:text-[42px]">
+                                <p className="text-2xl font-bold text-richblack-5 sm:text-4xl lg:text-[42px]">
                                     {courseName}
                                 </p>
                             </div>
@@ -162,10 +184,24 @@ function CourseDetails() {
                             <p className="space-x-3 pb-4 text-3xl font-semibold text-white">
                                 Rs. {price}
                             </p>
-                            <button className="cursor-pointer rounded-md bg-secondary-500 px-5 py-2 font-semibold text-white hover:bg-secondary-600 transition" onClick={handleBuyCourse}>
-                                Buy Now
+                            <button
+                                className="cursor-pointer rounded-md bg-secondary-500 px-5 py-2 font-semibold text-white hover:bg-secondary-600 transition"
+                                onClick={
+                                    user && studentEnrolled.includes(user?._id)
+                                        ? () => navigate("/dashboard/enrolled-courses")
+                                        : handleBuyCourse
+                                }
+                            >
+                                {user && studentEnrolled.includes(user?._id) ? "Go To Course" : "Buy Now"}
                             </button>
-                            <button className="cursor-pointer rounded-md bg-primary-700 border border-gray-700 px-5 py-2 font-semibold text-accent-500 hover:bg-primary-600 transition">Add to Cart</button>
+                            {(!user || !studentEnrolled.includes(user?._id)) && (
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="cursor-pointer rounded-md bg-primary-700 border border-gray-700 px-5 py-2 font-semibold text-accent-500 hover:bg-primary-600 transition"
+                                >
+                                    Add to Cart
+                                </button>
+                            )}
                         </div>
                     </div>
 
@@ -182,8 +218,8 @@ function CourseDetails() {
             <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
                 <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
 
-                    <div className="my-8 border border-gray-700 rounded-2xl bg-primary-700 p-8">
-                        <p className="text-3xl font-semibold text-white">What you'll learn</p>
+                    <div className="my-8 border border-gray-700 rounded-2xl bg-primary-700 p-5 sm:p-8">
+                        <p className="text-2xl font-semibold text-white sm:text-3xl">What you'll learn</p>
                         <div className="mt-5 text-gray-300">
                             <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>
                         </div>
@@ -191,9 +227,9 @@ function CourseDetails() {
 
                     <div className="max-w-[830px] ">
                         <div className="flex flex-col gap-3">
-                            <p className="text-[28px] font-semibold text-white">Course Content</p>
+                            <p className="text-2xl font-semibold text-white sm:text-[28px]">Course Content</p>
                             <div className="flex flex-wrap justify-between gap-2">
-                                <div className="flex gap-2">
+                                <div className="flex flex-wrap gap-x-3 gap-y-1">
                                     <span>
                                         {courseContent.length} {`section(s)`}
                                     </span>
@@ -225,7 +261,7 @@ function CourseDetails() {
                         </div>
 
                         <div className="mb-12 py-4">
-                            <p className="text-[28px] font-semibold">Author</p>
+                            <p className="text-2xl font-semibold sm:text-[28px]">Author</p>
                             <div className="flex items-center gap-4 py-4">
                                 <img
                                     src={

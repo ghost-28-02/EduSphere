@@ -168,7 +168,7 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made with ❤️ CodeHelp © 2026 EduSphere</div>
+          <div className="text-center">Made with ❤️ © 2026 EduSphere</div>
         </div>
       </div>
     </div>

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import { BsChevronDown } from "react-icons/bs";
 import IconBtn from "../../common/IconBtn";
 
-function VideoDetailsSidebar({ setReviewModal }) {
+function VideoDetailsSidebar({ setReviewModal, isOpen = false, setIsOpen = () => {} }) {
 
     const [activeStatus, setActiveStatus] = useState("");
     const [videoBarActive, setVideoBarActive] = useState("");
@@ -43,9 +44,10 @@ function VideoDetailsSidebar({ setReviewModal }) {
         setActiveFlags();
     }, [courseSectionData, courseEntireData, location.pathname])
 
-    return (
+    const closeDrawer = () => setIsOpen(false);
+
+    const sidebarBody = (
         <>
-            <div className="flex h-[calc(100vh-3.5rem)] w-full max-w-[350px] flex-col border-r border-gray-700 bg-primary-700 md:w-[320px]">
                 <div className="mx-4 flex flex-col items-start justify-between gap-2 border-b border-gray-600 py-4 text-lg font-bold text-white">
                     <div className="flex w-full items-center justify-between">
                         <button
@@ -58,7 +60,7 @@ function VideoDetailsSidebar({ setReviewModal }) {
                         <IconBtn
                             text="Add Review"
                             customClasses="ml-auto"
-                            onclick={() => setReviewModal(true)}
+                            onclick={() => { closeDrawer(); setReviewModal(true); }}
                         />
                     </div>
                     <div className="w-full">
@@ -68,7 +70,7 @@ function VideoDetailsSidebar({ setReviewModal }) {
                         </p>
                     </div>
                 </div>
-                <div className="h-[calc(100vh - 5rem)] overflow-y-auto">
+                <div className="flex-1 overflow-y-auto">
                     {courseSectionData.map((course, index) => (
                         <div
                             className="mt-2 cursor-pointer text-sm text-white"
@@ -105,6 +107,7 @@ function VideoDetailsSidebar({ setReviewModal }) {
                                                     `/view-course/${courseEntireData?._id}/section/${course?._id}/sub-section/${topic?._id}`
                                                 )
                                                 setVideoBarActive(topic._id)
+                                                closeDrawer()
                                             }}
                                         >
                                             <input
@@ -121,6 +124,41 @@ function VideoDetailsSidebar({ setReviewModal }) {
                         </div>
                     ))}
                 </div>
+        </>
+    )
+
+    return (
+        <>
+            {/* Desktop sidebar */}
+            <div className="hidden h-[calc(100vh-3.5rem)] w-[320px] flex-col border-r border-gray-700 bg-primary-700 md:flex">
+                {sidebarBody}
+            </div>
+
+            {/* Mobile backdrop */}
+            <div
+                onClick={closeDrawer}
+                className={`fixed inset-0 z-[60] bg-black/60 transition-opacity duration-300 md:hidden ${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+                aria-hidden="true"
+            />
+
+            {/* Mobile slide-in drawer */}
+            <div
+                className={`fixed left-0 top-0 z-[70] flex h-screen w-[300px] max-w-[85vw] flex-col bg-primary-700 shadow-2xl shadow-black/40 transition-transform duration-300 ease-out md:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+                role="dialog"
+                aria-modal="true"
+            >
+                <div className="flex items-center justify-between border-b border-gray-600 px-4 py-3">
+                    <span className="text-sm font-semibold text-white">Course Content</span>
+                    <button
+                        type="button"
+                        onClick={closeDrawer}
+                        aria-label="Close course content"
+                        className="inline-flex items-center justify-center rounded-lg p-1 text-gray-200 transition-colors duration-200 hover:bg-primary-600 hover:text-white"
+                    >
+                        <IoClose className="text-2xl" />
+                    </button>
+                </div>
+                {sidebarBody}
             </div>
         </>
     )
